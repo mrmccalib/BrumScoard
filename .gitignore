@@ -11,3 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
+
+#Ignore database.yml - this file will differ depending on the user
+/database.yml
+/secrets.yml
