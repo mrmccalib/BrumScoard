@@ -14,4 +14,4 @@
 
 #Ignore database.yml - this file will differ depending on the user
 #Ignore secrets.yml - this file is to be kept secret
-.yml
+*.yml
