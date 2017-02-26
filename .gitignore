@@ -13,5 +13,5 @@
 /tmp
 
 #Ignore database.yml - this file will differ depending on the user
-/database.yml
-/secrets.yml
+#Ignore secrets.yml - this file is to be kept secret
+.yml
