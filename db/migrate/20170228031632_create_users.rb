@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :first
       t.string :last
 
-      t.timestamps
+      #t.timestamps
     end
   end
 end
