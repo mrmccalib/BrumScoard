@@ -15,7 +15,7 @@ default: &default
   pool: 5
   username: BrumScoardAdmin
   password: adminP455
-  socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
