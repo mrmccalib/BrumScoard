@@ -2,103 +2,107 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .nav{
-    border: 1px solid #999999;
-    background-color: #d6d6d6;
-    list-style:none;
-    text-align:center;
-    /*margin-bottom:10px;
-    margin-right: auto;
-    margin-left: auto;*/
-    float:left;
-    padding-left:5px;
-    padding-right:5px;
-    border-radius:4px;
-  }
-  .nav li{
-    display:inline;
-  }
-  .nav a{
-    display:inline-block;
-    padding-right:20px;
-    padding-left:20px;
-    padding-top:10px;
-    padding-bottom:10px;
-    text-decoration:none;
-    color:black;
-  }
-  .title{
-    text-align:left;
-    color:white;
-    font-size:55px;
-  }
-  .quizContainer{
-    border:solid black;
-    background-color: #F5FFFA;
-    border-width:5px;
-    border-radius:5px;
-    height:400px;
-    width:70%;
-    padding:15px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .thisTweet{
-    text-align:right;
-    font-size:40px;
-  }
-  .quizTweet{
-    float:left;
-    text-align:right;
-    background-color:white;
-    width:98%;
-    margin-right:5%;
-  }
-  .selection{
-    color:white;
-    border:2px solid black;
-    border-radius:5px;
-    background-color:red;
-    text-align:center;
-    font-size:16px;
-    cursor:pointer;
-    width:100px;
-    height:20px;
-    padding:20px;
-    margin-top:1%;
-    margin-bottom:5%;
-    margin-left:1%;
-  }
-  .selection1:hover{
-    -webkit-transition-duration:0.5s;
-    background-color:white;
-    color:black;
-  }
-  .scoreBox {
-    background-color: white;
-    float:right;
-    width:98%;
-    height:150%;
-    margin:1%;
-  }
-  .fixed1{
-    background-color:orangered;
-    table-layout:fixed;
-    height:100%;
-  }
-  .resetButton{
-    padding: 15px 24px;
-    background-color:white;
-    border:2px solid #e7e7e7;
-    color:black;
-  }
-  .resetButton:hover{
-    -webkit-transition-duration:0.3s;
-    background-color:black;
-    color:white;
-  }
-  body{
-    background-color: #7fb3d5;
-  }
-  footer{
-    width: 100%;
-  }
+   border: 1px solid #999999
+;
+   background-color: #d6d6d6
+;
+   list-style:none;
+   text-align:center;
+   /*margin-bottom:10px;
+   margin-right: auto;
+   margin-left: auto;*/
+   float:left;
+   padding-left:5px;
+   padding-right:5px;
+   border-radius:4px;
+ }
+ .nav li{
+   display:inline;
+ }
+ .nav a{
+   display:inline-block;
+   padding-right:20px;
+   padding-left:20px;
+   padding-top:10px;
+   padding-bottom:10px;
+   text-decoration:none;
+   color:black;
+ }
+ .title{
+   text-align:left;
+   color:white;
+   font-size:55px;
+ }
+ .quizContainer{
+   border:solid black;
+   background-color: #F5FFFA
+;
+   border-width:5px;
+   border-radius:5px;
+   height:400px;
+   width:70%;
+   padding:15px;
+   margin-left:auto;
+   margin-right:auto;
+ }
+ .thisTweet{
+   text-align:right;
+   font-size:40px;
+ }
+ .quizTweet{
+   float:left;
+   text-align:right;
+   background-color:white;
+   width:98%;
+   margin-right:5%;
+ }
+ .selection{
+   color:white;
+   border:2px solid black;
+   border-radius:5px;
+   background-color:red;
+   text-align:center;
+   font-size:16px;
+   cursor:pointer;
+   width:100px;
+   height:20px;
+   padding:20px;
+   margin-top:1%;
+   margin-bottom:5%;
+   margin-left:1%;
+ }
+ .selection1:hover{
+   -webkit-transition-duration:0.5s;
+   background-color:white;
+   color:black;
+ }
+ .scoreBox {
+   background-color: white;
+   float:right;
+   width:98%;
+   height:150%;
+   margin:1%;
+ }
+ .fixed1{
+   background-color:orangered;
+   table-layout:fixed;
+   height:100%;
+ }
+ .resetButton{
+   padding: 15px 24px;
+   background-color:white;
+   border:2px solid #e7e7e7
+;
+   color:black;
+ }
+ .resetButton:hover{
+   -webkit-transition-duration:0.3s;
+   background-color:black;
+   color:white;
+ }
+ body{
+   background-color: #d8d6ff;
+ }
+ footer{
+   width: 100%;
+ }
