@@ -1267,3 +1267,91 @@ Processing by UsersController#index as HTML
 Completed 200 OK in 29ms (Views: 26.1ms | ActiveRecord: 0.3ms)
 
 
+Started GET "/users" for ::1 at 2017-02-27 23:29:13 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 61ms (Views: 57.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:30:48 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 55ms (Views: 51.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:31:11 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 33ms (Views: 25.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:31:36 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 55ms (Views: 52.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:31:44 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 54ms (Views: 51.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:31:58 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 64ms (Views: 61.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:32:04 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 58ms (Views: 55.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:32:05 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 34ms (Views: 31.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:32:16 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 63ms (Views: 60.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2017-02-27 23:32:32 -0600
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  Rendered users/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 57ms (Views: 54.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/new" for ::1 at 2017-02-27 23:32:38 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (110.7ms)
+  Rendered users/new.html.erb within layouts/application (114.5ms)
+Completed 200 OK in 194ms (Views: 144.8ms | ActiveRecord: 1.0ms)
+
+

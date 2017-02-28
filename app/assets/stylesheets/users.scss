@@ -6,9 +6,12 @@
     background-color: #d6d6d6;
     list-style:none;
     text-align:center;
-    margin-bottom:10px;
+    /*margin-bottom:10px;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: auto;*/
+    float:left;
+    padding-left:5px;
+    padding-right:5px;
     border-radius:4px;
   }
   .nav li{
@@ -59,13 +62,13 @@
     font-size:16px;
     cursor:pointer;
     width:100px;
-    height:30px;
-    padding: 17px;
+    height:20px;
+    padding:20px;
     margin-top:1%;
     margin-bottom:5%;
     margin-left:1%;
   }
-  .selection:hover{
+  .selection1:hover{
     -webkit-transition-duration:0.5s;
     background-color:white;
     color:black;
