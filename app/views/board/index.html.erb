@@ -1,0 +1,9 @@
+<h1>Board#index</h1>
+<p>Find me in app/views/board/index.html.erb</p>
+<h1>WELL HELLO INTERNET</h1>
+<br/>
+
+<% if (params.has_key?(:id) && params.has_key?(:random)) %>
+    <%= "id: #{params[:id]}" %> <br/>
+    <%= "random: #{params[:random]}" %> <br/>
+<% end %>
