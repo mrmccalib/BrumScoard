@@ -8,8 +8,7 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-.log
+/log
 /tmp
 
 #Ignore database.yml - this file will differ depending on the user
