@@ -8,11 +8,11 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
+/log
 /tmp
 
 #Ignore database.yml - this file will differ depending on the user
+database.yml
+
 #Ignore secrets.yml - this file is to be kept secret
-*.yml
-./Gemfile*
+secrets.yml
