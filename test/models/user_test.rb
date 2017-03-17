@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+<<<<<<< Updated upstream
     # test "the truth" do
     #   assert true
     # end
@@ -40,4 +41,9 @@ class UserTest < ActiveSupport::TestCase
         end
         User.destroy_all(username: "testuser")
     end
+=======
+  # test "the truth" do
+  #   assert true
+  # end
+>>>>>>> Stashed changes
 end
