@@ -1,4 +1,11 @@
 <h1>Register</h1>
+
+<% if @user.errors.full_messages.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %> <br />
+  <% end %>
+<% end %>
+
 <%= form_for :user, url: signup_path do |f| %>
 <p>
     <%= f.label "Username*" %><br>
