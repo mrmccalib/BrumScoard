@@ -11,10 +11,9 @@ class UsersController < ApplicationController
         # render plain: params[:user].inspect
         @user = User.new(user_params)
         if @user.save
-            flash[:success] = "User created successfully!"
-            #TODO: redirect to login
-            #redirect_to @signup
-            render 'new'
+            # flash.keep(:success)
+            flash[:notice] = "Registration successful!"
+            redirect_to login_url
         else
             render 'new'
         end
