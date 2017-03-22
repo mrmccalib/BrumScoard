@@ -1,4 +1,5 @@
 require 'test_helper'
+Rails.application.load_seed
 
 class UserTest < ActiveSupport::TestCase
 #     test "the truth" do
@@ -6,16 +7,13 @@ class UserTest < ActiveSupport::TestCase
 #       assert true
 #     end
 
+
+#Tests existence of user with given username that is already in the database
     test "user existence" do
-        username = "michael"
-        puts "Testing existence of user #{username}"
+        username = "matthew"
+        # Testing existence of user #{username}"
         begin
-            if User.exists?(username: username)
-              puts "user exists!"
-            else
-              puts "something went wrong - user with username #{username} could not be found!!"
-              assert false
-            end
+            assert( User.exists?(username: username), "Error - user #{username} could not be found!")
         rescue
             puts "RESCUE: something went wrong - user with username #{username} could not be found"
             puts caller
@@ -23,33 +21,25 @@ class UserTest < ActiveSupport::TestCase
         end
     end
 
+
+#Tests to ensure nonexistence of a user that is not in the database
     test "user nonexistence" do
         un = "1234"
-        puts "Testing nonexistence of user #{un}"
         begin
-            if User.exists?(username: un)
-              puts "Something went wrong - user #{un} found!"
-            else
-              puts "User #{un} not found!"
-              assert true
-            end
+            assert_not( User.exists?(username: un), "Error - user #{un} was found in database")
         rescue
-            puts "User with username #{un} does not exist in database"
-            assert true
+            puts "Something went wrong accessing database"
+            assert false
         end
     end
 
+
+#Tests user creation - creates user, then checks if user exists in database
     test "user creation" do
-        puts "Testing user creation"
+        # puts "Testing user creation"
         begin
             User.create(:username => "testuser", :password => "pass", :first => "name", :last => "name")
-            if User.exists?(username: 'testuser')
-              puts "User testuser created successfuly!"
-              assert true
-            else
-              puts "Failed to create user"
-              assert false
-            end
+            assert( User.exists?(username: 'testuser'), "Error - user with username 'testuser' does not exist!")
         rescue
             puts "something went wrong when creating the user"
             assert false
