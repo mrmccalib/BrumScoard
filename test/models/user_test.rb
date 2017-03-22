@@ -1,31 +1,32 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-<<<<<<< Updated upstream
-    # test "the truth" do
-    #   assert true
-    # end
-
-    test "user existence" do
-        id = 2984863745
-        puts "Testing existence of user #{id}"
+     test "the truth" do
+       puts "Testing the truth"
+       assert true
+     end
+=begin    test "user existence" do
+        username = "michael"
+        puts "Testing existence of user #{username}"
         begin
-            user = assert User.find(id)
-            puts "user exists!"
+            if User.exists?(username: username)
+              puts "user exists!"
+            end
         rescue
-            puts "something went wrong - user with ID #{id} could not be found"
+            puts "something went wrong - user with username #{username} could not be found"
             puts caller
             assert false
         end
     end
 
     test "user nonexistence" do
-        puts "Testing nonexistence"
-        id = 3000
+        username = "3000"
+        puts "Testing nonexistence of user #{username}"
         begin
-            user = User.find(id)
+            user = User.find(username)
+            puts "Something went wrong - user found!"
         rescue
-            puts "User with ID #{id} does not exist in database"
+            puts "User with username #{username} does not exist in database"
             assert true
         end
     end
@@ -41,9 +42,6 @@ class UserTest < ActiveSupport::TestCase
         end
         User.destroy_all(username: "testuser")
     end
-=======
-  # test "the truth" do
-  #   assert true
-  # end
->>>>>>> Stashed changes
+=end
+
 end
