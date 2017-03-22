@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  username: MyString
-  password: MyString
-  first: MyString
-  last: MyString
+#one:
+#  username: MyString
+#  password: MyString
+#  first: MyString
+#  last: MyString
 
-two:
-  username: MyString
-  password: MyString
-  first: MyString
-  last: MyString
+#two:
+#  username: MyString
+#  password: MyString
+#  first: MyString
+#  last: MyString
