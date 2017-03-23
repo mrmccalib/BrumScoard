@@ -1,7 +1,9 @@
 class User < ApplicationRecord
     validates :username, presence: true
-    validates :password, presence: true
-    validates :username, uniqueness: true
+    validates :username, uniqueness: { case_sensitive: false }
+
+    has_secure_password
+
     #
     # def validate!
     #     if username.nil?
