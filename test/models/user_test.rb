@@ -2,10 +2,10 @@ require 'test_helper'
 Rails.application.load_seed
 
 class UserTest < ActiveSupport::TestCase
-#     test "the truth" do
-#       puts "Testing the truth"
-#       assert true
-#     end
+     test "the truth" do
+       puts "Testing the truth"
+       assert true
+     end
 
 
 #Tests existence of user with given username that is already in the database
