@@ -6,6 +6,6 @@ rvm:
   email:
     on_success: never
     on_failure: never
-  slack: engineering2017:cBFA6v1oFyvJrBXguR4g5pHt
+  slack: engineering2017:jI4KiW9JCnaCIqThMd5bYcyB
 # uncomment and edit the following line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
