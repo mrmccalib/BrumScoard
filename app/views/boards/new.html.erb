@@ -1,2 +1,23 @@
-<h1>Boards#new</h1>
-<p>Find me in app/views/boards/new.html.erb</p>
+<h1>Create new board</h1>
+
+<% if @board.errors.full_messages.any? %>
+  <% @board.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger"><%= message %></div> </br>
+  <% end %>
+<% end %>
+
+<%= form_for :board, url: newboard_path do |f| %>
+<p>
+    <%= f.label "Name*" %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label "Description" %><br>
+    <%= f.text_field :description %>
+  </p>
+
+  <p>
+    <%= f.submit "Create board!" %>
+  </p>
+<% end %>

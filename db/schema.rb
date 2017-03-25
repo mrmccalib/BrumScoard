@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325205407) do
+ActiveRecord::Schema.define(version: 20170325224047) do
 
-  create_table "boards", primary_key: "name", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name",        null: false
     t.string "description"
   end
 
   create_table "boards_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
-    t.integer "board_id"
-    t.index ["board_id"], name: "index_boards_users_on_board_id", using: :btree
-    t.index ["user_id"], name: "index_boards_users_on_user_id", using: :btree
+    t.integer "board_id", null: false
+    t.integer "user_id",  null: false
   end
 
-  create_table "users", primary_key: "username", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "username",        null: false
     t.string "first"
     t.string "last"
     t.string "password_digest"
