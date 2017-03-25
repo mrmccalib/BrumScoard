@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             # flash.keep(:success)
-            flash[:notice] = "Registration successful!"
+            flash[:success] = "Registration successful!"
             redirect_to login_url
         else
             render 'new'
