@@ -17,4 +17,16 @@ class BoardTest < ActiveSupport::TestCase
         assert false
     end
   end
+
+  test "board nonexistence" do
+    boardName = "vbnm"
+    # Testing existence of user #{username}"
+    begin
+        assert_not(Board.exists?(name: boardName), "Error - board #{boardName} could not be found!")
+    rescue
+        puts "RESCUE: something went wrong - board with name #{boardName} could not be found"
+        puts caller
+        assert false
+    end
+  end
 end
