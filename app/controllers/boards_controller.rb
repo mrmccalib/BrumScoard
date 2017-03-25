@@ -7,7 +7,7 @@ class BoardsController < ApplicationController
     def create
         @board = Board.new(board_params)
         if @board.save
-            user = User.where(username: session[:username])
+            user = User.find(session[:user_id])
             @board.users << user
             flash[:success] = "Board created!"
             redirect_to boards_url
