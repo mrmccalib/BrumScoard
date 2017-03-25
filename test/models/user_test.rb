@@ -1,7 +1,7 @@
 require 'test_helper'
 Rails.application.load_seed
 
-# class UserTest < ActiveSupport::TestCase
+class UserTest < ActiveSupport::TestCase
 #      test "the truth" do
 #        puts "Testing the truth"
 #        assert true
@@ -11,7 +11,7 @@ Rails.application.load_seed
 #Tests existence of user with given username that is already in the database
     test "user existence" do
         username = "matthew"
-        # Testing existence of user #{username}"
+        Testing existence of user #{username}"
         begin
             assert( User.exists?(username: username), "Error - user #{username} could not be found!")
         rescue
@@ -45,6 +45,20 @@ Rails.application.load_seed
             assert false
         end
         User.where(username: "testuser").destroy_all
+    end
+
+#Tests duplicate user creation - (fails to) create user with a username that already exists
+    test "duplicate user creation" do
+        # puts "Testing user creation"
+        begin
+            User.create(:username => "matthew", :password => "p455")
+            puts "something went wrong - user should already exist"
+            assert false
+            #assert_not( User.exists?(username: 'testuser'), "Error - user with username 'testuser' does not exist!")
+        rescue
+          #user already exists and creation was unsuccessful
+            assert true
+        end
     end
 
 
