@@ -4,13 +4,5 @@ class User < ApplicationRecord
 
     has_secure_password
 
-    #
-    # def validate!
-    #     if username.nil?
-    #         errors.add(:name, :blank, message: "Username cannot be empty!")
-    #     end
-    #     if password.nil?
-    #         errors.add(:name, :blank, message: "Username cannot be empty!")
-    #     end
-    # end
+    has_and_belongs_to_many :boards
 end

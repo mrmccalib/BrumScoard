@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325201041) do
+ActiveRecord::Schema.define(version: 20170325205407) do
 
   create_table "boards", primary_key: "name", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "description"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20170325201041) do
     t.string "first"
     t.string "last"
     t.string "password_digest"
+  end
+
+  create_table "users_boards", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "username_id"
+    t.integer "proj_name_id"
+    t.index ["proj_name_id"], name: "index_users_boards_on_proj_name_id", using: :btree
+    t.index ["username_id"], name: "index_users_boards_on_username_id", using: :btree
   end
 
 end
