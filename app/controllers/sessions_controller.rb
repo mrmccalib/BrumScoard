@@ -3,13 +3,6 @@ class SessionsController < ApplicationController
     end
 
     def create
-        #   @session = Session.new(user_params)
-        #   if @session.save
-        #       flash[:notice] = "Registration successful!"
-        #       redirect_to login_url
-        #   else
-        #       render 'new'
-        #   end
         user = User.find_by(username: params[:session][:username].downcase)
         if params[:session][:username].empty?
             flash.now[:danger] = 'Enter username!'
@@ -19,22 +12,23 @@ class SessionsController < ApplicationController
             render 'new'
         elsif user && user.authenticate(params[:session][:password])
             log_in user
-            redirect_to signup_path
+            flash[:success] = 'Login successful!'
+            redirect_to boards_path
         else
             flash.now[:danger] = 'Invalid username/password combination!'
             render 'new'
         end
     end
 
-    def directToHome
-      if not params[:session][:username].empty?
-        flash[:success] = 'Login successful!'
-        redirect_to boards_url
-      else
-        flash[:danger] = 'You must log in to see this page.'
-        redirect_to login_url
-      end
-    end
+    # def directToHome
+    #   if not params[:session][:username].empty?
+    #     flash[:success] = 'Login successful!'
+    #     redirect_to boards_url
+    #   else
+    #     flash[:danger] = 'You must log in to see this page.'
+    #     redirect_to login_url
+    #   end
+    # end
 
 
     def destroy
