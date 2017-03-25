@@ -16,7 +16,8 @@
 
 body {
     font-family: 'Fira Sans', sans-serif;
-}
+    color: rgb(51, 51, 51);
+    }
 
 .alert {
     display: inline-block;
@@ -33,3 +34,7 @@ body {
  .alert-danger {
      background-color: rgb(255, 110, 110);
  }
+
+.field_with_errors {
+    background-color: rgb(255, 110, 110);
+}
