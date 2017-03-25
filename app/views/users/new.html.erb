@@ -2,7 +2,7 @@
 
 <% if @user.errors.full_messages.any? %>
   <% @user.errors.full_messages.each do |message| %>
-    <%= message %> <br />
+  <div class="alert alert-danger"><%= message %></div> </br>
   <% end %>
 <% end %>
 

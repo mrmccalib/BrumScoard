@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.alert {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+}
+
+ .alert-success {
+     background-color: rgb(78, 180, 78);
+ }
+
+ .alert-danger {
+     background-color: rgb(255, 110, 110);
+ }
