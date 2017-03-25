@@ -11,3 +11,6 @@ User.create(username: 'michael', password: 'matthewiscool', first: 'Michael', la
 User.create(username: 'imax', password: 'brumscoardrocks', first: 'Imax', last: 'Rahal')
 User.create(username: 'kenzie', password: 'greenhair', first: 'Kenzie', last: 'Flickinger')
 User.create(username: 'haylie', password: 'overwatchmemes', first: 'Haylie', last: 'Murphey')
+
+
+Board.create(name: 'testproject', description: 'this is a test board')
