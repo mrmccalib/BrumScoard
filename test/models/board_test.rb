@@ -1,4 +1,5 @@
 require 'test_helper'
+#require "#{Rails.root}/db/seeds.rb"
 Rails.application.load_seed
 
 class BoardTest < ActiveSupport::TestCase
@@ -12,8 +13,8 @@ class BoardTest < ActiveSupport::TestCase
     # Testing existence of user #{username}"
     begin
         assert( Board.exists?(name: boardName), "Error - board #{boardName} could not be found!")
-    rescue
-        puts "RESCUE: something went wrong with the query"
+    rescue Exception => e
+        puts "TEST BOARD EXISTENCE RESCUE: something went wrong with the query"
         puts caller
         assert false
     end
@@ -23,8 +24,8 @@ class BoardTest < ActiveSupport::TestCase
     boardName = "vbnm"
     begin
         assert_not(Board.exists?(name: boardName), "Error - board #{boardName} was found even though it doesn't exist!")
-    rescue
-        puts "RESCUE: something went wrong with the query"
+    rescue Exception => e
+        puts "TEST BOARD NON-EXISTENCE RESCUE: something went wrong with the query"
         puts caller
         assert false
     end
@@ -34,7 +35,7 @@ class BoardTest < ActiveSupport::TestCase
     begin
         Board.create(:name => "inserted", :description => "this is the test insertion board")
         assert( Board.exists?(name: 'inserted'), "Error - board with name 'inserted' does not exist!")
-    rescue
+    rescue Exception => e
         puts "RESCUE: something went wrong when creating the board"
         assert false
     end
@@ -46,7 +47,7 @@ class BoardTest < ActiveSupport::TestCase
     begin
       Board.create(:name => "testproject", :description => "this should not work")
       assert false
-    rescue
+    rescue Exception => e
       #puts "board was not created because a board with that name already exists!"
       assert true
     end
