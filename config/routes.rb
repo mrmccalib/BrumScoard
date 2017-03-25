@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
     # resources :sessions
     get    '/login',   to: 'sessions#new'
-    post   '/login',   to: 'sessions#create'
+    post   '/login',   to: 'sessions#directToHome'
     delete '/logout',  to: 'sessions#destroy'
 
-    resources :boards
-    get 'burd', to: 'boards#new'
+  #  resources :boards
+    get '/boards', to: 'boards#new'
 end

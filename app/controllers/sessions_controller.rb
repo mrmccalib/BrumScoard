@@ -26,6 +26,17 @@ class SessionsController < ApplicationController
         end
     end
 
+    def directToHome
+      if not params[:session][:username].empty?
+        flash[:success] = 'Login successful!'
+        redirect_to boards_url
+      else
+        flash[:danger] = 'You must log in to see this page.'
+        redirect_to login_url
+      end
+    end
+
+
     def destroy
 
     end
