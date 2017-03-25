@@ -13,4 +13,4 @@ User.create(username: 'kenzie', password: 'greenhair', first: 'Kenzie', last: 'F
 User.create(username: 'haylie', password: 'overwatchmemes', first: 'Haylie', last: 'Murphey')
 
 
-Board.create(name: 'testprojecto', description: 'this is a test board')
+Board.create(name: 'testproject', description: 'this is a test board')
