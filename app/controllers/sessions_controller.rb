@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-    def new
-    end
 
     def create
         user = User.find_by(username: params[:session][:username].downcase)
@@ -20,25 +18,6 @@ class SessionsController < ApplicationController
         end
     end
 
-    # def directToHome
-    #   if not params[:session][:username].empty?
-    #     flash[:success] = 'Login successful!'
-    #     redirect_to boards_url
-    #   else
-    #     flash[:danger] = 'You must log in to see this page.'
-    #     redirect_to login_url
-    #   end
-    # end
-
-
     def destroy
-
     end
-
-    private
-
-    # def user_params
-    #     params.require(:user).permit(:username, :password, :first, :last)
-    # end
-
 end

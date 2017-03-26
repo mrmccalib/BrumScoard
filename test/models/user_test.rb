@@ -8,7 +8,6 @@ class UserTest < ActiveSupport::TestCase
 #        assert true
 #      end
 
-
 #Tests existence of user with given username that is already in the database
     test "user existence" do
         username = "matthew"

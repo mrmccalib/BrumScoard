@@ -1,13 +1,8 @@
 class CreateBoards < ActiveRecord::Migration[5.0]
-  def change
-
-    create_table :boards do |t|
-      t.string :name, null: false
-      t.string :description
-
-      #t.timestamps
+    def change
+        create_table :boards do |t|
+            t.string :name, null: false
+            t.string :description
+        end
     end
-
-    # execute "ALTER TABLE boards ADD PRIMARY KEY (name);"
-  end
 end

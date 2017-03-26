@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get 'index' => 'sessions#new'
 
     # resources :users
-    get '/signup', to: 'users#new'
+    get  '/signup', to: 'users#new'
     post '/signup', to: 'users#create'
 
     # resources :sessions
@@ -17,6 +17,5 @@ Rails.application.routes.draw do
     get  '/boards',   to: 'boards#index'
     get  '/newboard', to: 'boards#new'
     post '/newboard', to: 'boards#create'
-
 
 end

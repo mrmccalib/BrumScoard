@@ -7,7 +7,6 @@ class BoardTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-
   test "board existence" do
     boardName = "testproject"
     # Testing existence of user #{username}"
