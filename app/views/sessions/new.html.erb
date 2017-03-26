@@ -1,17 +1,17 @@
 <h1>Login</h1>
 
 <%= form_for :session, url: login_path do |f| %>
-<p>
-    <%= f.label "Username" %><br>
-    <%= f.text_field :username %>
-  </p>
+    <div class="container">
+        <%= f.label "Username" %><br>
+        <%= f.text_field :username %>
+    </div>
 
-  <p>
-    <%= f.label "Password" %><br>
-    <%= f.password_field :password %>
-  </p>
+    <div class="container">
+        <%= f.label "Password" %><br>
+        <%= f.password_field :password %>
+    </div>
 
-  <p>
-    <%= f.submit "Log in" %>
-  </p>
+    <div class="container">
+        <%= f.submit "Log in" %>
+    </div>
 <% end %>

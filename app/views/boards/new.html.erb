@@ -1,23 +1,23 @@
 <h1>Create new board</h1>
 
 <% if @board.errors.full_messages.any? %>
-  <% @board.errors.full_messages.each do |message| %>
-  <div class="alert alert-danger"><%= message %></div> </br>
-  <% end %>
+    <% @board.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger"><%= message %></div> </br>
+    <% end %>
 <% end %>
 
 <%= form_for :board, url: newboard_path do |f| %>
-<p>
-    <%= f.label "Name*" %><br>
-    <%= f.text_field :name %>
-  </p>
+    <div class="container">
+        <%= f.label "Name*" %><br>
+        <%= f.text_field :name %>
+    </div>
 
-  <p>
-    <%= f.label "Description" %><br>
-    <%= f.text_field :description %>
-  </p>
+    <div class="container">
+        <%= f.label "Description" %><br>
+        <%= f.text_field :description %>
+    </div>
 
-  <p>
-    <%= f.submit "Create board!" %>
-  </p>
+    <div class="container">
+        <%= f.submit "Create board!" %>
+    </div>
 <% end %>
