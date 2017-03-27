@@ -22,6 +22,7 @@ class BoardsController < ApplicationController
         #      @id = params['id']
         #      @random = params[:random]
         #  end
+        boards = current_user.boards
     end
 
     private
