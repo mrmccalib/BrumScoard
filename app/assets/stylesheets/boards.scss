@@ -5,14 +5,21 @@
     color: rgb(51, 51, 51);
     box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
     width: 400px;
+
     .name {
         font-size: 18px;
         font-weight: bold;
     }
+
+    .name, .description {
+        text-decoration: none;
+    }
 }
 
-.board:hover {
-    .name {
-        text-decoration: underline;
-    }
+.boards a {
+    text-decoration: none;
+}
+
+.boards a:hover .name {
+    text-decoration: underline;
 }

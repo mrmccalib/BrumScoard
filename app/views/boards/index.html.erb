@@ -10,17 +10,19 @@
 <br>
 <br>
 
+<div class="boards">
 <% current_user.boards.each do |board|%>
     <%= link_to login_path do %>
         <div class="board">
-            <div class="name">
+            <span class="name">
                 <%= board.name %>
-            </div>
-            <br>
-            <div class="description">
+            </span>
+            <br><br>
+            <span class="description">
                 <%= board.description %>
-            </div>
+            </span>
         </div>
     <% end %>
     <br>
 <% end%>
+</div>
