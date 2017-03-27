@@ -18,11 +18,6 @@ class BoardsController < ApplicationController
     end
 
     def index
-        #   if (params.has_key?(:id) && params.has_key?(:random))
-        #      @id = params['id']
-        #      @random = params[:random]
-        #  end
-        boards = current_user.boards
     end
 
     private
