@@ -2,20 +2,25 @@
 
 
 <% if (params.has_key?(:id) && params.has_key?(:random)) %>
-    <%= "id: #{params[:id]}" %> <br/>
-    <%= "random: #{params[:random]}" %> <br/>
+<%= "id: #{params[:id]}" %> <br/>
+<%= "random: #{params[:random]}" %> <br/>
 <% end %>
 
 <%= link_to "Create new board", newboard_path %>
 <br>
 <br>
+
 <% current_user.boards.each do |board|%>
-<div class="board">
-  <div class="name">
-  <%= board.name %> 
-</div>
-<br>
-<div class="description">
-  <%= board.description %>
-</div>
+    <%= link_to login_path do %>
+        <div class="board">
+            <div class="name">
+                <%= board.name %>
+            </div>
+            <br>
+            <div class="description">
+                <%= board.description %>
+            </div>
+        </div>
+    <% end %>
+    <br>
 <% end%>

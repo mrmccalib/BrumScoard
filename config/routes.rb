@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     delete '/logout',  to: 'sessions#destroy'
 
   #  resources :boards
-    get  '/boards',   to: 'boards#index'
-    get  '/newboard', to: 'boards#new'
-    post '/newboard', to: 'boards#create'
+    get  '/boards',     to: 'boards#index'
+    get  '/boards/:id', to: 'boards#show'
+    get  '/newboard',   to: 'boards#new'
+    post '/newboard',   to: 'boards#create'
 
 end
