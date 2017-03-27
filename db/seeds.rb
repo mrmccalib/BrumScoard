@@ -6,11 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(username: 'matthew', password: 'pass', first: 'Matthew', last: 'Lynch')
-User.create(username: 'michael', password: 'matthewiscool', first: 'Michael', last: 'McCalib')
+matthew = User.create(username: 'michael', password: 'matthewiscool', first: 'Michael', last: 'McCalib')
 User.create(username: 'imax', password: 'brumscoardrocks', first: 'Imax', last: 'Rahal')
 User.create(username: 'kenzie', password: 'greenhair', first: 'Kenzie', last: 'Flickinger')
 User.create(username: 'haylie', password: 'overwatchmemes', first: 'Haylie', last: 'Murphey')
 
 
 Board.create(name: 'testproject', description: 'this is a test board')
+board = Board.create(name: 'CS330Project', description: 'board for CS330 project')
+
+matthew.boards << board
