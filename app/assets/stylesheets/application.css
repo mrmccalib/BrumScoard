@@ -30,6 +30,16 @@ header {
     font-weight: 900;
 }
 
+span {
+  float:right;
+  font-size:20px;
+}
+
+a {
+  text-decoration:none;
+  color: #990099;
+}
+
 .alert {
     display: inline-block;
     border-radius: 5px;
