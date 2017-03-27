@@ -33,6 +33,7 @@ header {
 header span {
   float:right;
   font-size:20px;
+  font-weight: bold;
 }
 
 header a {
