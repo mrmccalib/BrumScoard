@@ -37,7 +37,7 @@ header span {
   font-weight: bold;
 }
 
-header a {
+header span a {
   text-decoration:none;
   color: white;
 }

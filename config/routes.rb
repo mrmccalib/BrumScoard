@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   #  resources :boards
     get  '/boards',     to: 'boards#index'
-    get  '/boards/:id', to: 'boards#show'
+    get  '/boards/:id', to: 'boards#show', as: 'board'
     get  '/newboard',   to: 'boards#new'
     post '/newboard',   to: 'boards#create'
 
