@@ -24,6 +24,10 @@ class BoardsController < ApplicationController
     def index
     end
 
+    def invite
+      #does this even go here?
+    end
+
     private
 
     def board_params

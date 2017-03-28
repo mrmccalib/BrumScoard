@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     get  '/boards',     to: 'boards#index'
     get  '/boards/:id', to: 'boards#show', as: 'board'
     get  '/newboard',   to: 'boards#new'
+    get  '/invite',     to: 'boards#invite'
     post '/newboard',   to: 'boards#create'
+
 
 end
