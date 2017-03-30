@@ -42,6 +42,14 @@ header span a {
   color: white;
 }
 
+header span a:visited {
+  color: white;
+}
+
+header span a:hover {
+  text-decoration: underline;
+}
+
 header a:hover {
   background-color:inherit;
 }
