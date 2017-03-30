@@ -1,10 +1,9 @@
 <h1>Invite User</h1>
 
-
-<%= form_for :board, url: invite_path do |f| %>
+<%= form_for :invitation, url: invite_path do |f| %>
     <div class="container">
         <%= f.label "Username*" %><br>
-        <%= f.text_field :name %>
+        <%= f.text_field :username %>
     </div>
 
     <div class="container">

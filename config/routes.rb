@@ -14,12 +14,12 @@ Rails.application.routes.draw do
     delete '/logout',  to: 'sessions#destroy'
 
   #  resources :boards
-    get  '/boards',     to: 'boards#index'
-    get  '/boards/:id', to: 'boards#show', as: 'board'
-    get  '/newboard',   to: 'boards#new'
-    get  '/invite',     to: 'boards#invite'
-    post '/invite',     to: 'boards#invite'
-    post '/newboard',   to: 'boards#create'
+    get  '/boards',            to: 'boards#index'
+    get  '/boards/:id',        to: 'boards#show',   as: 'board'
+    get  '/newboard',          to: 'boards#new'
+    get  '/boards/:id/invite', to: 'boards#invite', as: 'invite'
+    post '/boards/:id/invite', to: 'boards#send_invitation'
+    post '/newboard',          to: 'boards#create'
 
 
 end

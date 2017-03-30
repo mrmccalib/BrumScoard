@@ -21,13 +21,24 @@ class BoardsController < ApplicationController
 
     def show
         @board = Board.find(params[:id])
+        session[:board_name] = @board.name
     end
 
     def index
+        @board = Board.find_by(name: session[:board_name])
     end
 
-    def invite
-        redirect_to invite_url
+    def send_invitation
+        username = params[:invitation][:username]
+        user = User.find_by(username: username)
+        if user
+            board = Board.find_by(name: session[:board_name])
+            board.users << user
+            flash[:success] = "User added!"
+        else
+            flash[:danger] = "Must enter a valid user!"
+        end
+        redirect_to :back
     end
 
     private
@@ -35,5 +46,10 @@ class BoardsController < ApplicationController
     def board_params
         params.require(:board).permit(:name, :description)
     end
+
+    def invitation_params
+        params.require(:invitation).permit(:name, :description)
+    end
+
 
 end
