@@ -1,3 +1,5 @@
+
+
 class BoardsController < ApplicationController
 
     def new
@@ -25,7 +27,7 @@ class BoardsController < ApplicationController
     end
 
     def invite
-      #does this even go here?
+        redirect_to invite_url
     end
 
     private
