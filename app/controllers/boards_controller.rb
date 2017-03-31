@@ -31,11 +31,15 @@ class BoardsController < ApplicationController
     def send_invitation
         username = params[:invitation][:username]
         user = User.find_by(username: username)
-        if user
+        if !user
+            flash[:danger] = "Must enter a valid user!"
+        elsif !current_board.users.include?(current_user)
+            flash[:danger] = "You must be a member of this project to invite users!"
+        elsif current_board.users.include?(user)
+            flash[:danger] = "User is already a member!"
+        else
             current_board.users << user
             flash[:success] = "User added!"
-        else
-            flash[:danger] = "Must enter a valid user!"
         end
         redirect_to :back
     end
