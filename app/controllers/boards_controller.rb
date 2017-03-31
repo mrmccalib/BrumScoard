@@ -25,15 +25,14 @@ class BoardsController < ApplicationController
     end
 
     def index
-        @board = Board.find_by(name: session[:board_name])
+        @board = current_board
     end
 
     def send_invitation
         username = params[:invitation][:username]
         user = User.find_by(username: username)
         if user
-            board = Board.find_by(name: session[:board_name])
-            board.users << user
+            current_board.users << user
             flash[:success] = "User added!"
         else
             flash[:danger] = "Must enter a valid user!"

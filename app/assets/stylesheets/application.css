@@ -54,6 +54,10 @@ header a:hover {
   background-color:inherit;
 }
 
+.user-table .user {
+    padding: 3px;
+}
+
 .alert {
     display: inline-block;
     border-radius: 5px;

@@ -1,6 +1,8 @@
 <h1>Invite User</h1>
 
+
 <%= form_for :invitation, url: invite_path do |f| %>
+
     <div class="container">
         <%= f.label "Username*" %><br>
         <%= f.text_field :username %>
@@ -10,3 +12,14 @@
         <%= f.submit "Invite" %>
     </div>
 <% end %>
+
+<h2>Members</h2>
+<div class="user-table">
+    <% current_board.users.each do |user|%>
+        <div class="user">
+            <%= user.username %>
+        </div>
+    <% end%>
+</div>
+</br>
+<%= link_to 'Return to board', current_board %>
