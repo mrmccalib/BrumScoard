@@ -54,6 +54,21 @@ header a:hover {
   background-color:inherit;
 }
 
+input[type="submit"] {
+    background-color: rgb(84, 106, 214);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(120, 120, 230);
+}
+
 .user-table .user {
     padding: 3px;
 }
