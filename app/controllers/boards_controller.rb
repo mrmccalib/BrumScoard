@@ -29,6 +29,7 @@ class BoardsController < ApplicationController
     end
 
     def send_invitation
+      #  @board = current_board
         username = params[:invitation][:username]
         user = User.find_by(username: username)
         if !user

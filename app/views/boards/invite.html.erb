@@ -1,4 +1,4 @@
-<h1>Invite User</h1>
+<h1>Invite Users</h1>
 
 
 <%= form_for :invitation, url: invite_path do |f| %>
@@ -13,7 +13,7 @@
     </div>
 <% end %>
 
-<h2>Members</h2>
+<h2>Members of <%=current_board.name%></h2>
 <div class="user-table">
     <% current_board.users.each do |user|%>
         <div class="user">
@@ -22,4 +22,5 @@
     <% end%>
 </div>
 </br>
-<%= link_to 'Return to board', current_board %>
+
+<%= link_to 'Return to ' + current_board.name , current_board %>
