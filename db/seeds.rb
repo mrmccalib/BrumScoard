@@ -16,5 +16,10 @@ User.create(username: 'haylie', password: 'overwatchmemes', first: 'Haylie', las
 Board.create(name: 'testproject', description: 'this is a test board')
 board = Board.create(name: 'CS330Project', description: 'board for CS330 project')
 
+
+story = Story.create(description: 'firstStory', as: 'Matthew', want: 'to stop coughing', so_that: 'I can stop bothering others',
+      criteria: 'coughing no longer occurs ever', size: 'literally so small')
+
+board.stories << story
 matthew.boards << board
 michael.boards << board
