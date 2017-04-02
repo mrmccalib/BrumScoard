@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  as: MyString
+  want: MyString
+  so_that: MyString
+  criteria: MyString
+  size: MyString
+
+two:
+  description: MyString
+  as: MyString
+  want: MyString
+  so_that: MyString
+  criteria: MyString
+  size: MyString
