@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402174441) do
+ActiveRecord::Schema.define(version: 20170402193444) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name",        null: false
@@ -23,12 +23,14 @@ ActiveRecord::Schema.define(version: 20170402174441) do
   end
 
   create_table "stories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "description"
-    t.string "as"
-    t.string "want"
-    t.string "so_that"
-    t.string "criteria"
-    t.string "size"
+    t.string  "description"
+    t.string  "as"
+    t.string  "want"
+    t.string  "so_that"
+    t.string  "criteria"
+    t.string  "size"
+    t.integer "board_id"
+    t.index ["board_id"], name: "index_stories_on_board_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -38,4 +40,5 @@ ActiveRecord::Schema.define(version: 20170402174441) do
     t.string "password_digest"
   end
 
+  add_foreign_key "stories", "boards"
 end

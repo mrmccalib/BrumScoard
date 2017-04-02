@@ -20,7 +20,7 @@ class StoriesController < ApplicationController
     private
 
     def story_params
-        params.require(:user).permit(:username, :password, :first, :last)
+        params.require(:story).permit(:description, :as, :want, :so_that, :criteria, :size, :board_id)
     end
 
 end

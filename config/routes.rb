@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
 
     get  '/boards/:id/newstory', to: 'stories#new', as: 'newstory'
-    # post '/boards/:id/newstory', to: 'stories#create' as: 'newstory'
+    post '/boards/:id/newstory', to: 'stories#create'
     get 'story/show'
 
 end

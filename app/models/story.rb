@@ -1,9 +1,13 @@
 class Story < ApplicationRecord
 
+    belongs_to :board
+
+    validate :required_fields
+
     private
 
     def required_fields
-        if !(description or (as and want and so_that))
+        if (description.blank? and (as.blank? or want.blank? or so_that.blank?))
             errors.add(:base, "Must enter either description or fill template!")
         end
     end

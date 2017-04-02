@@ -9,3 +9,16 @@
 <%= link_to 'Add story to product backlog', newstory_path %>
 </br></br>
 <%= link_to 'Return to boards', boards_path %>
+
+<h2>Product Backlog</h2>
+<div class="user-table">
+    <% current_board.stories.each do |story|%>
+        <div class="user">
+            <%= story.description %>
+            <% if !story.want.blank? %>
+            <%= "As " + story.as + ", I want " + story.want + " so that " + story.so_that %>
+            <% end %>
+        </div>
+    <% end%>
+</div>
+</br>

@@ -13,11 +13,6 @@
     </div>
 
     <div class="container">
-        <%= f.label "as" %><br>
-        <%= f.text_field :as %>
-    </div>
-
-    <div class="container">
         <%= f.label "Template" %><br>
         As <%= f.text_field :as %>,
         I want <%= f.text_field :want %>
@@ -33,6 +28,8 @@
         <%= f.label "Size estimate" %><br>
         <%= f.text_field :size %>
     </div>
+
+    <%= f.hidden_field :board_id, :value => current_board.id  %>
 
     <div class="container">
         <%= f.submit "Add story!" %>
