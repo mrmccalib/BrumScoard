@@ -1,7 +1,7 @@
 <h1><%= @board.name %></h1>
 
 <!-- <dialog class='modal'>
-  <p>Greetings, one and all!</p>
+<p>Greetings, one and all!</p>
 </dialog>
 <button onclick="function(){modal.style.display = 'block';}">I AM A BUTTON</button> -->
 <%= link_to 'Manage members', invite_path %>
@@ -9,16 +9,50 @@
 <%= link_to 'Add story to product backlog', newstory_path %>
 </br></br>
 <%= link_to 'Return to boards', boards_path %>
-
-<h2>Product Backlog</h2>
-<div class="user-table">
+</br>
+<div class="column">
+    <h2>Product Backlog</h2>
     <% current_board.stories.each do |story|%>
-        <div class="user">
-            <%= story.description %>
-            <% if !story.want.blank? %>
-            <%= "As " + story.as + ", I want " + story.want + " so that " + story.so_that %>
+        <div class="card">
+
+            <% if !story.description.blank? %>
+                <div class="info">
+                    <%= story.description %>
+                </div>
             <% end %>
+
+            <% if !story.want.blank? %>
+                <div class="info">
+                    <%= "As " + story.as + ", I want " + story.want + " so that " + story.so_that %>
+                </div>
+            <% end %>
+
+            <% if !story.criteria.blank? %>
+                <div class="info">
+                    <%= 'Acceptance criteria: ' + story.description %>
+                </div>
+            <% end %>
+
+            <% if !story.size.blank? %>
+                <div class="info">
+                    <%= 'Size estimate: ' + story.size %>
+                </div>
+            <% end %>
+
         </div>
     <% end%>
+</div>
+
+<div class="column">
+    <h2>Sprint Backlog</h2>
+</div>
+<div class="column">
+    <h2>To Do</h2>
+</div>
+<div class="column">
+    <h2>Doing</h2>
+</div>
+<div class="column">
+    <h2>Done</h2>
 </div>
 </br>
