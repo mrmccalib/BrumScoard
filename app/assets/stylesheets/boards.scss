@@ -1,13 +1,17 @@
 // Place all the styles related to the Boards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.board {
+
+.card {
     background-color: white;
     color: rgb(51, 51, 51);
     box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
-    width: 400px;
     padding: 10px;
     border-radius: 3px;
+}
+
+.board {
+    width: 400px;
 
     .name {
         font-size: 18px;

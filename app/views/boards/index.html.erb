@@ -13,7 +13,7 @@
 <div class="boards">
 <% current_user.boards.each do |board|%>
     <%= link_to board do %>
-        <div class="board">
+        <div class="card board">
             <span class="name">
                 <%= board.name %>
             </span>
