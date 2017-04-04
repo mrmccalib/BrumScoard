@@ -25,7 +25,6 @@ header {
     color: white;
     margin: -33px -33px 0px -33px;
     padding: 21px;
-    /*background-color: #56a7bf;*/
     background-color: rgb(186, 63, 63);
     font-size: 32px;
     font-weight: 900;
@@ -69,27 +68,15 @@ input[type="submit"]:hover {
     background-color: rgb(120, 120, 230);
 }
 
-.column {
-    float: left;
-    width: 17%;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(200, 200, 200);
-    border-radius: 3px;
-    padding: 10px;
-    margin: 8px;
-    background: rgb(200, 200, 200);
-}
-
-.column h2 {
-    margin: 5px;
-}
-
-.column .card {
-    margin-top: 10px;
-}
-.column .card .info {
-    margin: 2px 0px;
+footer {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  padding: 21px;
+  color:white;
+  height:2%;
+  background-color: rgb(120,120,120);
 }
 
 

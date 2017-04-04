@@ -1,15 +1,19 @@
-<h1><%= @board.name %></h1>
+<div class="boardActions">
+  <div class="boardTitle"><h1><%= @board.name %></h1></div>
+  <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
+  <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
+  <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
+</div>
+<br />
 
 <!-- <dialog class='modal'>
 <p>Greetings, one and all!</p>
 </dialog>
 <button onclick="function(){modal.style.display = 'block';}">I AM A BUTTON</button> -->
-<%= link_to 'Manage members', invite_path %>
-</br></br>
-<%= link_to 'Add story to product backlog', newstory_path %>
-</br></br>
-<%= link_to 'Return to boards', boards_path %>
-</br>
+<!-- <div class='actions'> -->
+
+<!-- </div> -->
+
 <div class="column">
     <h2>Product Backlog</h2>
     <% current_board.stories.each do |story|%>

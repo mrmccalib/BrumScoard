@@ -30,3 +30,44 @@
 .boards a:hover .name {
     text-decoration: underline;
 }
+
+.column {
+    float: left;
+    width: 18%;
+    border-style: solid;
+    border-width: 1%;
+    border-color: rgb(200, 200, 200);
+    border-radius: 3px;
+    padding: .4%;
+    margin: .3%;
+    background: rgb(200, 200, 200);
+}
+
+.column h2 {
+    margin: 5px;
+}
+
+.column .card {
+    margin-top: 10px;
+}
+.column .card .info {
+    margin: 2px 0px;
+}
+
+.boardActions {
+    width:100%;
+    display:inline-block;
+    margin:1.2%;
+}
+.boardTitle {
+    float:left;
+    display:inline-block;
+    align-self:left;
+}
+.singularAction {
+    float:right;
+    font-size:1.3em;
+    margin:inherit;
+    display:inline-block;
+    align-self:right;
+}
