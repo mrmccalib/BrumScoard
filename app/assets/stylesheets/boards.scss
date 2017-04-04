@@ -57,7 +57,7 @@
 .boardActions {
     width:100%;
     display:inline-block;
-    margin:1.2%;
+    margin:1.3%;
 }
 .boardTitle {
     float:left;
@@ -65,8 +65,9 @@
     align-self:left;
 }
 .singularAction {
+    text-decoration:none;
     float:right;
-    font-size:1.3em;
+    font-size:1.2em;
     margin:inherit;
     display:inline-block;
     align-self:right;
