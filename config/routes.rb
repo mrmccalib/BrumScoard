@@ -26,4 +26,6 @@ Rails.application.routes.draw do
     post '/boards/:id/newstory', to: 'stories#create'
     get 'story/show'
 
+
+    put '/drag', to: 'boards#list_update'
 end

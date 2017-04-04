@@ -28,6 +28,10 @@ class BoardsController < ApplicationController
         @board = current_board
     end
 
+    def list_update
+        puts 'HIYA'
+    end
+
     def send_invitation
       #  @board = current_board
         username = params[:invitation][:username]
