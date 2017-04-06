@@ -7,6 +7,8 @@ class CreateStories < ActiveRecord::Migration[5.0]
             t.string :so_that
             t.string :criteria
             t.string :size
+            t.integer :position, index: true
+            t.integer :column
             # t.belongs_to :board, index: true
         end
     end

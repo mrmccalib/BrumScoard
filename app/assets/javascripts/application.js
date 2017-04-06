@@ -14,27 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-//= require sortable-rails-jquery
-//= require_tree .
-
-$(document).ready(function() {
-    var columns = $('.column').each(function() {
-        console.log(this);
-        options = {
-            draggable: '.card',
-            animation: 150,
-	       onSort: function (/**Event*/evt) {
-               var item = evt.item;
-               console.log(evt.oldIndex);
-               console.log(evt.newIndex);
-               $.ajax({
-                  url: '/drag',
-                  type: 'put'
-                });
-           }
-        };
-        var sortable = Sortable.create(this, options);
-    });
-    // var sortable = Sortable.create(el);
-})

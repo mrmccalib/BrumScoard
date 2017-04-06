@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
     get 'index' => 'sessions#new'
+    get '/' => 'sessions#new'
+
 
     # resources :users
     get  '/signup', to: 'users#new'
@@ -21,11 +23,11 @@ Rails.application.routes.draw do
     get  '/boards/:id/invite', to: 'boards#invite', as: 'invite'
     post '/boards/:id/invite', to: 'boards#send_invitation'
 
+    post '/boards/:id/sort', to: 'boards#list_update'
 
     get  '/boards/:id/newstory', to: 'stories#new', as: 'newstory'
     post '/boards/:id/newstory', to: 'stories#create'
     get 'story/show'
 
 
-    put '/drag', to: 'boards#list_update'
 end

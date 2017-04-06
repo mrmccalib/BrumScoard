@@ -29,8 +29,11 @@ ActiveRecord::Schema.define(version: 20170402193444) do
     t.string  "so_that"
     t.string  "criteria"
     t.string  "size"
+    t.integer "position"
+    t.integer "column"
     t.integer "board_id"
     t.index ["board_id"], name: "index_stories_on_board_id", using: :btree
+    t.index ["position"], name: "index_stories_on_position", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

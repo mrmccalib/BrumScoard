@@ -17,9 +17,25 @@ Board.create(name: 'testproject', description: 'this is a test board')
 board = Board.create(name: 'CS330Project', description: 'board for CS330 project')
 
 
-story = Story.create(description: 'firstStory', as: 'Matthew', want: 'to stop coughing', so_that: 'I can stop bothering others',
-      criteria: 'coughing no longer occurs ever', size: 'literally so small')
+story1 = Story.create(description: 'firstStory', as: 'Matthew', want: 'to stop coughing', so_that: 'I can stop bothering others',
+      criteria: 'coughing no longer occurs ever', size: 'literally so small', position: 0, column: 0)
+story2 = Story.create(description: 'stuff happening', as: 'someone', want: 'some stuff', so_that: 'I can do some stuff',
+    criteria: 'stuff is allowed to happen', size: 'not too big', position: 1, column: 0)
+story3 = Story.create(description: 'seed', as: 'a seed', want: 'water', so_that: 'I can do grow',
+    criteria: 'I can do grow', size: 'a very big plant', position: 2, column: 0)
+story4 = Story.create(description: 'pringle', as: 'Julius Pringles', want: 'pringles', so_that: 'I have sustenance',
+    criteria: 'pringles are provided', size: 'as many of them as possible', position: 3, column: 0)
+story5 = Story.create(description: 'scrum board', as: 'Imad', want: 'an entire scrum board', so_that: 'my students suffer',
+    criteria: 'it has lots of features and styling is on fleek', size: 'tiny', position: 4, column: 0)
 
-board.stories << story
+
+
+
+board.stories << story1
+board.stories << story2
+board.stories << story3
+board.stories << story4
+board.stories << story5
+
 matthew.boards << board
 michael.boards << board

@@ -25,11 +25,30 @@ class BoardsController < ApplicationController
     end
 
     def index
-        @board = current_board
+        # @board = current_board
     end
 
     def list_update
-        puts 'HIYA'
+
+        @board = current_board
+        oldIndex = params[:oldIndex].to_i
+        newIndex = params[:newIndex].to_i
+
+        boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex}).first
+
+        if oldIndex < newIndex # moving down in the list
+            (@board.stories.select {|story| story.position <= newIndex and story.position > oldIndex}).each do |story|
+                story.position -= 1
+                story.save
+            end
+        else # moving up in the list
+            (@board.stories.select {|story| story.position >= newIndex and story.position < oldIndex}).each do |story|
+                story.position += 1
+                story.save
+            end
+        end
+        boardAtOldIndex.position = newIndex
+        boardAtOldIndex.save
     end
 
     def send_invitation
