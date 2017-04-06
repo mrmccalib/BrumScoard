@@ -4,6 +4,10 @@ class StoriesController < ApplicationController
     end
 
     def create
+        current_board.stories.each do |story|
+            story.position += 1
+            story.save
+        end
         @story = Story.new(story_params)
         if @story.save
             flash[:success] = "Story added successfully!"
@@ -20,7 +24,7 @@ class StoriesController < ApplicationController
     private
 
     def story_params
-        params.require(:story).permit(:description, :as, :want, :so_that, :criteria, :size, :board_id)
+        params.require(:story).permit(:description, :as, :want, :so_that, :criteria, :size, :board_id, :position, :column)
     end
 
 end

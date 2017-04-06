@@ -30,6 +30,9 @@
     </div>
 
     <%= f.hidden_field :board_id, :value => current_board.id  %>
+    <%= f.hidden_field :column, :value => 0  %>
+    <%= f.hidden_field :position, :value => 0 %>
+
 
     <div class="container">
         <%= f.submit "Add story!" %>
