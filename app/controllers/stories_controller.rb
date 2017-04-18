@@ -1,4 +1,7 @@
 class StoriesController < ApplicationController
+    #not sure why we need this line here and not in the other controllers
+    include StoriesHelper
+
     def new
         @story = Story.new
     end
@@ -10,12 +13,27 @@ class StoriesController < ApplicationController
         end
         @story = Story.new(story_params)
         if @story.save
-            flash[:success] = "Story added successfully!"
+            flash[:success] = "Story added!"
             redirect_to current_board
         else
             render 'new'
         end
 
+    end
+
+    def edit
+        @story = current_story
+    end
+
+    def update
+        @story = current_story
+        @story.update_attributes(story_params)
+        if @story.save
+            flash[:success] = "Story edited!"
+            redirect_to current_board
+        else
+            render 'new'
+        end
     end
 
     def show

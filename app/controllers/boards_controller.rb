@@ -1,5 +1,3 @@
-
-
 class BoardsController < ApplicationController
 
     def new

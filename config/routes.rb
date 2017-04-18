@@ -25,8 +25,10 @@ Rails.application.routes.draw do
 
     post '/boards/:id/sort', to: 'boards#list_update'
 
-    get  '/boards/:id/newstory', to: 'stories#new', as: 'newstory'
-    post '/boards/:id/newstory', to: 'stories#create'
+    get  '/boards/:id/newstory',          to: 'stories#new',    as: 'newstory'
+    post '/boards/:id/newstory',          to: 'stories#create'
+    get  '/boards/:id/stories/:story_id', to: 'stories#edit',   as: 'editstory'
+    post '/boards/:id/stories/:story_id', to: 'stories#update'
     get 'story/show'
 
 

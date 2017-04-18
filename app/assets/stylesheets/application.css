@@ -12,7 +12,13 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
+.fa {
+  float: right;
+  text-decoration: none;
+}
 
 body {
     font-family: 'Fira Sans', sans-serif;
