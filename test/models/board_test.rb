@@ -39,7 +39,6 @@ class BoardTest < ActiveSupport::TestCase
         assert false
     end
     Board.where(name: "inserted").destroy_all
-    #Board.where(board_name: "inserted").destroy_all
   end
 
   test "duplicate board creation" do
@@ -50,6 +49,18 @@ class BoardTest < ActiveSupport::TestCase
       #puts "board was not created because a board with that name already exists!"
       assert true
     end
+  end
+
+
+  test "add story to board" do
+    begin
+        Story.create(:description => "desc1", :board_id => 1)
+        assert( Story.exists?(description: 'desc1'), "Error - story with description 'desc1' does not exist!")
+    rescue Exception => e
+        puts "RESCUE: something went wrong creating a story"
+        assert false
+    end
+    Story.where(description: 'desc1').destroy_all
   end
 
 
