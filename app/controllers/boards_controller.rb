@@ -27,10 +27,10 @@ class BoardsController < ApplicationController
     end
 
     def list_update
-
+        puts "what is going on"
         @board = current_board
-        oldIndex = params[:oldIndex].to_i
-        newIndex = params[:newIndex].to_i
+        oldIndex = params[:oldIndex].to_i - 1
+        newIndex = params[:newIndex].to_i - 1
 
         boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex}).first
 
