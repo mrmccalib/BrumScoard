@@ -33,10 +33,24 @@ class BoardsController < ApplicationController
         oldCol = params[:oldCol].to_i
         newCol = params[:newCol].to_i
 
+
+        if oldCol == 0
+          puts "%*%*%*%*%*%*%%OLDCOL EQUALS ZERO%*%*%*%*%*%*%%*"
+          puts "newCol = #{newCol}"
+          puts "oldIndex = #{oldIndex}"
+        end
+
+        if newCol == 1
+          puts "((((((((((((((((((((((newcol = 1))))))))))))))))))))))"
+        end
+
+        if oldIndex != 0
+          puts '______________________oldIndex != 0_____________________'
+        end
+
         if oldCol == 0 and newCol == 1 and oldIndex != 0
-            #fuck your shit up
             flash[:danger] = "Can only move top item in Product Backlog!"
-            puts 'asdklfjdsklafjdsklfdjsklfdjsklfdjkljfdkljdkslfjkslafjdklsjkldjsklafdjlkdsjkfldsjaklfjdakldfjklasjfkdlsjfdsaklfjdklsjfdlksjfjdkls'
+            puts '@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$'
             redirect_to :back
         end
 
