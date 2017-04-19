@@ -27,10 +27,18 @@ class BoardsController < ApplicationController
     end
 
     def list_update
-        puts "what is going on"
         @board = current_board
-        oldIndex = params[:oldIndex].to_i - 1
-        newIndex = params[:newIndex].to_i - 1
+        oldIndex = params[:oldIndex].to_i
+        newIndex = params[:newIndex].to_i
+        oldCol = params[:oldCol].to_i
+        newCol = params[:newCol].to_i
+
+        if oldCol == 0 and newCol == 1 and oldIndex != 0
+            #fuck your shit up
+            flash[:danger] = "Can only move top item in Product Backlog!"
+            puts 'asdklfjdsklafjdsklfdjsklfdjsklfdjkljfdkljdkslfjkslafjdklsjkldjsklafdjlkdsjkfldsjaklfjdakldfjklasjfkdlsjfdsaklfjdklsjfdlksjfjdkls'
+            redirect_to :back
+        end
 
         boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex}).first
 

@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
@@ -6,44 +6,43 @@
 //= require jquery-ui/widgets/sortable
 
 $(document).ready(function() {
-    // var columns = $('.column').each(function() {
-    //     console.log(this);
-    //     options = {
-    //         draggable: '.card',
-    //         animation: 150,
-    //        onSort: function (/**Event*/evt) {
-    //            var item = evt.item;
-    //            console.log(evt.oldIndex);
-    //            console.log(evt.newIndex);
-    //            $.ajax({
-    //               url: window.location.pathname + '/sort',
-    //               type: 'post',
-    //               data: {oldIndex: evt.oldIndex, newIndex: evt.newIndex}
-    //             });
-    //        }
-    //     };
-    //     var sortable = Sortable.create(this, options);
-    // });
 
-    $(".column").sortable({
-        group: 'column',
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    $(".cards").sortable({
+        group: 'cards',
+        connectWith: ['.cards'],
         // pullPlaceholder: false,
         // revert: 300,
 
         start: function(e, ui) {
             // creates a temporary attribute on the element with the old index
             $(this).attr('data-oldindex', ui.item.index());
+            $(this).attr('data-oldcol', ui.item.parent().data('col'));
         },
         update: function(e, ui) {
+            if (ui.sender) {
+                var newIndex = ui.item.index();
+                var oldIndex = $(this).attr('data-oldindex');
+                var oldCol = $(this).attr('data-oldcol');
+                var newCol = $(this).data('col');
+                console.log(newCol);
+                $(this).removeAttr('data-oldindex');
+                $(this).removeAttr('data-oldcol');
+                $.ajax({
+                    type: 'post',
+                    url: window.location.pathname + '/sort',
+                    data: {oldIndex: oldIndex,
+                           newIndex: newIndex,
+                           oldCol: oldCol,
+                           newCol: newCol}
+                });
+            }
             // gets the new and old index then removes the temporary attribute
-            var newIndex = ui.item.index();
-            var oldIndex = $(this).attr('data-oldindex');
-            $(this).removeAttr('data-oldindex');
-           $.ajax({
-              url: window.location.pathname + '/sort',
-              type: 'post',
-              data: {oldIndex: oldIndex, newIndex: newIndex}
-            });
         }
     });
 })
