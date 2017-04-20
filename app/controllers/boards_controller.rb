@@ -33,28 +33,13 @@ class BoardsController < ApplicationController
         oldCol = params[:oldCol].to_i
         newCol = params[:newCol].to_i
 
-
-        if oldCol == 0
-          puts "%*%*%*%*%*%*%%OLDCOL EQUALS ZERO%*%*%*%*%*%*%%*"
-          puts "newCol = #{newCol}"
-          puts "oldIndex = #{oldIndex}"
-        end
-
-        if newCol == 1
-          puts "((((((((((((((((((((((newcol = 1))))))))))))))))))))))"
-        end
-
-        if oldIndex != 0
-          puts '______________________oldIndex != 0_____________________'
-        end
-
         if oldCol == 0 and newCol == 1 and oldIndex != 0
-            flash[:danger] = "Can only move top item in Product Backlog!"
-            puts '@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$@#$'
+            flash_now[:danger] = "Can only move top item in Product Backlog!"
             redirect_to :back
+            return
         end
 
-        boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex}).first
+        boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex and story.column == oldCol}).first
 
         if oldIndex < newIndex # moving down in the list
             (@board.stories.select {|story| story.position <= newIndex and story.position > oldIndex}).each do |story|
@@ -68,6 +53,7 @@ class BoardsController < ApplicationController
             end
         end
         boardAtOldIndex.position = newIndex
+        boardAtOldIndex.column = newCol
         boardAtOldIndex.save
     end
 
