@@ -10,7 +10,7 @@ function showError(message) {
 }
 
 function clearError() {
-    console.log('clearing error');
+    $('#flashes').empty();
 }
 
 $(document).ready(function() {
@@ -37,15 +37,15 @@ $(document).ready(function() {
             var $cards = $(this);
 
             var newIndex = ui.item.index();
-            var oldIndex = $(this).attr('data-oldindex');
-            var oldCol = $(this).attr('data-oldcol');
+            var oldIndex = $cards.attr('data-oldindex');
+            var oldCol = $cards.attr('data-oldcol');
             var newCol = ui.item.parent().parent().data('col');
 
             // console.log("old column: " + oldCol);
             // console.log("new column: " + newCol);
 
-            $(this).removeAttr('data-oldindex');
-            $(this).removeAttr('data-oldcol');
+            $cards.removeAttr('data-oldindex');
+            $cards.removeAttr('data-oldcol');
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -56,11 +56,17 @@ $(document).ready(function() {
                     newCol: newCol
                 },
                 success: function(data){
-                    $cards.sortable('cancel');
-                    if (data) showError(data.message);
+                    if (data)
+                    {
+                        $cards.sortable('cancel');
+                        showError(data.message);
+                    }
+                    else {
+                        clearError();
+                    }
                 },
                 error: function(error){
-                     console.log("Error:");
+                     console.log("AJAX response error:");
                      console.log(error);
                 }
                 }
