@@ -33,25 +33,44 @@ class BoardsController < ApplicationController
         oldCol = params[:oldCol].to_i
         newCol = params[:newCol].to_i
 
+
         if oldCol == 0 and newCol == 1 and oldIndex != 0
-            flash_now[:danger] = "Can only move top item in Product Backlog!"
-            redirect_to :back
+            # flash.now[:danger] = "Can only move top item in Product Backlog!"
+            # redirect_to :back
+            # respond_to do |format|
+            #     format.js { flash[:danger] = "Can only move top item in Product Backlog!" }
+            # end
+            render :json => {
+                :message => "Can only move top item in Product Backlog!"
+            }
             return
         end
 
         boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex and story.column == oldCol}).first
 
-        if oldIndex < newIndex # moving down in the list
-            (@board.stories.select {|story| story.position <= newIndex and story.position > oldIndex}).each do |story|
+        if oldCol == newCol
+            if oldIndex < newIndex # moving down in the list
+                (@board.stories.select {|story| story.position <= newIndex and story.position > oldIndex}).each do |story|
+                    story.position -= 1
+                    story.save
+                end
+            else # moving up in the list
+                (@board.stories.select {|story| story.position >= newIndex and story.position < oldIndex}).each do |story|
+                    story.position += 1
+                    story.save
+                end
+            end
+        elsif oldCol == 0 and newCol == 1
+            (@board.stories.select {|story| story.column == oldCol}).each do |story|
                 story.position -= 1
                 story.save
             end
-        else # moving up in the list
-            (@board.stories.select {|story| story.position >= newIndex and story.position < oldIndex}).each do |story|
+            (@board.stories.select {|story| story.column == newCol and story.position >= newIndex}).each do |story|
                 story.position += 1
                 story.save
             end
         end
+
         boardAtOldIndex.position = newIndex
         boardAtOldIndex.column = newCol
         boardAtOldIndex.save

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get  '/boards/:id/invite', to: 'boards#invite', as: 'invite'
     post '/boards/:id/invite', to: 'boards#send_invitation'
 
-    post '/boards/:id/sort', to: 'boards#list_update'
+    get '/boards/:id/sort', to: 'boards#list_update'
 
     get  '/boards/:id/newstory',          to: 'stories#new',    as: 'newstory'
     post '/boards/:id/newstory',          to: 'stories#create'

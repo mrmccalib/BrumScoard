@@ -1,0 +1,70 @@
+//= require jquery3
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+
+//= require jquery-ui/widgets/sortable
+
+function showError(message) {
+    $('#flashes').html('<div class="alert alert-danger">' + message + '</div>');
+}
+
+function clearError() {
+    console.log('clearing error');
+}
+
+$(document).ready(function() {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(".cards").sortable({
+        group: 'cards',
+        connectWith: ['.cards'],
+        // pullPlaceholder: false,
+        // revert: 300,
+
+        start: function(e, ui) {
+            // creates a temporary attribute on the element with the old index
+            $(this).attr('data-oldindex', ui.item.index());
+            $(this).attr('data-oldcol', ui.item.parent().parent().data('col'));
+        },
+        stop: function(e, ui) {
+
+            var $cards = $(this);
+
+            var newIndex = ui.item.index();
+            var oldIndex = $(this).attr('data-oldindex');
+            var oldCol = $(this).attr('data-oldcol');
+            var newCol = ui.item.parent().parent().data('col');
+
+            // console.log("old column: " + oldCol);
+            // console.log("new column: " + newCol);
+
+            $(this).removeAttr('data-oldindex');
+            $(this).removeAttr('data-oldcol');
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: window.location.pathname + '/sort',
+                data: {oldIndex: oldIndex,
+                    newIndex: newIndex,
+                    oldCol: oldCol,
+                    newCol: newCol
+                },
+                success: function(data){
+                    $cards.sortable('cancel');
+                    if (data) showError(data.message);
+                },
+                error: function(error){
+                     console.log("Error:");
+                     console.log(error);
+                }
+                }
+            );
+        }
+    });
+})
