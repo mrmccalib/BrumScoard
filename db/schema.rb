@@ -17,9 +17,11 @@ ActiveRecord::Schema.define(version: 20170402193444) do
     t.string "description"
   end
 
-  create_table "boards_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "board_id", null: false
-    t.integer "user_id",  null: false
+  create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "board_id"
+    t.integer "user_id"
+    t.string  "role"
+    t.index ["board_id", "user_id"], name: "index_memberships_on_board_id_and_user_id", using: :btree
   end
 
   create_table "stories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
