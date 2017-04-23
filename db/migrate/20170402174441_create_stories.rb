@@ -11,5 +11,6 @@ class CreateStories < ActiveRecord::Migration[5.0]
             t.integer :column
             # t.belongs_to :board, index: true
         end
+        add_reference :stories, :board, foreign_key: true
     end
 end

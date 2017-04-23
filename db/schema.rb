@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402193444) do
+ActiveRecord::Schema.define(version: 20170423052027) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name",        null: false
     t.string "description"
+  end
+
+  create_table "invitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "board_id"
+    t.integer "user_id"
+    t.integer "role"
+    t.index ["board_id", "user_id"], name: "index_invitations_on_board_id_and_user_id", using: :btree
   end
 
   create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
