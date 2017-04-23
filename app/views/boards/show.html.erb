@@ -4,7 +4,9 @@
 <div class="boardActions">
   <div class="boardTitle"><h1><%= @board.name %></h1></div>
   <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
-  <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
+  <% if current_user_role == Membership.roles[:developer] %>
+      <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
+  <% end %>
   <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
 </div>
 <br />

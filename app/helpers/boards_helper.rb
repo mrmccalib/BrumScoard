@@ -5,6 +5,6 @@ module BoardsHelper
     end
 
     def current_user_role
-        Membership.find_by(board_id: current_board.id, user_id: current_user.id).role
+        Membership.roles[Membership.find_by(board_id: current_board.id, user_id: current_user.id).role]
     end
 end

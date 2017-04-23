@@ -43,7 +43,7 @@ class BoardsController < ApplicationController
                     :message => "Can only move top item in Product Backlog!"
                 }
                 return
-            elsif Membership.roles[current_user_role] != Membership.roles[:product_owner]
+            elsif current_user_role != Membership.roles[:product_owner]
                 render :json => {
                     :message => "Only a product owner can move items from the Product Backlog!"
                 }

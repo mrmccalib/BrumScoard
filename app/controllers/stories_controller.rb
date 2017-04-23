@@ -12,7 +12,10 @@ class StoriesController < ApplicationController
             story.save
         end
         @story = Story.new(story_params)
-        if @story.save
+        if current_user_role != Membership.roles[:developer]
+            flash[:danger] = "Only developers can add stories!"
+            render 'new'
+        elsif @story.save
             flash[:success] = "Story added!"
             redirect_to current_board
         else
