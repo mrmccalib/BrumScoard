@@ -9,7 +9,9 @@ class BoardsController < ApplicationController
         if @board.save
             user = User.find(session[:user_id])
             # add to lookup table
-            @board.users << user
+            membership = Membership.new(board_id: @board.id, user_id: user.id, role: :developer)
+            membership.save
+            # @board.users << user
             flash[:success] = "Board created!"
             redirect_to boards_url
         else
