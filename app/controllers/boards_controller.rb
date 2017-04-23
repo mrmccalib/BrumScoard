@@ -36,16 +36,19 @@ class BoardsController < ApplicationController
         newCol = params[:newCol].to_i
 
 
-        if oldCol == 0 and newCol == 1 and oldIndex != 0
-            # flash.now[:danger] = "Can only move top item in Product Backlog!"
-            # redirect_to :back
-            # respond_to do |format|
-            #     format.js { flash[:danger] = "Can only move top item in Product Backlog!" }
-            # end
-            render :json => {
-                :message => "Can only move top item in Product Backlog!"
-            }
-            return
+        if oldCol == 0 and newCol == 1
+            puts current_user_role
+            if oldIndex != 0
+                render :json => {
+                    :message => "Can only move top item in Product Backlog!"
+                }
+                return
+            elsif Membership.roles[current_user_role] != Membership.roles[:product_owner]
+                render :json => {
+                    :message => "Only a product owner can move items from the Product Backlog!"
+                }
+                return
+            end
         end
 
         boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex and story.column == oldCol}).first

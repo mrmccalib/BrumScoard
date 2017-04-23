@@ -2,8 +2,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
 //= require jquery-ui/widgets/sortable
+
 
 function showError(message) {
     $('#flashes').html('<div class="alert alert-danger">' + message + '</div>');
@@ -13,7 +13,7 @@ function clearError() {
     $('#flashes').empty();
 }
 
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
 
     $.ajaxSetup({
         headers: {
@@ -66,11 +66,12 @@ $(document).ready(function() {
                     }
                 },
                 error: function(error){
-                     console.log("AJAX response error:");
-                     console.log(error);
+                    showError('AJAX response error!');
+                    console.log("AJAX response error (check server console):");
+                    console.log(error.getResponseHeader());
                 }
-                }
-            );
-        }
-    });
+            }
+        );
+    }
+});
 })
