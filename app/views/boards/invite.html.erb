@@ -9,18 +9,32 @@
     </div>
 
     <div class="container">
+        <%= f.label "Role" %><br>
+        <%= f.select :role, Membership.roles.keys.map {|key| [key.humanize, key]} %>
+    </div>
+
+    <div class="container">
         <%= f.submit "Invite" %>
     </div>
 <% end %>
 
 <h2>Members of <%=current_board.name%></h2>
-<div class="user-table">
-    <% current_board.users.each do |user|%>
-        <div class="user">
-            <%= user.username %>
-        </div>
+<table class="user-table">
+    <tr>
+        <th>Username</th>
+        <th>Role</th>
+    </tr>
+    <% current_board.memberships.each do |membership|%>
+        <tr>
+            <td class="cell">
+                <%= User.find(membership.user_id).username %>
+            </td>
+            <td class="cell">
+                <%= membership.role.humanize %>
+            </td>
+        </tr>
     <% end%>
-</div>
+</table>
 </br>
 
 <%= link_to 'Return to ' + current_board.name , current_board %>

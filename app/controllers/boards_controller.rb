@@ -87,7 +87,9 @@ class BoardsController < ApplicationController
         elsif current_board.users.include?(user)
             flash[:danger] = "User is already a member!"
         else
-            current_board.users << user
+            # current_board.users << user
+            membership = Membership.new(board_id: current_board.id, user_id: user.id, role: params[:invitation][:role])
+            membership.save
             flash[:success] = "User added!"
         end
         redirect_to :back
@@ -100,7 +102,7 @@ class BoardsController < ApplicationController
     end
 
     def invitation_params
-        params.require(:invitation).permit(:name, :description)
+        params.require(:invitation).permit(:username, :role)
     end
 
 

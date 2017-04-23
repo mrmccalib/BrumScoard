@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170402193444) do
   create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "board_id"
     t.integer "user_id"
-    t.string  "role"
+    t.integer "role"
     t.index ["board_id", "user_id"], name: "index_memberships_on_board_id_and_user_id", using: :btree
   end
 

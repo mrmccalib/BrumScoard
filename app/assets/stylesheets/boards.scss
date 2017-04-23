@@ -68,6 +68,7 @@
     display:inline-block;
     align-self:left;
 }
+
 .singularAction {
     text-decoration:none;
     float:right;
@@ -77,4 +78,16 @@
     align-self:right;
     line-height: 53px;
     margin-left: 1.3%;
+}
+
+
+
+th, td {
+    // padding: 5px 30px 7px 30px;
+}
+
+th {
+    // align: left;
+    text-align: left;
+    padding: 5px 35px 7px 0px;
 }

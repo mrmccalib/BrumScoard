@@ -40,5 +40,5 @@ board.stories << story5
 # matthew.boards << board
 # michael.boards << board
 
-matthew.memberships.create(:board => board, :role => 'po')
-michael.memberships.create(:board => board, :role => 'dev')
+matthew.memberships.create(:board => board, :role => :product_owner)
+michael.memberships.create(:board => board, :role => :developer)
