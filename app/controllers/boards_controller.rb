@@ -103,6 +103,14 @@ class BoardsController < ApplicationController
         redirect_to :back
     end
 
+    def join
+
+    end
+
+    def reject
+
+    end
+
     private
 
     def board_params

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     post '/newboard',          to: 'boards#create'
     get  '/boards/:id/invite', to: 'boards#invite', as: 'invite'
     post '/boards/:id/invite', to: 'boards#send_invitation'
+    post '/boards/:id/join',   to: 'boards#join'
+    post '/boards/:id/reject', to: 'boards#reject'
 
     get '/boards/:id/sort', to: 'boards#list_update'
 
