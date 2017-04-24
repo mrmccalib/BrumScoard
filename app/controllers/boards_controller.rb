@@ -81,20 +81,19 @@ class BoardsController < ApplicationController
         boardAtOldIndex.save
     end
 
-
-    # <% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
-
     def send_invitation
-      #  @board = current_board
         username = params[:invitation][:username]
         invitee = User.find_by(username: username)
         members = User.joins(:memberships).where(memberships: {board_id: current_board.id})
+        invited = User.joins(:invitations).where(invitations: {board_id: current_board.id})
         if !invitee
             flash[:danger] = "Must enter a valid user!"
         elsif !members.include?(current_user)
             flash[:danger] = "You must be a member of this project to invite users!"
         elsif members.include?(invitee)
             flash[:danger] = "User is already a member!"
+        elsif invited.include?(invitee)
+            flash[:danger] = "User has already been invited!"
         else
             invitation = Invitation.new(board_id: current_board.id, user_id: invitee.id, role: params[:invitation][:role])
             invitation.save
@@ -104,11 +103,33 @@ class BoardsController < ApplicationController
     end
 
     def join
-
+        user_id = params[:user_id]
+        if current_user.id != user_id.to_i #only true if user is a jerk
+            puts "user_id: #{user_id.class.name}, current_user.id: #{current_user.id.class.name}"
+            flash[:danger] = "You must be invited to a board before joining it!"
+            redirect_to :back
+        end
+        board_id = params[:board_id]
+        invitation = Invitation.find_by(board_id: board_id, user_id: user_id)
+        membership = Membership.new(board_id: board_id, user_id: user_id, role: invitation.role);
+        invitation.destroy
+        membership.save
+        flash[:success] = 'Project joined!'
+        redirect_to :back
     end
 
     def reject
-
+        user_id = params[:user_id]
+        if current_user.id != user_id.to_i #only true if user is a jerk
+            puts "user_id: #{user_id.class.name}, current_user.id: #{current_user.id.class.name}"
+            flash[:danger] = "That is not your invitation to reject!"
+            redirect_to :back
+        end
+        board_id = params[:board_id]
+        invitation = Invitation.find_by(board_id: board_id, user_id: user_id)
+        invitation.destroy
+        flash[:success] = 'Invitation rejected! (You sure showed them!)'
+        redirect_to :back
     end
 
     private

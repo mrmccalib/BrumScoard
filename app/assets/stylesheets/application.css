@@ -61,8 +61,8 @@ header a:hover {
 
 input[type="submit"] {
     background-color: rgb(84, 106, 214);
-    color: white;
     border: none;
+    color: white;
     padding: 8px 20px;
     text-align: center;
     text-decoration: none;
@@ -72,6 +72,11 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: rgb(120, 120, 230);
+}
+
+
+input[type="submit"]:active {
+    background-color: rgb(148, 148, 255);
 }
 
 footer {
