@@ -37,4 +37,27 @@
 </table>
 </br>
 
+<% invites = current_board.invitations %>
+<% if invites.any? %>
+    <h2>Pending invitations</h2>
+    <table class="user-table">
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+        <% invites.each do |invite|%>
+            <tr>
+                <td class="cell">
+                    <%= User.find(invite.user_id).username %>
+                </td>
+                <td class="cell">
+                    <%= invite.role.humanize %>
+                </td>
+            </tr>
+        <% end%>
+    </table>
+</br>
+
+<% end %>
+
 <%= link_to 'Return to ' + current_board.name , current_board %>

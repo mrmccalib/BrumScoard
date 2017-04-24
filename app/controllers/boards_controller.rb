@@ -81,21 +81,24 @@ class BoardsController < ApplicationController
         boardAtOldIndex.save
     end
 
+
+    # <% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
+
     def send_invitation
       #  @board = current_board
         username = params[:invitation][:username]
-        user = User.find_by(username: username)
-        if !user
+        invitee = User.find_by(username: username)
+        members = User.joins(:memberships).where(memberships: {board_id: current_board.id})
+        if !invitee
             flash[:danger] = "Must enter a valid user!"
-        elsif !current_board.users.include?(current_user)
+        elsif !members.include?(current_user)
             flash[:danger] = "You must be a member of this project to invite users!"
-        elsif current_board.users.include?(user)
+        elsif members.include?(invitee)
             flash[:danger] = "User is already a member!"
         else
-            # current_board.users << user
-            membership = Membership.new(board_id: current_board.id, user_id: user.id, role: params[:invitation][:role])
-            membership.save
-            flash[:success] = "User added!"
+            invitation = Invitation.new(board_id: current_board.id, user_id: invitee.id, role: params[:invitation][:role])
+            invitation.save
+            flash[:success] = "User invited!"
         end
         redirect_to :back
     end

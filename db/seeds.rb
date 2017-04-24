@@ -13,8 +13,8 @@ User.create(username: 'kenzie', password: 'greenhair', first: 'Kenzie', last: 'F
 User.create(username: 'haylie', password: 'overwatchmemes', first: 'Haylie', last: 'Murphey')
 
 
-Board.create(name: 'testproject', description: 'this is a test board')
-board = Board.create(name: 'CS330Project', description: 'board for CS330 project')
+testproject = Board.create(name: 'testproject', description: 'this is a test board')
+cs330project = Board.create(name: 'CS330Project', description: 'board for CS330 project')
 
 
 story1 = Story.create(description: 'firstStory', as: 'Matthew', want: 'to stop coughing', so_that: 'I can stop bothering others',
@@ -31,14 +31,17 @@ story5 = Story.create(description: 'scrum board', as: 'Imad', want: 'an entire s
 
 
 
-board.stories << story1
-board.stories << story2
-board.stories << story3
-board.stories << story4
-board.stories << story5
+cs330project.stories << story1
+cs330project.stories << story2
+cs330project.stories << story3
+cs330project.stories << story4
+cs330project.stories << story5
 
 # matthew.boards << board
 # michael.boards << board
 
-matthew.memberships.create(:board => board, :role => :product_owner)
-michael.memberships.create(:board => board, :role => :developer)
+matthew.memberships.create(:board => cs330project, :role => :product_owner)
+michael.memberships.create(:board => cs330project, :role => :developer)
+
+michael.memberships.create(:board => testproject, :role => :developer)
+matthew.invitations.create(:board => testproject, :role => :developer)

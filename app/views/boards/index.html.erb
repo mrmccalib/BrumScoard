@@ -11,18 +11,37 @@
 <br>
 
 <div class="boards">
-<% current_user.boards.each do |board|%>
-    <%= link_to board do %>
-        <div class="card board">
-            <span class="name">
-                <%= board.name %>
-            </span>
-            <br><br>
-            <span class="description">
-                <%= board.description %>
-            </span>
-        </div>
+    <% Board.joins(:memberships).where(memberships: {user_id: current_user.id}).each do |board|%>
+        <%= link_to board do %>
+            <div class="card board">
+                <span class="name">
+                    <%= board.name %>
+                </span>
+                <br><br>
+                <span class="description">
+                    <%= board.description %>
+                </span>
+            </div>
+        <% end %>
+        <br>
     <% end %>
-    <br>
-<% end%>
 </div>
+
+<% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
+<% if invites.any? %>
+    <h1>Invitations</h1>
+        <div class="boards">
+            <% invites.each do |board|%>
+                <div class="card board">
+                    <span class="name">
+                        <%= board.name %>
+                    </span>
+                    <br><br>
+                    <span class="description">
+                        <%= board.description %>
+                    </span>
+                </div>
+            <br>
+            <% end %>
+        </div>
+<% end %>
