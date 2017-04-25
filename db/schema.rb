@@ -48,8 +48,11 @@ ActiveRecord::Schema.define(version: 20170425003808) do
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "description"
     t.integer "weight"
+    t.integer "column"
+    t.integer "position"
     t.integer "story_id"
     t.integer "user_id"
+    t.index ["position"], name: "index_tasks_on_position", using: :btree
     t.index ["story_id"], name: "index_tasks_on_story_id", using: :btree
     t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end

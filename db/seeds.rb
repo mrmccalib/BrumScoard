@@ -30,12 +30,13 @@ story5 = Story.create(description: 'scrum board', as: 'Imad', want: 'an entire s
 
 
 
-task1 = Task.create(description: 'first Task!', weight: 20)
-task2 = Task.create(description: 'pop socket', weight: 30)
-task3 = Task.create(description: 'this was too creepy so I changed it', weight: 20)
-task4 = Task.create(description: 'bahamas is a set of islands in the carribean', weight: 50)
-task5 = Task.create(description: "orange juice has lots of vitamin c but really isn't very good for you", weight: 10)
-task6 = Task.create(description: 'lentil lasagna is a weight watchers recipe', weight: 30)
+task1 = Task.create(description: 'first Task!', weight: 20, column: 2, position: 0)
+task2 = Task.create(description: 'pop socket', weight: 30, column: 2, position: 1)
+task3 = Task.create(description: 'this was too creepy so I changed it', weight: 20, column: 2, position: 2)
+task4 = Task.create(description: 'bahamas is a set of islands in the carribean', weight: 50, column: 2, position: 3)
+task5 = Task.create(description: "orange juice has lots of vitamin c but really isn't very good for you",
+    weight: 10, column: 2, position: 4)
+task6 = Task.create(description: 'lentil lasagna is a weight watchers recipe', weight: 30, column: 2, position: 5)
 
 
 
