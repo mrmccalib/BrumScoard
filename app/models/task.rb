@@ -4,7 +4,6 @@ class Task < ApplicationRecord
     belongs_to :user
 
     validate :required_fields
-    validate :weight_sum
 
 
     private
