@@ -1,0 +1,30 @@
+<h1>Add new task</h1>
+
+<% if @task.errors.full_messages.any? %>
+    <% @task.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger"><%= message %></div> </br>
+    <% end %>
+<% end %>
+
+<%= form_for :story, url: newstory_path do |f| %>
+    <div class="container">
+        <%= f.label "Description" %><br>
+        <%= f.text_field :description %>
+    </div>
+
+    <div class="container">
+        <%= f.label "Weight" %><br>
+        <%= f.text_field :description %>
+    </div>
+
+    <%= f.hidden_field :story_id, :value => ?????????????  %>
+    <%= f.hidden_field :column, :value => 0  %>
+    <%= f.hidden_field :position, :value => 0 %>
+
+
+    <div class="container">
+        <%= f.submit "Add story!" %>
+    </div>
+<% end %>
+
+<%= link_to 'Return to ' + current_board.name, current_board %>

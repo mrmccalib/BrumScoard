@@ -4,7 +4,7 @@ class Task < ApplicationRecord
     belongs_to :user
 
     validate :required_fields
-
+    validates_with SumValidator
 
     private
 
