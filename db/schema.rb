@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423052027) do
+ActiveRecord::Schema.define(version: 20170425003808) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name",        null: false
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 20170423052027) do
     t.index ["position"], name: "index_stories_on_position", using: :btree
   end
 
+  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "description"
+    t.integer "weight"
+    t.integer "story_id"
+    t.integer "user_id"
+    t.index ["story_id"], name: "index_tasks_on_story_id", using: :btree
+    t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "username",        null: false
     t.string "first"
@@ -53,4 +62,6 @@ ActiveRecord::Schema.define(version: 20170423052027) do
   end
 
   add_foreign_key "stories", "boards"
+  add_foreign_key "tasks", "stories"
+  add_foreign_key "tasks", "users"
 end
