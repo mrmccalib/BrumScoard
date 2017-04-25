@@ -11,17 +11,6 @@
 </div>
 <br />
 
-<!-- <div id="sorterrors">
-
-</div> -->
-
-<!-- <dialog class='modal'>
-<p>Greetings, one and all!</p>
-</dialog>
-<button onclick="function(){modal.style.display = 'block';}">I AM A BUTTON</button> -->
-<!-- <div class='actions'> -->
-
-<!-- </div> -->
 
 <div class="column" data-col="0">
     <h2>Product Backlog</h2>
@@ -92,20 +81,97 @@
         <% end%>
     </div>
 </div>
+
 <div class="column" data-col="2">
     <h2>To Do</h2>
     <div class="cards">
-    </div>
+      <% current_board.stories.each do |story|%>
+        <% (story.tasks.select {|task| task.column == 2}).each do |task| %>
+          <div class="task">
+            <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+              <% if !task.description.blank? %>
+                  <div class="info">
+                      <%= task.description %>
+                  </div>
+              <% end %>
+
+              <% if !task.weight.blank? %>
+                  <div class="info">
+                      <%= "Weight: " + task.weight.to_s %>
+                  </div>
+              <% end %>
+
+              <% if !task.user.blank? %>
+                  <div class="info">
+                      <%= 'Assigned user: ' + task.user.username %>
+                  </div>
+              <% end %>
+          </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
+
+
 <div class="column" data-col="3">
     <h2>Doing</h2>
     <div class="cards">
-    </div>
-</div>
-<div class="column" data-col="4">
-    <h2>Done</h2>
-    <div class="cards">
+      <% current_board.stories.each do |story|%>
+        <% (story.tasks.select {|task| task.column == 3}).each do |task| %>
+          <div class="task">
+            <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+              <% if !task.description.blank? %>
+                  <div class="info">
+                      <%= task.description %>
+                  </div>
+              <% end %>
+
+              <% if !task.weight.blank? %>
+                  <div class="info">
+                      <%= "Weight: " + task.weight.to_s %>
+                  </div>
+              <% end %>
+
+              <% if !task.user.blank? %>
+                  <div class="info">
+                      <%= 'Assigned user: ' + task.user.username %>
+                  </div>
+              <% end %>
+          </div>
+      <% end %>
+    <% end %>
     </div>
 </div>
 
-</br>
+
+<div class="column" data-col="4">
+    <h2>Done</h2>
+    <div class="cards">
+      <% current_board.stories.each do |story|%>
+        <% (story.tasks.select {|task| task.column == 4}).each do |task| %>
+          <div class="task">
+            <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+              <% if !task.description.blank? %>
+                  <div class="info">
+                      <%= task.description %>
+                  </div>
+              <% end %>
+
+              <% if !task.weight.blank? %>
+                  <div class="info">
+                      <%= "Weight: " + task.weight.to_s %>
+                  </div>
+              <% end %>
+
+              <% if !task.user.blank? %>
+                  <div class="info">
+                      <%= 'Assigned user: ' + task.user.username %>
+                  </div>
+              <% end %>
+          </div>
+      <% end %>
+    <% end %>
+    </div>
+</div>
+
+<br />
