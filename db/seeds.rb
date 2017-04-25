@@ -70,6 +70,6 @@ matthew.invitations.create(:board => testproject, :role => :developer)
 
 haylie.memberships.create(:board => cs330project, :role => :developer)
 
-kenzie.memberships.create(:board => testProject, :role => :developer)
+kenzie.memberships.create(:board => testproject, :role => :developer)
 
-imax.memberships.create(:board => testProject, :role => :product_owner)
+imax.memberships.create(:board => testproject, :role => :product_owner)
