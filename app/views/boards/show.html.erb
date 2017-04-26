@@ -20,7 +20,7 @@
               <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
                 <% if !story.description.blank? %>
                     <div class="info">
-                        <%= story.description %>
+                        <strong><%= story.description %></strong>
                     </div>
                 <% end %>
 
@@ -55,7 +55,7 @@
               <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
                 <% if !story.description.blank? %>
                     <div class="info">
-                        <%= story.description %>
+                        <strong><%= story.description %></strong>
                     </div>
                 <% end %>
 
@@ -89,6 +89,9 @@
         <% (story.tasks.select {|task| task.column == 2}).each do |task| %>
           <div class="task">
             <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+                  <div class="info">
+                    <span style="text-decoration:underline;"><%= story.description %></span>
+                  </div>
               <% if !task.description.blank? %>
                   <div class="info">
                       <%= task.description %>
@@ -122,7 +125,7 @@
             <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
               <% if !task.description.blank? %>
                   <div class="info">
-                      <%= task.description %>
+                      <%= story.description %>
                   </div>
               <% end %>
 
@@ -153,7 +156,7 @@
             <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
               <% if !task.description.blank? %>
                   <div class="info">
-                      <%= task.description %>
+                      <%= story.description %>
                   </div>
               <% end %>
 
