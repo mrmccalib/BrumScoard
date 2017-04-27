@@ -1,4 +1,4 @@
-<h1>New task for <%= current_story.description%></h1>
+<h1>Edit task<h1>
 
 <% if @task.errors.full_messages.any? %>
     <% @task.errors.full_messages.each do |message| %>
@@ -6,7 +6,7 @@
     <% end %>
 <% end %>
 
-<%= form_for :task, url: newtask_path do |f| %>
+<%= form_for :task, url: edittask_path do |f| %>
     <div class="container">
         <%= f.label "Description" %><br>
         <%= f.text_field :description %>
@@ -24,12 +24,12 @@
 
 
     <%= f.hidden_field :story_id, :value => current_story.id  %>
-    <%= f.hidden_field :column, :value => 2  %>
-    <%= f.hidden_field :position, :value => 0 %>
+    <%= f.hidden_field :column, :value => @task.column  %>
+    <%= f.hidden_field :position, :value => @task.position %>
 
 
     <div class="container">
-        <%= f.submit "Add task!" %>
+        <%= f.submit "Edit task!" %>
     </div>
 <% end %>
 

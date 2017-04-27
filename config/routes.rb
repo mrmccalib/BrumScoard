@@ -33,5 +33,9 @@ Rails.application.routes.draw do
     post '/boards/:id/stories/:story_id', to: 'stories#update'
     get 'story/show'
 
+    get  '/boards/:id/stories/:story_id/newtask', to: 'tasks#new',    as: 'newtask'
+    post '/boards/:id/stories/:story_id/newtask', to: 'tasks#create'
+    get  '/boards/:id/stories/:story_id/tasks/:task_id', to: 'tasks#edit',    as: 'edittask'
+    post '/boards/:id/stories/:story_id/tasks/:task_id', to: 'tasks#update'
 
 end

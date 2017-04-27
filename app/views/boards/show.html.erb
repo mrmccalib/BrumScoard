@@ -17,7 +17,8 @@
     <div class="cards">
         <% (current_board.stories.select {|story| story.column == 0}).each do |story|%>
             <div class="card">
-              <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+                <%= link_to editstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
+                <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
                 <% if !story.description.blank? %>
                     <div class="info">
                         <strong><%= story.description %></strong>
@@ -52,7 +53,8 @@
     <div class="cards">
         <% (current_board.stories.select {|story| story.column == 1}).each do |story|%>
             <div class="card">
-              <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+                <%= link_to editstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
+                <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
                 <% if !story.description.blank? %>
                     <div class="info">
                         <strong><%= story.description %></strong>
@@ -88,7 +90,7 @@
       <% current_board.stories.each do |story|%>
         <% (story.tasks.select {|task| task.column == 2}).each do |task| %>
           <div class="task">
-            <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+              <%= link_to edittask_path(current_board.id, story.id, task.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
                   <div class="info">
                     <span style="text-decoration:underline;"><%= story.description %></span>
                   </div>
