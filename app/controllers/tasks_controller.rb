@@ -25,7 +25,6 @@ class TasksController < ApplicationController
             flash[:success] = "Task added!"
             redirect_to current_board
         else
-            flash[:danger] = "OH NO! Task could not be added!"
             render 'new'
         end
     end
@@ -53,7 +52,6 @@ class TasksController < ApplicationController
             flash[:success] = "Task edited!"
             redirect_to current_board
         else
-            flash[:danger] = "OH NO! Task could not be edited!"
             render 'new'
         end
     end
