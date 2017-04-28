@@ -25,7 +25,8 @@ Rails.application.routes.draw do
     post '/boards/join',   to: 'boards#join'
     post '/boards/reject', to: 'boards#reject'
 
-    get '/boards/:id/sort', to: 'boards#list_update'
+    get '/boards/:id/sortstories', to: 'boards#stories_update'
+    get '/boards/:id/sorttasks',   to: 'boards#tasks_update'
 
     get  '/boards/:id/newstory',          to: 'stories#new',    as: 'newstory'
     post '/boards/:id/newstory',          to: 'stories#create'

@@ -16,7 +16,7 @@
     <h2>Product Backlog</h2>
     <div class="cards">
         <% (current_board.stories.select {|story| story.column == 0}).each do |story|%>
-            <div class="card">
+            <div class="card" id="<%= story.id %>">
                 <%= link_to editstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
                 <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
                 <% if !story.description.blank? %>
@@ -52,7 +52,7 @@
     <h2>Sprint Backlog</h2>
     <div class="cards">
         <% (current_board.stories.select {|story| story.column == 1}).each do |story|%>
-            <div class="card">
+            <div class="card" id="<%= story.id %>">
                 <%= link_to editstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
                 <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
                 <% if !story.description.blank? %>
@@ -89,7 +89,7 @@
     <div class="cards">
       <% current_board.stories.each do |story|%>
         <% (story.tasks.select {|task| task.column == 2}).each do |task| %>
-          <div class="task">
+          <div class="task" id="<%= task.id %>">
               <%= link_to edittask_path(current_board.id, story.id, task.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
                   <div class="info">
                     <span style="text-decoration:underline;"><%= story.description %></span>
@@ -123,11 +123,14 @@
     <div class="cards">
       <% current_board.stories.each do |story|%>
         <% (story.tasks.select {|task| task.column == 3}).each do |task| %>
-          <div class="task">
-            <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+          <div class="task" id="<%= task.id %>">
+              <%= link_to edittask_path(current_board.id, story.id, task.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
+                  <div class="info">
+                    <span style="text-decoration:underline;"><%= story.description %></span>
+                  </div>
               <% if !task.description.blank? %>
                   <div class="info">
-                      <%= story.description %>
+                      <%= task.description %>
                   </div>
               <% end %>
 
@@ -145,7 +148,7 @@
           </div>
       <% end %>
     <% end %>
-    </div>
+  </div>
 </div>
 
 
@@ -154,11 +157,14 @@
     <div class="cards">
       <% current_board.stories.each do |story|%>
         <% (story.tasks.select {|task| task.column == 4}).each do |task| %>
-          <div class="task">
-            <%= link_to "", editstory_path(current_board.id, story.id), :class => "fa fa-edit" %>
+          <div class="task" id="<%= task.id %>">
+              <%= link_to edittask_path(current_board.id, story.id, task.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
+                  <div class="info">
+                    <span style="text-decoration:underline;"><%= story.description %></span>
+                  </div>
               <% if !task.description.blank? %>
                   <div class="info">
-                      <%= story.description %>
+                      <%= task.description %>
                   </div>
               <% end %>
 
@@ -176,7 +182,7 @@
           </div>
       <% end %>
     <% end %>
-    </div>
+  </div>
 </div>
 
 <br />

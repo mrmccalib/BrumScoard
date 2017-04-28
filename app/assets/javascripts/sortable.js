@@ -40,19 +40,29 @@ $(document).on('turbolinks:load', function() {
             var oldIndex = $cards.attr('data-oldindex');
             var oldCol = $cards.attr('data-oldcol');
             var newCol = ui.item.parent().parent().data('col');
+            var id = ui.item.attr('id');
 
             // console.log("old column: " + oldCol);
             // console.log("new column: " + newCol);
 
             $cards.removeAttr('data-oldindex');
             $cards.removeAttr('data-oldcol');
+            var updateRoute;
+            if (oldCol == 0 || oldCol == 1) {
+                updateRoute = 'sortstories';
+            }
+            else {
+                updateRoute = 'sorttasks';
+            }
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
-                url: window.location.pathname + '/sort',
-                data: {oldIndex: oldIndex,
+                url: window.location.pathname + '/' + updateRoute,
+                data: {
+                    itemID: id,
+                    // oldIndex: oldIndex,
                     newIndex: newIndex,
-                    oldCol: oldCol,
+                    // oldCol: oldCol,
                     newCol: newCol
                 },
                 success: function(data){
@@ -65,7 +75,7 @@ $(document).on('turbolinks:load', function() {
                         clearError();
                     }
                 },
-                error: function(error){
+                error: function(error) {
                     showError('AJAX response error!');
                     console.log("AJAX response error (check server console):");
                     console.log(error.getResponseHeader());

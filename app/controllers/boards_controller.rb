@@ -28,30 +28,40 @@ class BoardsController < ApplicationController
         # @board = current_board
     end
 
-    def list_update
+    def stories_update
         @board = current_board
-        oldIndex = params[:oldIndex].to_i
+        storyID = params[:itemID].to_i
+        storyAtOldIndex = Story.find(storyID)
+        oldIndex = storyAtOldIndex.position
+        oldCol = storyAtOldIndex.column
+        # oldIndex = params[:oldIndex].to_i
+        # oldCol = params[:oldCol].to_i
         newIndex = params[:newIndex].to_i
-        oldCol = params[:oldCol].to_i
         newCol = params[:newCol].to_i
 
 
+        if current_user_role != Membership.roles[:product_owner]
+            render :json => {
+                :message => "Only a product owner can move stories!"
+            }
+            return
+        end
         if oldCol == 0 and newCol == 1
-            puts current_user_role
             if oldIndex != 0
                 render :json => {
                     :message => "Can only move top item in Product Backlog!"
                 }
                 return
-            elsif current_user_role != Membership.roles[:product_owner]
-                render :json => {
-                    :message => "Only a product owner can move items from the Product Backlog!"
-                }
-                return
             end
         end
+        if newCol == 2 or newCol == 3 or newCol == 4
+            render :json => {
+                :message => "Only tasks can go in that column!"
+            }
+            return
+        end
 
-        boardAtOldIndex = (@board.stories.select {|story| story.position == oldIndex and story.column == oldCol}).first
+        storyAtOldIndex = (@board.stories.select {|story| story.position == oldIndex and story.column == oldCol}).first
 
         if oldCol == newCol
             if oldIndex < newIndex # moving down in the list
@@ -65,8 +75,8 @@ class BoardsController < ApplicationController
                     story.save
                 end
             end
-        elsif oldCol == 0 and newCol == 1
-            (@board.stories.select {|story| story.column == oldCol}).each do |story|
+        else #oldCol == 0 and newCol == 1
+            (@board.stories.select {|story| story.column == oldCol and story.position > oldIndex}).each do |story|
                 story.position -= 1
                 story.save
             end
@@ -76,10 +86,71 @@ class BoardsController < ApplicationController
             end
         end
 
-        boardAtOldIndex.position = newIndex
-        boardAtOldIndex.column = newCol
-        boardAtOldIndex.save
+        storyAtOldIndex.position = newIndex
+        storyAtOldIndex.column = newCol
+        storyAtOldIndex.save
     end
+
+
+    def tasks_update
+        @board = current_board
+        taskID = params[:itemID].to_i
+        taskAtOldIndex = Task.find(taskID)
+        oldIndex = taskAtOldIndex.position
+        oldCol = taskAtOldIndex.column
+        # oldIndex = params[:oldIndex].to_i
+        # oldCol = params[:oldCol].to_i
+        newIndex = params[:newIndex].to_i
+        newCol = params[:newCol].to_i
+
+        if current_user_role != Membership.roles[:developer]
+            render :json => {
+                :message => "Only a developer can move tasks!"
+            }
+            return
+        elsif newCol == 0 or newCol == 1
+            render :json => {
+                :message => "Only stories can go in that column!"
+            }
+            return
+        end
+
+        if oldCol == newCol
+            if oldIndex < newIndex # moving down in the list
+                @board.stories.each do |story|
+                    (story.tasks.select {|task| task.position <= newIndex and task.position > oldIndex}).each do |task|
+                        task.position -= 1
+                        task.save
+                    end
+                end
+            else # moving up in the list
+                @board.stories.each do |story|
+                    (story.tasks.select {|task| task.position >= newIndex and task.position < oldIndex}).each do |task|
+                        task.position += 1
+                        task.save
+                    end
+                end
+            end
+        else #oldCol == 0 and newCol == 1
+            @board.stories.each do |story|
+                (story.tasks.select {|task| task.column == oldCol and task.position > oldIndex}).each do |task|
+                    task.position -= 1
+                    task.save
+                end
+            end
+            @board.stories.each do |story|
+                (story.tasks.select {|task| task.column == newCol and task.position >= newIndex}).each do |task|
+                    task.position += 1
+                    task.save
+                end
+            end
+        end
+
+        taskAtOldIndex.position = newIndex
+        taskAtOldIndex.column = newCol
+        taskAtOldIndex.save
+    end
+
 
     def send_invitation
         username = params[:invitation][:username]
