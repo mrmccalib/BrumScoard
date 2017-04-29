@@ -40,7 +40,7 @@ class TasksController < ApplicationController
         newWeight = task_params[:weight].to_i
         if newWeight
             if newWeight > 100 or newWeight < 1
-                flash.now[:danger] = "Weight must be between 0 and 100!"
+                flash.now[:danger] = "Weight must be between 1 and 100!"
                 render 'new'
                 return
             elsif current_story.tasks.sum(:weight) - oldWeight + newWeight > 100
