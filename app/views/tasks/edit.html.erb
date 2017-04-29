@@ -8,12 +8,13 @@
 
 <%= form_for :task, url: edittask_path do |f| %>
     <div class="container">
-        <%= f.label "Description" %><br>
+        <%= f.label "Description*" %><br>
         <%= f.text_field :description %>
     </div>
 
     <div class="container">
-        <%= f.label "Weight" %><br>
+        <% star = @task.task_column.position == 4 ? '*' : ''%>
+        <%= f.label "Weight (Percent)" + star %><br>
         <%= f.text_field :weight %>
     </div>
 

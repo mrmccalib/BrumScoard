@@ -8,12 +8,12 @@
 
 <%= form_for :task, url: newtask_path do |f| %>
     <div class="container">
-        <%= f.label "Description" %><br>
+        <%= f.label "Description*" %><br>
         <%= f.text_field :description %>
     </div>
 
     <div class="container">
-        <%= f.label "Weight" %><br>
+        <%= f.label "Weight (Percent)" %><br>
         <%= f.text_field :weight %>
     </div>
 
