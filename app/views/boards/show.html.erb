@@ -11,8 +11,6 @@
 </div>
 <br />
 
-<% column = 0 %>
-
 <% current_board.story_columns.each do |story_column| %>
     <div class="column", id="story_column.<%= story_column.id %>" data-col="<%= story_column.position %>">
         <h2><%= story_column.name %></h2>

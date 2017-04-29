@@ -13,8 +13,8 @@ class TasksController < ApplicationController
             flash[:danger] = "Only developers can add tasks!"
             render 'new'
         elsif @task.weight
-            if @task.weight > 100 or @task.weight < 0
-                flash.now[:danger] = "Weight must be between 0 and 100!"
+            if @task.weight > 100 or @task.weight < 1
+                flash.now[:danger] = "Weight must be between 1 and 100!"
                 render 'new'
             elsif current_story.tasks.sum(:weight) + @task.weight > 100
                 flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
         oldWeight = 0 if oldWeight.nil?
         newWeight = task_params[:weight].to_i
         if newWeight
-            if newWeight > 100 or newWeight < 0
+            if newWeight > 100 or newWeight < 1
                 flash.now[:danger] = "Weight must be between 0 and 100!"
                 render 'new'
                 return

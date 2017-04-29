@@ -12,15 +12,16 @@ module StoriesHelper
         doneWeight = 0
         totalWeight = 0
         doneTasks.each do |task|
-            doneWeight += task.weight
+            doneWeight += task.weight unless task.weight.nil?
+
         end
         story.tasks.each do |task|
-            totalWeight += task.weight
+            totalWeight += task.weight unless task.weight.nil?
         end
         if !story.tasks.any?
-            return 'No tasks created'
+            return 'no tasks created'
         elsif totalWeight == 0
-            return "Story's tasks have 0 weight!"
+            return "tasks have no weight"
         else
             return (doneWeight).to_s + "%"
         end
