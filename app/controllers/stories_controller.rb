@@ -7,13 +7,13 @@ class StoriesController < ApplicationController
     end
 
     def create
-        current_board.stories.each do |story|
+        current_board.story_columns.first.stories.each do |story|
             story.position += 1
             story.save
         end
         @story = Story.new(story_params)
         if current_user_role != Membership.roles[:developer]
-            flash[:danger] = "Only developers can add stories!"
+            flash.now[:danger] = "Only developers can add stories!"
             render 'new'
         elsif @story.save
             flash[:success] = "Story added!"
@@ -44,7 +44,7 @@ class StoriesController < ApplicationController
     private
 
     def story_params
-        params.require(:story).permit(:description, :as, :want, :so_that, :criteria, :size, :board_id, :position, :column)
+        params.require(:story).permit(:description, :as, :want, :so_that, :criteria, :size, :story_column_id, :position)
     end
 
 end

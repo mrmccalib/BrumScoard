@@ -8,9 +8,8 @@ class CreateStories < ActiveRecord::Migration[5.0]
             t.string :criteria
             t.string :size
             t.integer :position, index: true
-            t.integer :column
             # t.belongs_to :board, index: true
         end
-        add_reference :stories, :board, foreign_key: true
+        add_reference :stories, :story_column, foreign_key: true
     end
 end

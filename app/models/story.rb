@@ -1,6 +1,6 @@
 class Story < ApplicationRecord
 
-    belongs_to :board
+    belongs_to :story_column
     has_many :tasks
 
     validate :required_fields

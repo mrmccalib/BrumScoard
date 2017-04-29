@@ -39,21 +39,37 @@ ActiveRecord::Schema.define(version: 20170425003808) do
     t.string  "criteria"
     t.string  "size"
     t.integer "position"
-    t.integer "column"
-    t.integer "board_id"
-    t.index ["board_id"], name: "index_stories_on_board_id", using: :btree
+    t.integer "story_column_id"
     t.index ["position"], name: "index_stories_on_position", using: :btree
+    t.index ["story_column_id"], name: "index_stories_on_story_column_id", using: :btree
+  end
+
+  create_table "story_columns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "name",     null: false
+    t.integer "position"
+    t.integer "board_id"
+    t.index ["board_id"], name: "index_story_columns_on_board_id", using: :btree
+    t.index ["position"], name: "index_story_columns_on_position", using: :btree
+  end
+
+  create_table "task_columns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "name",     null: false
+    t.integer "position"
+    t.integer "board_id"
+    t.index ["board_id"], name: "index_task_columns_on_board_id", using: :btree
+    t.index ["position"], name: "index_task_columns_on_position", using: :btree
   end
 
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "description"
     t.integer "weight"
-    t.integer "column"
     t.integer "position"
-    t.integer "story_id"
+    t.integer "task_column_id"
     t.integer "user_id"
+    t.integer "story_id"
     t.index ["position"], name: "index_tasks_on_position", using: :btree
     t.index ["story_id"], name: "index_tasks_on_story_id", using: :btree
+    t.index ["task_column_id"], name: "index_tasks_on_task_column_id", using: :btree
     t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end
 
@@ -64,7 +80,10 @@ ActiveRecord::Schema.define(version: 20170425003808) do
     t.string "password_digest"
   end
 
-  add_foreign_key "stories", "boards"
+  add_foreign_key "stories", "story_columns"
+  add_foreign_key "story_columns", "boards"
+  add_foreign_key "task_columns", "boards"
   add_foreign_key "tasks", "stories"
+  add_foreign_key "tasks", "task_columns"
   add_foreign_key "tasks", "users"
 end

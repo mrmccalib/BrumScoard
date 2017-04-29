@@ -23,8 +23,8 @@
     </div>
 
 
-    <%= f.hidden_field :story_id, :value => current_story.id  %>
-    <%= f.hidden_field :column, :value => @task.column  %>
+    <%= f.hidden_field :story_id, :value => @task.task_column_id %>
+    <%= f.hidden_field :task_column_id, :value => @task.task_column_id %>
     <%= f.hidden_field :position, :value => @task.position %>
 
     <div class="container">

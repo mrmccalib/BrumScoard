@@ -6,6 +6,11 @@ class BoardsController < ApplicationController
 
     def create
         @board = Board.new(board_params)
+        @board.story_columns << StoryColumn.create(name: 'Product Backlog', position:0)
+        @board.story_columns << StoryColumn.create(name: 'Sprint Backlog',  position:1)
+        @board.task_columns << TaskColumn.create(name: 'To Do', position: 2)
+        @board.task_columns << TaskColumn.create(name: 'Doing', position: 3)
+        @board.task_columns << TaskColumn.create(name: 'Done',  position: 4)
         if @board.save
             user = User.find(session[:user_id])
             # add to lookup table
@@ -30,85 +35,75 @@ class BoardsController < ApplicationController
 
     def stories_update
         @board = current_board
-        storyID = params[:itemID].to_i
-        storyAtOldIndex = Story.find(storyID)
+        storyAtOldIndex = Story.find(params[:itemID].to_i)
         oldIndex = storyAtOldIndex.position
-        oldCol = storyAtOldIndex.column
-        # oldIndex = params[:oldIndex].to_i
-        # oldCol = params[:oldCol].to_i
         newIndex = params[:newIndex].to_i
-        newCol = params[:newCol].to_i
-
+        oldCol = (@board.story_columns.select {|story_column| story_column.position == params[:oldCol].to_i}).first
+        newCol = (@board.story_columns.select {|story_column| story_column.position == params[:newCol].to_i}).first
 
         if current_user_role != Membership.roles[:product_owner]
             render :json => {
                 :message => "Only a product owner can move stories!"
             }
             return
-        end
-        if oldCol == 0 and newCol == 1
-            if oldIndex != 0
-                render :json => {
-                    :message => "Can only move top item in Product Backlog!"
-                }
-                return
-            end
-        end
-        if newCol == 2 or newCol == 3 or newCol == 4
+        elsif oldCol.position == 0 and newCol.position == 1 and oldIndex != 0
+            render :json => {
+                :message => "Can only move top item in Product Backlog!"
+            }
+            return
+        elsif newCol.position == 2 or newCol.position == 3 or newCol.position == 4
             render :json => {
                 :message => "Only tasks can go in that column!"
             }
             return
         end
 
-        storyAtOldIndex = (@board.stories.select {|story| story.position == oldIndex and story.column == oldCol}).first
-
         if oldCol == newCol
             if oldIndex < newIndex # moving down in the list
-                (@board.stories.select {|story| story.position <= newIndex and story.position > oldIndex}).each do |story|
+                (oldCol.stories.select {|story| story.position <= newIndex and story.position > oldIndex}).each do |story|
                     story.position -= 1
                     story.save
                 end
             else # moving up in the list
-                (@board.stories.select {|story| story.position >= newIndex and story.position < oldIndex}).each do |story|
+                (oldCol.stories.select {|story| story.position >= newIndex and story.position < oldIndex}).each do |story|
                     story.position += 1
                     story.save
                 end
             end
-        else #oldCol == 0 and newCol == 1
-            (@board.stories.select {|story| story.column == oldCol and story.position > oldIndex}).each do |story|
+        else #moving between columns
+            (oldCol.stories.select {|story| story.position > oldIndex}).each do |story|
                 story.position -= 1
                 story.save
             end
-            (@board.stories.select {|story| story.column == newCol and story.position >= newIndex}).each do |story|
+            (newCol.stories.select {|story| story.position >= newIndex}).each do |story|
                 story.position += 1
                 story.save
             end
         end
 
         storyAtOldIndex.position = newIndex
-        storyAtOldIndex.column = newCol
         storyAtOldIndex.save
+        if oldCol != newCol
+            newCol.stories << storyAtOldIndex
+            oldCol.stories.delete(storyAtOldIndex)
+        end
     end
 
 
     def tasks_update
         @board = current_board
-        taskID = params[:itemID].to_i
-        taskAtOldIndex = Task.find(taskID)
+        taskAtOldIndex = Task.find(params[:itemID].to_i)
         oldIndex = taskAtOldIndex.position
-        oldCol = taskAtOldIndex.column
-        # oldIndex = params[:oldIndex].to_i
-        # oldCol = params[:oldCol].to_i
         newIndex = params[:newIndex].to_i
-        newCol = params[:newCol].to_i
+        oldCol = (@board.task_columns.select {|task_column| task_column.position == params[:oldCol].to_i}).first
+        newCol = (@board.task_columns.select {|task_column| task_column.position == params[:newCol].to_i}).first
 
         if current_user_role != Membership.roles[:developer]
             render :json => {
                 :message => "Only a developer can move tasks!"
             }
             return
-        elsif newCol == 0 or newCol == 1
+        elsif newCol.position == 0 or newCol.position == 1
             render :json => {
                 :message => "Only stories can go in that column!"
             }
@@ -117,38 +112,33 @@ class BoardsController < ApplicationController
 
         if oldCol == newCol
             if oldIndex < newIndex # moving down in the list
-                @board.stories.each do |story|
-                    (story.tasks.select {|task| task.position <= newIndex and task.position > oldIndex}).each do |task|
-                        task.position -= 1
-                        task.save
-                    end
-                end
-            else # moving up in the list
-                @board.stories.each do |story|
-                    (story.tasks.select {|task| task.position >= newIndex and task.position < oldIndex}).each do |task|
-                        task.position += 1
-                        task.save
-                    end
-                end
-            end
-        else #oldCol == 0 and newCol == 1
-            @board.stories.each do |story|
-                (story.tasks.select {|task| task.column == oldCol and task.position > oldIndex}).each do |task|
+                (oldCol.tasks.select {|task| task.position <= newIndex and task.position > oldIndex}).each do |task|
                     task.position -= 1
                     task.save
                 end
-            end
-            @board.stories.each do |story|
-                (story.tasks.select {|task| task.column == newCol and task.position >= newIndex}).each do |task|
+            else # moving up in the list
+                (oldCol.tasks.select {|task| task.position >= newIndex and task.position < oldIndex}).each do |task|
                     task.position += 1
                     task.save
                 end
             end
+        else #oldCol == 0 and newCol == 1
+            (oldCol.tasks.select {|task| task.position > oldIndex}).each do |task|
+                task.position -= 1
+                task.save
+            end
+            (newCol.tasks.select {|task| task.position >= newIndex}).each do |task|
+                task.position += 1
+                task.save
+            end
         end
 
         taskAtOldIndex.position = newIndex
-        taskAtOldIndex.column = newCol
         taskAtOldIndex.save
+        if oldCol != newCol
+            newCol.tasks << taskAtOldIndex
+            oldCol.tasks.delete(taskAtOldIndex)
+        end
     end
 
 

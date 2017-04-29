@@ -39,7 +39,9 @@ $(document).on('turbolinks:load', function() {
             var newIndex = ui.item.index();
             var oldIndex = $cards.attr('data-oldindex');
             var oldCol = $cards.attr('data-oldcol');
+            // var oldCol = $cards.attr('id');
             var newCol = ui.item.parent().parent().data('col');
+            // var newCol = ui.item.parent().parent().attr('id');
             var id = ui.item.attr('id');
 
             // console.log("old column: " + oldCol);
@@ -60,9 +62,8 @@ $(document).on('turbolinks:load', function() {
                 url: window.location.pathname + '/' + updateRoute,
                 data: {
                     itemID: id,
-                    // oldIndex: oldIndex,
                     newIndex: newIndex,
-                    // oldCol: oldCol,
+                    oldCol: oldCol,
                     newCol: newCol
                 },
                 success: function(data){

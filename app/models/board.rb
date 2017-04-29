@@ -1,6 +1,8 @@
 class Board < ApplicationRecord
 
-    has_many :stories, -> {order 'position asc'}
+    # has_many :stories, -> {order 'position asc'}
+    has_many :story_columns
+    has_many :task_columns
 
     validates :name, presence: true
     validates :name, uniqueness: { case_sensitive: false }

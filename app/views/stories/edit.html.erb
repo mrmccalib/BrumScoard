@@ -29,8 +29,7 @@
         <%= f.text_field :size, :value => @story.size %>
     </div>
 
-    <%= f.hidden_field :board_id, :value => current_board.id  %>
-    <%= f.hidden_field :column, :value => @story.column  %>
+    <%= f.hidden_field :story_column_id, :value => @story.story_column_id  %>
     <%= f.hidden_field :position, :value => @story.position %>
 
 

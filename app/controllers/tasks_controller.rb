@@ -4,7 +4,7 @@ class TasksController < ApplicationController
     end
 
     def create
-        current_story.tasks.each do |task|
+        current_board.task_columns.first.tasks.each do |task|
             task.position += 1
             task.save
         end
@@ -14,10 +14,10 @@ class TasksController < ApplicationController
             render 'new'
         elsif @task.weight
             if @task.weight > 100 or @task.weight < 0
-                flash[:danger] = "Weight must be between 0 and 100!"
+                flash.now[:danger] = "Weight must be between 0 and 100!"
                 render 'new'
             elsif current_story.tasks.sum(:weight) + @task.weight > 100
-                flash[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
+                flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
                 render 'new'
             end
         end
@@ -35,19 +35,22 @@ class TasksController < ApplicationController
 
     def update
         @task = current_task
-        @task.update_attributes(task_params)
-        if @task.weight
-            if @task.weight > 100 or @task.weight < 0
-                flash[:danger] = "Weight must be between 0 and 100!"
+        oldWeight = @task.weight
+        oldWeight = 0 if oldWeight.nil?
+        newWeight = task_params[:weight].to_i
+        if newWeight
+            if newWeight > 100 or newWeight < 0
+                flash.now[:danger] = "Weight must be between 0 and 100!"
                 render 'new'
                 return
-            elsif current_story.tasks.sum(:weight) + @task.weight > 100
-                flash[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
+            elsif current_story.tasks.sum(:weight) - oldWeight + newWeight > 100
+                flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
                 render 'new'
                 return
             end
         end
 
+        @task.update_attributes(task_params)
         if @task.save
             flash[:success] = "Task edited!"
             redirect_to current_board
@@ -56,11 +59,10 @@ class TasksController < ApplicationController
         end
     end
 
-
     private
 
     def task_params
-        params.require(:task).permit(:description, :weight, :position, :column, :story_id, :user_id)
+        params.require(:task).permit(:description, :weight, :position, :task_column_id, :story_id, :user_id)
     end
 
 end
