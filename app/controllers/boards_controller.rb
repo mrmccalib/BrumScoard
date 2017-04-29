@@ -108,6 +108,18 @@ class BoardsController < ApplicationController
                 :message => "Only stories can go in that column!"
             }
             return
+        elsif oldCol.position == 2 and newCol.position > oldCol.position
+            if taskAtOldIndex.weight.nil?
+                render :json => {
+                    :message => "Tasks must have a weight before being moved from To Do!"
+                }
+                return
+            elsif taskAtOldIndex.user_id.nil?
+                render :json => {
+                    :message => "Tasks must have a developer assigned before being moved from To Do!"
+                }
+                return
+            end
         end
 
         if oldCol == newCol
@@ -122,7 +134,7 @@ class BoardsController < ApplicationController
                     task.save
                 end
             end
-        else #oldCol == 0 and newCol == 1
+        else #moving between columns
             (oldCol.tasks.select {|task| task.position > oldIndex}).each do |task|
                 task.position -= 1
                 task.save
