@@ -151,6 +151,17 @@ class BoardsController < ApplicationController
             newCol.tasks << taskAtOldIndex
             oldCol.tasks.delete(taskAtOldIndex)
         end
+
+        # tell ajax to update weight
+        if (oldCol.position == 4 or newCol.position == 4 ) and newCol.position != oldCol.position
+            completion = completion(taskAtOldIndex.story)
+            if completion != 'No tasks created'
+                render :json => {
+                    :story => taskAtOldIndex.story.id.to_s,
+                    :completion => completion
+                }
+            end
+        end
     end
 
 

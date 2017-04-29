@@ -43,6 +43,7 @@ $(document).on('turbolinks:load', function() {
             var newCol = ui.item.parent().parent().data('col');
             // var newCol = ui.item.parent().parent().attr('id');
             var id = ui.item.attr('id');
+            id = id.substring(id.indexOf('.') + 1);
 
             // console.log("old column: " + oldCol);
             // console.log("new column: " + newCol);
@@ -66,11 +67,18 @@ $(document).on('turbolinks:load', function() {
                     oldCol: oldCol,
                     newCol: newCol
                 },
-                success: function(data){
-                    if (data)
-                    {
-                        $cards.sortable('cancel');
-                        showError(data.message);
+                success: function(data) {
+                    if (data) {
+                        if (data.message) {
+                            $cards.sortable('cancel');
+                            showError(data.message);
+                        }
+                        else if (data.completion) {
+                            $('#story\\.' + data.story).find('.completion').text('Completion: ' + data.completion);
+                        }
+                        else {
+                            showError('Unhandled response type!');
+                        }
                     }
                     else {
                         clearError();
