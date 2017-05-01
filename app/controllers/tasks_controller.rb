@@ -59,6 +59,12 @@ class TasksController < ApplicationController
         end
     end
 
+    def destroy
+        current_task.destroy
+        flash[:success] = "Task removed!"
+        redirect_to current_board
+    end
+
     private
 
     def task_params

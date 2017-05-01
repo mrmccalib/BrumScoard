@@ -18,7 +18,13 @@
             <% story_column.stories.each do |story| %>
                 <div class="card" id="story.<%= story.id %>">
                     <%= link_to editstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
-                    <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
+                    <% if current_user_role == Membership.roles[:developer] %>
+                        <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
+                    <% end %>
+                    <% if current_user_role == Membership.roles[:product_owner] %>
+                        <%= link_to rejectstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-times"></span>&nbsp;Reject&nbsp;&nbsp;</div><% end %>
+                        <%= link_to acceptstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-check"></span>&nbsp;Accept&nbsp;&nbsp;</div><% end %>
+                    <% end %>
                     <% if !story.description.blank? %>
                         <div class="info">
                             <strong><%= story.description %></strong>
@@ -61,8 +67,13 @@
             <% task_column.tasks.each do |task|%>
                 <% story = Story.find(task.story_id) %>
                 <div class="task" id="task.<%= task.id %>">
-                    <%= link_to edittask_path(current_board.id, story.id, task.id) do %>
-                        <div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div>
+                    <% if current_user_role == Membership.roles[:developer] %>
+                        <%= link_to deletetask_path(current_board.id, story.id, task.id), method: :delete do %>
+                            <div class="text-fa"><span class="fa fa-times-circle"></span>&nbsp;Delete</div>
+                        <% end %>
+                        <%= link_to edittask_path(current_board.id, story.id, task.id) do %>
+                            <div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit&nbsp;&nbsp;</div>
+                        <% end %>
                     <% end %>
                     <div class="info">
                         <span style="text-decoration:underline;"><%= story.description %></span>

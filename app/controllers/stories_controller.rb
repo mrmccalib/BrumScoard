@@ -38,8 +38,34 @@ class StoriesController < ApplicationController
         end
     end
 
-    def show
+    def accept
+        if current_user_role != Membership.roles[:product_owner]
+            flash.now[:danger] = "Only product owners can add accept stories!"
+            render 'new'
+        else
+            @story = current_story
+            @story.acceptance = true
+            if @story.save
+                flash[:success] = "Story accepted!"
+                redirect_to current_board
+            end
+        end
     end
+
+    def accept
+        if current_user_role != Membership.roles[:product_owner]
+            flash.now[:danger] = "Only product owners can add accept stories!"
+            render 'new'
+        else
+            @story = current_story
+            @story.acceptance = true
+            if @story.save
+                flash[:success] = "Story rejected!"
+                redirect_to current_board
+            end
+        end
+    end
+
 
     private
 

@@ -28,15 +28,17 @@ Rails.application.routes.draw do
     get '/boards/:id/sortstories', to: 'boards#stories_update'
     get '/boards/:id/sorttasks',   to: 'boards#tasks_update'
 
-    get  '/boards/:id/newstory',          to: 'stories#new',    as: 'newstory'
-    post '/boards/:id/newstory',          to: 'stories#create'
-    get  '/boards/:id/stories/:story_id', to: 'stories#edit',   as: 'editstory'
-    post '/boards/:id/stories/:story_id', to: 'stories#update'
-    get 'story/show'
+    get    '/boards/:id/newstory',          to: 'stories#new',    as: 'newstory'
+    post   '/boards/:id/newstory',          to: 'stories#create'
+    get    '/boards/:id/stories/:story_id', to: 'stories#edit',   as: 'editstory'
+    post   '/boards/:id/stories/:story_id', to: 'stories#update'
+    get '/boards/:id/stories/:story_id', to: 'stories#accept',   as: 'acceptstory'
+    get '/boards/:id/stories/:story_id', to: 'stories#reject',   as: 'rejectstory'
 
-    get  '/boards/:id/stories/:story_id/newtask', to: 'tasks#new',    as: 'newtask'
-    post '/boards/:id/stories/:story_id/newtask', to: 'tasks#create'
-    get  '/boards/:id/stories/:story_id/tasks/:task_id', to: 'tasks#edit',    as: 'edittask'
-    post '/boards/:id/stories/:story_id/tasks/:task_id', to: 'tasks#update'
+    get    '/boards/:id/stories/:story_id/newtask', to: 'tasks#new',    as: 'newtask'
+    post   '/boards/:id/stories/:story_id/newtask', to: 'tasks#create'
+    get    '/boards/:id/stories/:story_id/tasks/:task_id', to: 'tasks#edit',    as: 'edittask'
+    post   '/boards/:id/stories/:story_id/tasks/:task_id', to: 'tasks#update'
+    delete '/boards/:id/stories/:story_id/tasks/:task_id/delete', to: 'tasks#destroy', as: 'deletetask'
 
 end

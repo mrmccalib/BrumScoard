@@ -1,7 +1,3 @@
-//= require jquery3
-//= require jquery_ujs
-//= require turbolinks
-//= require_tree .
 //= require jquery-ui/widgets/sortable
 
 
