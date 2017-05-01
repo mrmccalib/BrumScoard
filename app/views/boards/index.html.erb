@@ -1,52 +1,68 @@
-<h1>Boards</h1>
+<div class="content-wrapper">
+  <div class="boardActions">
+    <div class="pageTitle">
+
+      <h1>My Boards</h1>
+    </div>
+    <div class="singularAction">
+    </div>
+  </div>
 
 
-<% if (params.has_key?(:id) && params.has_key?(:random)) %>
-<%= "id: #{params[:id]}" %> <br/>
-<%= "random: #{params[:random]}" %> <br/>
-<% end %>
+  <% if (params.has_key?(:id) && params.has_key?(:random)) %>
+  <%= "id: #{params[:id]}" %> <br/>
+  <%= "random: #{params[:random]}" %> <br/>
+  <% end %>
 
-<%= link_to "Create new board", newboard_path %>
-<br>
-<br>
+  <br>
+  <br>
 
-<div class="boards">
-    <% Board.joins(:memberships).where(memberships: {user_id: current_user.id}).each do |board|%>
-        <%= link_to board do %>
-            <div class="card board">
-                <span class="name">
-                    <%= board.name %>
-                </span>
-                <br><br>
-                <div class="info">
-                    <%= board.description %>
-                </div>
-            </div>
-        <% end %>
-        <br>
-    <% end %>
-</div>
-
-<% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
-<% if invites.any? %>
-    <h1>Invitations</h1>
-        <div class="boards">
-            <% invites.each do |board|%>
-                <div class="card board">
-                    <span class="name">
-                        <%= board.name %>
-                    </span>
-                    <%= button_to 'REJECT', {:controller => "boards", :action => "reject", :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
-                    <%= button_to 'ACCEPT', {:controller => "boards", :action => "join",   :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
-                    <br><br>
-                    <div class="info">
-                        <%= board.description %>
-                    </div>
-                    <div class="info">
-                        <%= 'Role: ' + Invitation.find_by(board_id: board.id, user_id: current_user.id).role.humanize %>
-                    </div>
-                </div>
-            <br>
-            <% end %>
+  <div class="boards">
+      <% Board.joins(:memberships).where(memberships: {user_id: current_user.id}).each do |board|%>
+          <%= link_to board do %>
+              <div class="card board">
+                  <span class="name">
+                      <%= board.name %>
+                  </span>
+                  <br><br>
+                  <div class="info">
+                      <%= board.description %>
+                  </div>
+              </div>
+          <% end %>
+          <br>
+      <% end %>
+  </div>
+  <div class="boardActions">
+    <div class="singularAction">
+      <div class="text-fa"><span class="fa fa-plus"></span>&nbsp;<%= link_to "New Board", newboard_path %></div>
+    </div>
+  </div>
+  <% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
+  <% if invites.any? %>
+    <br />
+    <br />
+    <div class="boardActions">
+        <h1>Invitations</h1>
+    </div>
+    <div class="boards">
+      <% invites.each do |board|%>
+        <div class="card board">
+          <span class="name">
+              <%= board.name %>
+          </span>
+          <%= button_to 'REJECT', {:controller => "boards", :action => "reject", :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
+          <%= button_to 'ACCEPT', {:controller => "boards", :action => "join",   :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
+          <div class="info">
+              <br />
+              <%= board.description %>
+          </div>
+          <div class="info">
+              <%= 'Role: ' + Invitation.find_by(board_id: board.id, user_id: current_user.id).role.humanize %>
+          </div>
         </div>
-<% end %>
+      <br>
+      <% end %>
+    </div>
+  <% end %>
+</div>
