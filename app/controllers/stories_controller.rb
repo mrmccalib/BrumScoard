@@ -12,8 +12,8 @@ class StoriesController < ApplicationController
             story.save
         end
         @story = Story.new(story_params)
-        if current_user_role != Membership.roles[:developer]
-            flash.now[:danger] = "Only developers can add stories!"
+        if current_user_role != Membership.roles[:product_owner]
+            flash.now[:danger] = "Only product owners can add stories!"
             render 'new'
         elsif @story.save
             flash[:success] = "Story added!"
@@ -40,7 +40,7 @@ class StoriesController < ApplicationController
 
     def accept
         if current_user_role != Membership.roles[:product_owner]
-            flash.now[:danger] = "Only product owners can add accept stories!"
+            flash.now[:danger] = "Only product owners can accept stories!"
             render 'new'
         else
             @story = current_story
@@ -52,13 +52,23 @@ class StoriesController < ApplicationController
         end
     end
 
-    def accept
+    def reject
+        @story = current_story
+    end
+
+    def do_reject
         if current_user_role != Membership.roles[:product_owner]
-            flash.now[:danger] = "Only product owners can add accept stories!"
+            flash.now[:danger] = "Only product owners can reject stories!"
             render 'new'
         else
             @story = current_story
-            @story.acceptance = true
+            @story.update_attributes(reject_params)
+            if @story.rejection_reason.blank?
+                flash.now[:danger] = "Reason required to reject story!"
+                render 'reject'
+                return
+            end
+            @story.acceptance = false
             if @story.save
                 flash[:success] = "Story rejected!"
                 redirect_to current_board
@@ -72,5 +82,10 @@ class StoriesController < ApplicationController
     def story_params
         params.require(:story).permit(:description, :as, :want, :so_that, :criteria, :size, :story_column_id, :position)
     end
+
+    def reject_params
+        params.require(:story).permit(:rejection_reason)
+    end
+
 
 end
