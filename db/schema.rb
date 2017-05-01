@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20170425003808) do
     t.string  "criteria"
     t.string  "size"
     t.integer "position"
+    t.boolean "acceptance"
+    t.string  "rejection_reason"
     t.integer "story_column_id"
     t.index ["position"], name: "index_stories_on_position", using: :btree
     t.index ["story_column_id"], name: "index_stories_on_story_column_id", using: :btree

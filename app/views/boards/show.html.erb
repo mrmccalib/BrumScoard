@@ -21,13 +21,20 @@
                     <% if current_user_role == Membership.roles[:developer] %>
                         <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
                     <% end %>
-                    <% if current_user_role == Membership.roles[:product_owner] %>
+                    <% if current_user_role == Membership.roles[:product_owner] and story.acceptance.nil? %>
                         <%= link_to rejectstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-times"></span>&nbsp;Reject&nbsp;&nbsp;</div><% end %>
                         <%= link_to acceptstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-check"></span>&nbsp;Accept&nbsp;&nbsp;</div><% end %>
                     <% end %>
+
+
+                    <% acceptance = '' %>
+                    <% if !story.acceptance.nil? %>
+                        <% acceptance = if story.acceptance then ' (accepted)' else ' (rejected)' end%>
+                    <% end %>
+
                     <% if !story.description.blank? %>
                         <div class="info">
-                            <strong><%= story.description %></strong>
+                            <strong><%= story.description + acceptance%></strong>
                         </div>
                     <% end %>
 
@@ -48,12 +55,20 @@
                             <%= 'Size estimate: ' + story.size %>
                         </div>
                     <% end %>
+
                     <% completion = completion(story) %>
                     <% if completion != -1 %>
                         <div class="info completion">
                             <%= 'Completion: ' + completion %>
                         </div>
                     <% end %>
+
+                    <% if !story.rejection_reason.blank? %>
+                        <div class="info">
+                            <%= 'Reason for rejection: ' + story.rejection_reason %>
+                        </div>
+                    <% end %>
+
                 </div>
             <% end %>
         </div>
@@ -100,5 +115,8 @@
         </div>
     </div>
 <% end %>
+</body>
+</html>
+
 
 <br />
