@@ -1,3 +1,49 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.credentials_box {
+  background-color: rgb(240,240,240);
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: grey;
+  display: grid;
+  position:absolute;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  grid-template-columns: 20px auto 20px;
+  grid-template-rows: repeat(5, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap:10px;
+}
+.login_title {
+  font-size: 33px;
+  text-align: center;
+  grid-column: 2;
+  grid-row: 1;
+  padding-top:30px;
+  padding-bottom:15px;
+}
+.username_box  {
+  font-size: 1.1em;
+  margin-top: 5px;
+  text-align: center;
+  grid-column: 2;
+  grid-row: 2;
+}
+.password_box {
+  margin-bottom: 5px;
+  margin-top:20px;
+  grid-column: 2;
+  grid-row: 3;
+}
+.login_button {
+  padding-top:20px;
+  grid-column: 2;
+  grid-row: 4;
+}

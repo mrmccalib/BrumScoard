@@ -1,17 +1,18 @@
-<h1>Login</h1>
-
 <%= form_for :session, url: login_path do |f| %>
-    <div class="container">
-        <%= f.label "Username" %><br>
-        <%= f.text_field :username %>
+  <div class="credentials_box">
+    <h1 class="login_title">Login</h1>
+    <div class="username_box">
+        <!-- <%= f.label "Username" %> -->
+        <div class="fa fa-user"></span>&nbsp;<%= f.text_field :username, placeholder: " username" %>
     </div>
 
-    <div class="container">
-        <%= f.label "Password" %><br>
-        <%= f.password_field :password %>
+    <div class="password_box">
+        <!-- <%= f.label "Password" %> -->
+        <div class="fa fa-lock"></span>&nbsp;<%= f.password_field :password, placeholder: " password"%>
     </div>
 
-    <div class="container">
+    <div class="login_button">
         <%= f.submit "Log in" %>
     </div>
+  </div>
 <% end %>
