@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+    layout 'sessions'
+
     def create
         user = User.find_by(username: params[:session][:username].downcase)
         if params[:session][:username].empty?
