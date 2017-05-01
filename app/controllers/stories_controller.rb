@@ -63,6 +63,11 @@ class StoriesController < ApplicationController
         else
             @story = current_story
             @story.update_attributes(reject_params)
+            if @story.rejection_reason.blank?
+                flash.now[:danger] = "Reason required to reject story!"
+                render 'reject'
+                return
+            end
             @story.acceptance = false
             if @story.save
                 flash[:success] = "Story rejected!"

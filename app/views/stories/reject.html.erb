@@ -49,7 +49,7 @@
 
 <%= form_for :story, url: rejectstory_path(current_board.id, @story.id) do |f| %>
     <div class="container">
-        <%= f.label "Reason for rejection:" %><br>
+        <%= f.label "Reason for rejection:*" %><br>
         <%= f.text_field :rejection_reason %>
     </div>
     <div class="container">
