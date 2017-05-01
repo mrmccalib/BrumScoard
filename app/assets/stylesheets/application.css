@@ -29,8 +29,8 @@
 body {
     font-family: 'Fira Sans', sans-serif;
     color: rgb(51, 51, 51);
-    background: rgb(94, 95, 114);
-    background-image: url("blue_geometric.png");
+    background: rgb(16, 34, 71);
+    /*background-image: url("blue_geometric.png");*/
 }
 
 header {
@@ -39,10 +39,10 @@ header {
     padding: 21px;
     /*color: rgb(186, 63, 63);*/
     color: white;
-    background-color: rgb(54, 55, 74);
+    /*background-color: rgb(16, 34, 91);*/
     font-size: 32px;
     font-weight: 900;
-    /*background-image: url("blue_geometric.png");*/
+    background-image: url("blue_geometric.png");
 }
 
 header span {
@@ -100,6 +100,11 @@ input[type="password"] {
     border-radius: 4px;
     border: 1px solid #ccc;
 }
+textarea {
+    width: 270px;
+    height: 50px;
+    border-radius: 2px;
+}
 /*footer {
   position:relative;
   margin: 0 auto -60px;
@@ -138,7 +143,7 @@ input[type="password"] {
   margin: -33px -33px 0px -33px;
   padding: 21px;
   color: white;
-  background-color: rgb(54, 55, 74);
+  background-color: rgb(16, 37, 91);
   font-size: 32px;
   font-weight: 900;
 }
