@@ -8,7 +8,7 @@
     <% end %>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
     <%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %>
-    <%= select "sprint", "sprint_id", options_for_select(current_board.sprints.reverse.collect {|sprint| [sprint.created_at.strftime('%d/%m/%y, %l:%M %P'), sprint.id]})%>
+    <div class="singularAction">Viewing sprint:&nbsp;<%= select "sprint", "sprint_id", options_for_select(current_board.sprints.reverse.collect {|sprint| [sprint.created_at.strftime('%d/%m/%y, %l:%M %P'), sprint.id]})%></div>
 </div>
 <br />
 <% current_sprint.story_columns.each do |story_column| %>
@@ -17,17 +17,18 @@
         <div class="cards">
             <% story_column.stories.each do |story| %>
                 <div class="card" id="story.<%= story.id %>">
-                    <%= link_to editstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
-                    <% if current_user_role == Membership.roles[:developer] %>
-                        <%= link_to newtask_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
+                    <% if current_sprint == current_board.sprints.last %>
+                        <%= link_to editstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
+                        <% if current_user_role == Membership.roles[:developer] %>
+                            <%= link_to newtask_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
+                        <% end %>
+                        <span class="acceptreject" style="visibility:<%= if story_column.position == 1 then 'visible' else 'hidden' end %>">
+                        <% if current_user_role == Membership.roles[:product_owner] and story.acceptance.nil? %>
+                            <%= link_to rejectstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-times"></span>&nbsp;Reject&nbsp;&nbsp;</div><% end %>
+                            <%= link_to acceptstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-check"></span>&nbsp;Accept&nbsp;&nbsp;</div><% end %>
+                        <% end %>
+                        </span>
                     <% end %>
-                    <span class="acceptreject" style="visibility:<%= if story_column.position == 1 then 'visible' else 'hidden' end %>">
-                    <% if current_user_role == Membership.roles[:product_owner] and story.acceptance.nil? %>
-                        <%= link_to rejectstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-times"></span>&nbsp;Reject&nbsp;&nbsp;</div><% end %>
-                        <%= link_to acceptstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-check"></span>&nbsp;Accept&nbsp;&nbsp;</div><% end %>
-                    <% end %>
-                    </span>
-
 
                     <% acceptance = '' %>
                     <% if !story.acceptance.nil? %>
@@ -84,12 +85,14 @@
             <% task_column.tasks.each do |task|%>
                 <% story = Story.find(task.story_id) %>
                 <div class="task" id="task.<%= task.id %>">
-                    <% if current_user_role == Membership.roles[:developer] %>
-                        <%= link_to deletetask_path(current_board.id, current_sprint.id, story.id, task.id), method: :delete do %>
-                            <div class="text-fa"><span class="fa fa-times-circle"></span>&nbsp;Delete</div>
-                        <% end %>
-                        <%= link_to edittask_path(current_board.id, current_sprint.id, story.id, task.id) do %>
-                            <div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit&nbsp;&nbsp;</div>
+                    <% if current_sprint == current_board.sprints.last %>
+                        <% if current_user_role == Membership.roles[:developer] %>
+                            <%= link_to deletetask_path(current_board.id, current_sprint.id, story.id, task.id), method: :delete do %>
+                                <div class="text-fa"><span class="fa fa-times-circle"></span>&nbsp;Delete</div>
+                            <% end %>
+                            <%= link_to edittask_path(current_board.id, current_sprint.id, story.id, task.id) do %>
+                                <div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit&nbsp;&nbsp;</div>
+                            <% end %>
                         <% end %>
                     <% end %>
                     <div class="info">

@@ -15,10 +15,8 @@ class BoardsController < ApplicationController
         sprint.task_columns << TaskColumn.create(name: 'Done',  position: 4)
         if @board.save
             user = User.find(session[:user_id])
-            # add to lookup table
             membership = Membership.new(board_id: @board.id, user_id: user.id, role: :developer)
             membership.save
-            # @board.users << user
             flash[:success] = "Board created!"
             redirect_to boards_url
         else
@@ -28,16 +26,21 @@ class BoardsController < ApplicationController
 
     def show
         @board = Board.find(params[:id])
-        # session[:board_name] = @board.name
         session[:sprint_id] = current_sprint.id
     end
 
     def index
-        # @board = current_board
     end
 
     def stories_update
         sprint = current_sprint
+        if sprint != current_board.sprints.last
+            render :json => {
+                :message => "Only the current sprint is editable!"
+            }
+            return
+        end
+
         storyAtOldIndex = Story.find(params[:itemID].to_i)
         oldIndex = storyAtOldIndex.position
         newIndex = params[:newIndex].to_i
@@ -95,6 +98,12 @@ class BoardsController < ApplicationController
 
     def tasks_update
         sprint = current_sprint
+        if sprint != current_board.sprints.last
+            render :json => {
+                :message => "Only the current sprint is editable!"
+            }
+            return
+        end
         taskAtOldIndex = Task.find(params[:itemID].to_i)
         oldIndex = taskAtOldIndex.position
         newIndex = params[:newIndex].to_i
