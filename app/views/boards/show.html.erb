@@ -2,29 +2,33 @@
 <%= yield :js %>
 
 <div class="boardActions">
-  <div class="pageTitle"><span style="color:rgb(57, 127, 214);"><h1><%= @board.name %></h1></span></div>
-  <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
-  <% if current_user_role == Membership.roles[:product_owner] %>
-      <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
-  <% end %>
-  <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
+    <div class="pageTitle"><span style="color:rgb(57, 127, 214);"><h1><%= @board.name %></h1></span></div>
+    <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
+    <% if current_user_role == Membership.roles[:product_owner] %>
+        <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
+    <% end %>
+    <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
+    <%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %>
+    <%= select_tag :sprint_dropdown, options_for_select(current_board.sprints) %>
 </div>
 <br />
 
-<% current_board.story_columns.each do |story_column| %>
+<% current_sprint.story_columns.each do |story_column| %>
     <div class="column", id="story_column.<%= story_column.id %>" data-col="<%= story_column.position %>">
         <h2><%= story_column.name %></h2>
         <div class="cards">
             <% story_column.stories.each do |story| %>
                 <div class="card" id="story.<%= story.id %>">
-                    <%= link_to editstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
+                    <%= link_to editstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit</div><% end %>
                     <% if current_user_role == Membership.roles[:developer] %>
-                        <%= link_to newtask_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
+                        <%= link_to newtask_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-plus-circle"></span>&nbsp;Add task&nbsp;&nbsp;</div><% end %>
                     <% end %>
+                    <span class="acceptreject" style="visibility:<%= if story_column.position == 1 then 'visible' else 'hidden' end %>">
                     <% if current_user_role == Membership.roles[:product_owner] and story.acceptance.nil? %>
-                        <%= link_to rejectstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-times"></span>&nbsp;Reject&nbsp;&nbsp;</div><% end %>
-                        <%= link_to acceptstory_path(current_board.id, story.id) do %><div class="text-fa"><span class="fa fa-check"></span>&nbsp;Accept&nbsp;&nbsp;</div><% end %>
+                        <%= link_to rejectstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-times"></span>&nbsp;Reject&nbsp;&nbsp;</div><% end %>
+                        <%= link_to acceptstory_path(current_board.id, current_sprint.id, story.id) do %><div class="text-fa"><span class="fa fa-check"></span>&nbsp;Accept&nbsp;&nbsp;</div><% end %>
                     <% end %>
+                    </span>
 
 
                     <% acceptance = '' %>
@@ -75,7 +79,7 @@
     </div>
 <% end %>
 
-<% current_board.task_columns.each do |task_column| %>
+<% current_sprint.task_columns.each do |task_column| %>
     <div class="column" data-col="<%= task_column.position %>">
         <h2><%= task_column.name %></h2>
         <div class="cards">
@@ -83,10 +87,10 @@
                 <% story = Story.find(task.story_id) %>
                 <div class="task" id="task.<%= task.id %>">
                     <% if current_user_role == Membership.roles[:developer] %>
-                        <%= link_to deletetask_path(current_board.id, story.id, task.id), method: :delete do %>
+                        <%= link_to deletetask_path(current_board.id, current_sprint.id, story.id, task.id), method: :delete do %>
                             <div class="text-fa"><span class="fa fa-times-circle"></span>&nbsp;Delete</div>
                         <% end %>
-                        <%= link_to edittask_path(current_board.id, story.id, task.id) do %>
+                        <%= link_to edittask_path(current_board.id, current_sprint.id, story.id, task.id) do %>
                             <div class="text-fa"><span class="fa fa-edit"></span>&nbsp;Edit&nbsp;&nbsp;</div>
                         <% end %>
                     <% end %>

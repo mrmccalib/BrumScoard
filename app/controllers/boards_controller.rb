@@ -6,11 +6,13 @@ class BoardsController < ApplicationController
 
     def create
         @board = Board.new(board_params)
-        @board.story_columns << StoryColumn.create(name: 'Product Backlog', position:0)
-        @board.story_columns << StoryColumn.create(name: 'Sprint Backlog',  position:1)
-        @board.task_columns << TaskColumn.create(name: 'To Do', position: 2)
-        @board.task_columns << TaskColumn.create(name: 'Doing', position: 3)
-        @board.task_columns << TaskColumn.create(name: 'Done',  position: 4)
+        sprint = Sprint.create()
+        @board.sprints << sprint
+        sprint.story_columns << StoryColumn.create(name: 'Product Backlog', position:0)
+        sprint.story_columns << StoryColumn.create(name: 'Sprint Backlog',  position:1)
+        sprint.task_columns << TaskColumn.create(name: 'To Do', position: 2)
+        sprint.task_columns << TaskColumn.create(name: 'Doing', position: 3)
+        sprint.task_columns << TaskColumn.create(name: 'Done',  position: 4)
         if @board.save
             user = User.find(session[:user_id])
             # add to lookup table
@@ -26,7 +28,8 @@ class BoardsController < ApplicationController
 
     def show
         @board = Board.find(params[:id])
-        session[:board_name] = @board.name
+        # session[:board_name] = @board.name
+        session[:sprint_id] = current_sprint.id
     end
 
     def index
@@ -34,12 +37,12 @@ class BoardsController < ApplicationController
     end
 
     def stories_update
-        @board = current_board
+        sprint = current_sprint
         storyAtOldIndex = Story.find(params[:itemID].to_i)
         oldIndex = storyAtOldIndex.position
         newIndex = params[:newIndex].to_i
-        oldCol = (@board.story_columns.select {|story_column| story_column.position == params[:oldCol].to_i}).first
-        newCol = (@board.story_columns.select {|story_column| story_column.position == params[:newCol].to_i}).first
+        oldCol = (sprint.story_columns.select {|story_column| story_column.position == params[:oldCol].to_i}).first
+        newCol = (sprint.story_columns.select {|story_column| story_column.position == params[:newCol].to_i}).first
 
         if current_user_role != Membership.roles[:product_owner]
             render :json => {
@@ -91,12 +94,12 @@ class BoardsController < ApplicationController
 
 
     def tasks_update
-        @board = current_board
+        sprint = current_sprint
         taskAtOldIndex = Task.find(params[:itemID].to_i)
         oldIndex = taskAtOldIndex.position
         newIndex = params[:newIndex].to_i
-        oldCol = (@board.task_columns.select {|task_column| task_column.position == params[:oldCol].to_i}).first
-        newCol = (@board.task_columns.select {|task_column| task_column.position == params[:newCol].to_i}).first
+        oldCol = (sprint.task_columns.select {|task_column| task_column.position == params[:oldCol].to_i}).first
+        newCol = (sprint.task_columns.select {|task_column| task_column.position == params[:newCol].to_i}).first
 
         if current_user_role != Membership.roles[:developer]
             render :json => {

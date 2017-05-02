@@ -14,25 +14,25 @@
   <%= "random: #{params[:random]}" %> <br/>
   <% end %>
 
+<div class="boards">
+    <% Board.joins(:memberships).where(memberships: {user_id: current_user.id}).each do |board|%>
+        <%= link_to board_path(board.id, board.sprints.last.id) do %>
+            <div class="card board">
+                <span class="name">
+                    <%= board.name %>
+                </span>
+                <br><br>
+                <div class="info">
+                    <%= board.description %>
+                </div>
+            </div>
+        <% end %>
+        <br>
+    <% end %>
+</div>
   <br>
   <br>
 
-  <div class="boards">
-      <% Board.joins(:memberships).where(memberships: {user_id: current_user.id}).each do |board|%>
-          <%= link_to board do %>
-              <div class="card board">
-                  <span class="name">
-                      <%= board.name %>
-                  </span>
-                  <br><br>
-                  <div class="info">
-                      <%= board.description %>
-                  </div>
-              </div>
-          <% end %>
-          <br>
-      <% end %>
-  </div>
   <div class="boardActions">
     <div class="singularAction">
       <div class="text-fa"><span class="fa fa-plus"></span>&nbsp;<%= link_to "New Board", newboard_path %></div>

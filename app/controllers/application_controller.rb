@@ -6,4 +6,5 @@ class ApplicationController < ActionController::Base
     include BoardsHelper
     include StoriesHelper
     include TasksHelper
+    include SprintsHelper
 end

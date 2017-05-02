@@ -35,9 +35,15 @@ $(document).on('turbolinks:load', function() {
             var newIndex = ui.item.index();
             var oldIndex = $cards.attr('data-oldindex');
             var oldCol = $cards.attr('data-oldcol');
-            // var oldCol = $cards.attr('id');
             var newCol = ui.item.parent().parent().data('col');
-            // var newCol = ui.item.parent().parent().attr('id');
+
+            if (oldCol == 0 && newCol == 1) {
+                ui.item.find('.acceptreject').css('visibility', 'visible');
+            }
+            else if (oldCol == 1 && newCol == 0) {
+                ui.item.find('.acceptreject').css('visibility', 'hidden');
+            }
+
             var id = ui.item.attr('id');
             id = id.substring(id.indexOf('.') + 1);
 

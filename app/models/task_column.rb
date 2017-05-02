@@ -1,6 +1,6 @@
 class TaskColumn < ApplicationRecord
 
-    belongs_to :board
+    belongs_to :sprint
     has_many :tasks, -> {order 'position asc'}
 
     validate :required_fields

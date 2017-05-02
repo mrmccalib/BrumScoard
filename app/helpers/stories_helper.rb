@@ -5,7 +5,7 @@ module StoriesHelper
 
     def completion(story)
         puts story.description
-        doneColumn = (current_board.task_columns.select {|task_column| task_column.position == 4}).first
+        doneColumn = (current_sprint.task_columns.select {|task_column| task_column.position == 4}).first
         doneTasks = doneColumn.tasks.select {|task| task.story_id == story.id}
         # numDone = doneTasks ? doneTasks.count : 0
         # numTasks = story.tasks.any? ? story.tasks.count : 0

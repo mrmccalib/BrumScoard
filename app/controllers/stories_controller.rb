@@ -1,13 +1,14 @@
 class StoriesController < ApplicationController
     #not sure why we need this line here and not in the other controllers
     include StoriesHelper
+    include SprintsHelper
 
     def new
         @story = Story.new
     end
 
     def create
-        current_board.story_columns.first.stories.each do |story|
+        current_sprint.story_columns.first.stories.each do |story|
             story.position += 1
             story.save
         end
@@ -71,6 +72,9 @@ class StoriesController < ApplicationController
             @story.acceptance = false
             if @story.save
                 flash[:success] = "Story rejected!"
+                # redirect_to board_path#(id: current_board.id, sprint_id: current_sprint.id)
+
+                # redirect_to board_path
                 redirect_to current_board
             end
         end

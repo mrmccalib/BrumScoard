@@ -1,6 +1,6 @@
 class StoryColumn < ApplicationRecord
 
-    belongs_to :board
+    belongs_to :sprint
     has_many :stories, -> {order 'position asc'}
 
     validate :required_fields

@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 20170425003808) do
     t.index ["board_id", "user_id"], name: "index_memberships_on_board_id_and_user_id", using: :btree
   end
 
+  create_table "sprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at"
+    t.integer  "board_id"
+    t.index ["board_id"], name: "index_sprints_on_board_id", using: :btree
+    t.index ["created_at"], name: "index_sprints_on_created_at", using: :btree
+  end
+
   create_table "stories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "description"
     t.string  "as"
@@ -47,19 +54,19 @@ ActiveRecord::Schema.define(version: 20170425003808) do
   end
 
   create_table "story_columns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "name",     null: false
+    t.string  "name",      null: false
     t.integer "position"
-    t.integer "board_id"
-    t.index ["board_id"], name: "index_story_columns_on_board_id", using: :btree
+    t.integer "sprint_id"
     t.index ["position"], name: "index_story_columns_on_position", using: :btree
+    t.index ["sprint_id"], name: "index_story_columns_on_sprint_id", using: :btree
   end
 
   create_table "task_columns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "name",     null: false
+    t.string  "name",      null: false
     t.integer "position"
-    t.integer "board_id"
-    t.index ["board_id"], name: "index_task_columns_on_board_id", using: :btree
+    t.integer "sprint_id"
     t.index ["position"], name: "index_task_columns_on_position", using: :btree
+    t.index ["sprint_id"], name: "index_task_columns_on_sprint_id", using: :btree
   end
 
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -82,9 +89,10 @@ ActiveRecord::Schema.define(version: 20170425003808) do
     t.string "password_digest"
   end
 
+  add_foreign_key "sprints", "boards"
   add_foreign_key "stories", "story_columns"
-  add_foreign_key "story_columns", "boards"
-  add_foreign_key "task_columns", "boards"
+  add_foreign_key "story_columns", "sprints"
+  add_foreign_key "task_columns", "sprints"
   add_foreign_key "tasks", "stories"
   add_foreign_key "tasks", "task_columns"
   add_foreign_key "tasks", "users"
