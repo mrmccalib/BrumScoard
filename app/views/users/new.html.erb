@@ -1,33 +1,44 @@
-<h1>Register</h1>
-
 <% if @user.errors.full_messages.any? %>
     <% @user.errors.full_messages.each do |message| %>
     <div class="alert alert-danger"><%= message %></div> </br>
     <% end %>
 <% end %>
 
+
+
 <%= form_for :user, url: signup_path do |f| %>
-    <div class="container">
-        <%= f.label "Username*" %><br>
-        <%= f.text_field :username %>
-    </div>
+   <div class="registration_wrapper">
+       <h1 class="registration_title">New User</h1>
+      <div class="registration_username_label">
+        <%= f.label "Username*" %>
+      </div>
+      <div class="registration_username_box">
+        <%= f.text_field :username, placeholder: '  thisIsAnExample' %>
+      </div>
 
-    <div class="container">
-        <%= f.label "Password*" %><br>
-        <%= f.text_field :password %>
-    </div>
+      <div class="registration_password_label">
+        <%= f.label "Password*" %>
+      </div>
+      <div class="registration_password_box">
+        <%= f.text_field :password, placeholder: '  secret'%>
+      </div>
 
-    <div class="container">
-        <%= f.label "First name" %><br>
-        <%= f.text_field :first %>
-    </div>
+      <div class="registration_fname_label">
+        First Name
+      </div>
+      <div class="registration_fname_box">
+        <%= f.text_field :first, placeholder: '  first'%>
+      </div>
 
-    <div class="container">
-        <%= f.label "Last name" %><br>
-        <%= f.text_field :last %>
-    </div>
+      <div class="registration_lname_label">
+        Last Name
+      </div>
+      <div class="registration_lname_box">
+        <%= f.text_field :last, placeholder: "  last" %>
+      </div>
 
-    <div class="container">
+      <div class="registration_register_button">
         <%= f.submit "Register me!" %>
+      </div>
     </div>
 <% end %>
