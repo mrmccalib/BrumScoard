@@ -29,7 +29,7 @@
 body {
     font-family: 'Fira Sans', sans-serif;
     color: rgb(51, 51, 51);
-    background: rgb(16, 34, 71);
+    background: rgb(98, 98, 98);
     /*background-image: url("blue_geometric.png");*/
 }
 
@@ -113,6 +113,16 @@ textarea {
   color:white;
   background-color: red;
 }*/
+.content-wrapper {
+    position:absolute;
+    top:62px;
+    right:10%;
+    left:10%;
+    bottom:0;
+    margin: auto;
+    background: white;
+    padding: 30px;
+}
 
 .user-table .user {
     padding: 3px;
