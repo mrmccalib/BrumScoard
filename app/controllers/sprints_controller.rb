@@ -9,20 +9,19 @@ class SprintsController < ApplicationController
         sprint.task_columns << TaskColumn.create(name: 'Doing', position: 3)
         sprint.task_columns << TaskColumn.create(name: 'Done',  position: 4)
         current_sprint.story_columns.first.stories.each do |story| # take from prduct backlog
-            pbl.stories << story.clone
+            pbl.stories << story.dup
         end
         current_sprint.story_columns.last.stories.each do |story| # take unaccepted from sprint backlog
             if story.acceptance.nil? or story.acceptance == false
-                storyClone = story.clone
+                storyClone = story.dup
                 storyClone.acceptance = nil
-                story.rejection_reason = nil
-                pbl.stories << story.clone
+                storyClone.rejection_reason = nil
+                pbl.stories << storyClone
+                # storyClone.save
             end
         end
         current_board.sprints << sprint
-        if sprint.save
-            redirect_to board_path(current_board.id, sprint.id)
-        end
+        redirect_to board_path(current_board.id, sprint.id)
     end
 
 end

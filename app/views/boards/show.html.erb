@@ -9,6 +9,7 @@
     <% end %>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
     <%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %>
+    <%= select_tag :sprint_dropdown, options_for_select(current_board.sprints) %>
 </div>
 <br />
 
