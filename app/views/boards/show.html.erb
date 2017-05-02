@@ -1,4 +1,3 @@
-<%= javascript_include_tag "sortable" %>
 <%= yield :js %>
 
 <div class="boardActions">
@@ -9,10 +8,9 @@
     <% end %>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
     <%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %>
-    <%= select_tag :sprint_dropdown, options_for_select(current_board.sprints) %>
+    <%= select "sprint", "sprint_id", options_for_select(current_board.sprints.reverse.collect {|sprint| [sprint.created_at.strftime('%d/%m/%y, %l:%M %P'), sprint.id]})%>
 </div>
 <br />
-
 <% current_sprint.story_columns.each do |story_column| %>
     <div class="column", id="story_column.<%= story_column.id %>" data-col="<%= story_column.position %>">
         <h2><%= story_column.name %></h2>

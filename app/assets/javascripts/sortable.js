@@ -1,6 +1,5 @@
 //= require jquery-ui/widgets/sortable
 
-
 function showError(message) {
     $('#flashes').html('<div class="alert alert-danger">' + message + '</div>');
 }
