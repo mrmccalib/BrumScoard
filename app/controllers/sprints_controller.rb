@@ -1,7 +1,7 @@
 class SprintsController < ApplicationController
 
     def create
-        sprint = Sprint.create()
+        sprint = Sprint.create(number: current_sprint.number + 1)
         pbl = StoryColumn.create(name: 'Product Backlog', position:0)
         sprint.story_columns << pbl
         sprint.story_columns << StoryColumn.create(name: 'Sprint Backlog',  position:1)

@@ -16,8 +16,8 @@ haylie  = User.create(username: 'haylie', password: 'overwatchmemes',  first: 'H
 testproject  = Board.create(name: 'testproject',  description: 'this is a test board')
 cs330project = Board.create(name: 'CS330Project', description: 'board for CS330 project')
 
-testsprint  = Sprint.create()
-cs330sprint = Sprint.create()
+testsprint  = Sprint.create(number: 1)
+cs330sprint = Sprint.create(number: 1)
 
 testproject.sprints << testsprint
 cs330project.sprints << cs330sprint

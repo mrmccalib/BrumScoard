@@ -6,7 +6,7 @@ class BoardsController < ApplicationController
 
     def create
         @board = Board.new(board_params)
-        sprint = Sprint.create()
+        sprint = Sprint.create(number: 1)
         @board.sprints << sprint
         sprint.story_columns << StoryColumn.create(name: 'Product Backlog', position:0)
         sprint.story_columns << StoryColumn.create(name: 'Sprint Backlog',  position:1)

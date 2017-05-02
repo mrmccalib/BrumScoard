@@ -6,6 +6,7 @@ class CreateBoards < ActiveRecord::Migration[5.0]
         end
 
         create_table :sprints do |t|
+            t.integer  :number
             t.datetime :created_at
         end
 

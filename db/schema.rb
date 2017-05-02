@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170425003808) do
   end
 
   create_table "sprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "number"
     t.datetime "created_at"
     t.integer  "board_id"
     t.index ["board_id"], name: "index_sprints_on_board_id", using: :btree

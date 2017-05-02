@@ -8,7 +8,7 @@
     <% end %>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
     <%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %>
-    <div class="singularAction">Viewing sprint:&nbsp;<%= select "sprint", "sprint_id", options_for_select(current_board.sprints.reverse.collect {|sprint| [sprint.created_at.strftime('%d/%m/%y, %l:%M %P'), sprint.id]})%></div>
+    <div class="singularAction">Viewing sprint:&nbsp;<%= select "sprint", "sprint_id", options_for_select(current_board.sprints.reverse.collect {|sprint| ['Sprint ' + sprint.number.to_s + ' (' + sprint.created_at.strftime('%d/%m/%y, %l:%M %P') + ')', sprint.id]})%></div>
 </div>
 <br />
 <% current_sprint.story_columns.each do |story_column| %>
