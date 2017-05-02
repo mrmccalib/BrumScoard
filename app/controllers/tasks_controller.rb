@@ -4,7 +4,7 @@ class TasksController < ApplicationController
     end
 
     def create
-        current_board.task_columns.first.tasks.each do |task|
+        current_sprint.task_columns.first.tasks.each do |task|
             task.position += 1
             task.save
         end
@@ -12,13 +12,16 @@ class TasksController < ApplicationController
         if current_user_role != Membership.roles[:developer]
             flash[:danger] = "Only developers can add tasks!"
             render 'new'
+            return
         elsif @task.weight
             if @task.weight > 100 or @task.weight < 1
                 flash.now[:danger] = "Weight must be between 1 and 100!"
                 render 'new'
+                return
             elsif current_story.tasks.sum(:weight) + @task.weight > 100
                 flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
                 render 'new'
+                return
             end
         end
         if @task.save
@@ -38,14 +41,14 @@ class TasksController < ApplicationController
         oldWeight = @task.weight
         oldWeight = 0 if oldWeight.nil?
         newWeight = task_params[:weight].to_i
-        if newWeight
+        if newWeight or current_sprint.position > 2
             if newWeight > 100 or newWeight < 1
                 flash.now[:danger] = "Weight must be between 1 and 100!"
-                render 'new'
+                render 'edit'
                 return
             elsif current_story.tasks.sum(:weight) - oldWeight + newWeight > 100
                 flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
-                render 'new'
+                render 'edit'
                 return
             end
         end

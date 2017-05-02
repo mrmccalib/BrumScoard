@@ -16,21 +16,27 @@ haylie  = User.create(username: 'haylie', password: 'overwatchmemes',  first: 'H
 testproject  = Board.create(name: 'testproject',  description: 'this is a test board')
 cs330project = Board.create(name: 'CS330Project', description: 'board for CS330 project')
 
+testsprint  = Sprint.create()
+cs330sprint = Sprint.create()
+
+testproject.sprints << testsprint
+cs330project.sprints << cs330sprint
+
 testpbl  = StoryColumn.create(name: 'Product Backlog', position: 0)
 cs330pbl = StoryColumn.create(name: 'Product Backlog', position: 0)
 testtodo  = TaskColumn.create(name: 'To Do', position: 2)
 cs330todo = TaskColumn.create(name: 'To Do', position: 2)
 
-testproject.story_columns << testpbl
-testproject.story_columns << StoryColumn.create(name: 'Sprint Backlog', position:1)
-testproject.task_columns << testtodo
-testproject.task_columns << TaskColumn.create(name: 'Doing', position: 3)
-testproject.task_columns << TaskColumn.create(name: 'Done', position: 4)
-cs330project.story_columns << cs330pbl
-cs330project.story_columns << StoryColumn.create(name: 'Sprint Backlog', position: 1)
-cs330project.task_columns << cs330todo
-cs330project.task_columns << TaskColumn.create(name: 'Doing', position: 3)
-cs330project.task_columns << TaskColumn.create(name: 'Done', position: 4)
+testsprint.story_columns << testpbl
+testsprint.story_columns << StoryColumn.create(name: 'Sprint Backlog', position:1)
+testsprint.task_columns << testtodo
+testsprint.task_columns << TaskColumn.create(name: 'Doing', position: 3)
+testsprint.task_columns << TaskColumn.create(name: 'Done', position: 4)
+cs330sprint.story_columns << cs330pbl
+cs330sprint.story_columns << StoryColumn.create(name: 'Sprint Backlog', position: 1)
+cs330sprint.task_columns << cs330todo
+cs330sprint.task_columns << TaskColumn.create(name: 'Doing', position: 3)
+cs330sprint.task_columns << TaskColumn.create(name: 'Done', position: 4)
 
 
 story1 = Story.create(description: 'firstStory', as: 'Matthew', want: 'to stop coughing', so_that: 'I can stop bothering others',
