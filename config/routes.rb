@@ -44,4 +44,7 @@ Rails.application.routes.draw do
     post '/boards/:id/states/:state_id/sprints/:sprint_id/newsprint', to: 'sprints#create'
 
     post '/boards/:id/states/:state_id/sprints/:sprint_id/newstate',  to: 'states#create'
+
+    get  '/boards/:id/states/:state_id/latestsprint',  to: 'states#latest_sprint'
+
 end

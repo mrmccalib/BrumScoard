@@ -71,10 +71,8 @@ $(document).on('turbolinks:load', function() {
                         else {
                             showError('Unhandled response type!');
                         }
-                        console.log(data.message == true);
                     }
                     else {
-                        console.log('do the stuff');
                         if (oldCol == 0 && newCol == 1) {
                             ui.item.find('.acceptreject').css('visibility', 'visible');
                         }

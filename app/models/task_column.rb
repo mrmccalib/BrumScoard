@@ -7,9 +7,9 @@ class TaskColumn < ApplicationRecord
 
     def deep_dup
         self_dup = TaskColumn.create(self.dup.attributes)
-        tasks.each do |task|
-            self_dup.tasks << task.deep_dup
-        end
+        # tasks.each do |task|
+        #     self_dup.tasks << task.deep_dup
+        # end
         return self_dup
     end
 

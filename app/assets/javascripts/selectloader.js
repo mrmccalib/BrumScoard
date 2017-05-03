@@ -6,12 +6,47 @@ $(document).on('turbolinks:load', function() {
     boardSlashLoc = window.location.pathname.indexOf('/', boardsLoc + 7);
     boardID = window.location.pathname.substring(boardsLoc + 7, boardSlashLoc);
 
+    statesLoc = window.location.pathname.indexOf('states');
+    stateSlashLoc = window.location.pathname.indexOf('/', statesLoc + 7);
+    stateID = window.location.pathname.substring(statesLoc + 7, stateSlashLoc);
+
     $('#sprint_sprint_id').val(sprintID);
+    $('#state_state_id').val(stateID);
 
     $('#sprint_sprint_id').change(function() {
-        console.log('hey');
         selection = $(this).find('option:selected').val();
-        window.open('/boards/' + boardID + '/sprints/' + selection, '_self');
+        window.open('/boards/' + boardID + '/states/' + stateID + '/sprints/' + selection, '_self');
     });
+
+    $('#state_state_id').change(function() {
+        sprintID = -1;
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: window.location.pathname + '/currentsprint',
+            data: {},
+            success: function(data) {
+                if (data) {
+                    if (data.sprint_id) {
+                        sprintID = data.sprint_id
+                    }
+                    else {
+                        showError('Unhandled response type!');
+                    }
+                }
+                else {
+                    clearError();
+                }
+            },
+            error: function(error) {
+                showError('AJAX response error!');
+                console.log("AJAX response error (check server console):");
+                console.log(error.getResponseHeader());
+            }
+        });
+        selection = $(this).find('option:selected').val();
+        window.open('/boards/' + boardID + '/states/' + selection + '/sprints/' + sprintID, '_self');
+    });
+
 
 })
