@@ -1,62 +1,73 @@
-<h1>Invite Users</h1>
+<div class='content-wrapper'>
+  <div class='invite_wrapper'>
+    <div class='invite_new_box'>
+      <h1 class="pageTitle">Invite User</h1>
+        <br />
+        <br />
+        <%= form_for :invitation, url: invite_path do |f| %>
 
-<%= form_for :invitation, url: invite_path do |f| %>
-
-    <div class="container">
-        <%= f.label "Username*" %><br>
+        <%= f.label "Username*" %>
         <%= f.text_field :username %>
-    </div>
 
-    <div class="container">
-        <%= f.label "Role" %><br>
+        <br />
+        <br />
+
+        <%= f.label "Role" %>
         <%= f.select :role, Membership.roles.keys.map {|key| [key.humanize, key]} %>
-    </div>
 
-    <div class="container">
+        <br />
+        <br />
+        <br />
         <%= f.submit "Invite" %>
+        <% end %>
+      </div>
+    <div class='current_users_box'>
+      <h1 class='pageTitle'>Members of <%=current_board.name%></h1>
+      <table class="user-table">
+          <tr>
+              <th>Username</th>
+              <th>Role</th>
+          </tr>
+          <% current_board.memberships.each do |membership|%>
+              <tr>
+                  <td class="cell">
+                      <%= User.find(membership.user_id).username %>
+                  </td>
+                  <td class="cell">
+                      <%= membership.role.humanize %>
+                  </td>
+              </tr>
+          <% end%>
+      </table>
+      <br />
     </div>
-<% end %>
 
-<h2>Members of <%=current_board.name%></h2>
-<table class="user-table">
-    <tr>
-        <th>Username</th>
-        <th>Role</th>
-    </tr>
-    <% current_board.memberships.each do |membership|%>
-        <tr>
-            <td class="cell">
-                <%= User.find(membership.user_id).username %>
-            </td>
-            <td class="cell">
-                <%= membership.role.humanize %>
-            </td>
-        </tr>
-    <% end%>
-</table>
-</br>
+    <div class='pending_invites_box'>
+      <% invites = current_board.invitations %>
+      <% if invites.any? %>
+          <h1 class='pageTitle'>Pending invitations</h1>
+          <table class="user-table">
+              <tr>
+                  <th>Username</th>
+                  <th>Role</th>
+              </tr>
+              <% invites.each do |invite|%>
+                  <tr>
+                      <td class="cell">
+                          <%= User.find(invite.user_id).username %>
+                      </td>
+                      <td class="cell">
+                          <%= invite.role.humanize %>
+                      </td>
+                  </tr>
+              <% end%>
+          </table>
+        </div>
+      <br />
 
-<% invites = current_board.invitations %>
-<% if invites.any? %>
-    <h2>Pending invitations</h2>
-    <table class="user-table">
-        <tr>
-            <th>Username</th>
-            <th>Role</th>
-        </tr>
-        <% invites.each do |invite|%>
-            <tr>
-                <td class="cell">
-                    <%= User.find(invite.user_id).username %>
-                </td>
-                <td class="cell">
-                    <%= invite.role.humanize %>
-                </td>
-            </tr>
-        <% end%>
-    </table>
-</br>
-
-<% end %>
-
-<%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>
+      <% end %>
+      <div class='return_link_box'>
+      <%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>
+    </div>
+  </div>
+</div>

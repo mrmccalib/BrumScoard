@@ -23,39 +23,39 @@
         <br>
     <% end %>
 </div>
-  <br>
-  <br>
 
-  <div class="boardActions">
-    <div class="singularAction">
-      <div class="text-fa"><span class="fa fa-plus"></span>&nbsp;<%= link_to "New Board", newboard_path %></div>
-    </div>
+<div class="boardActions">
+  <div class="singularAction">
+    <div class="text-fa"><span class="fa fa-plus"></span>&nbsp;<%= link_to "New Board", newboard_path %></div>
   </div>
-  <% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
-  <% if invites.any? %>
-    <br />
-    <br />
-    <div class="boardActions">
-        <h1>Invitations</h1>
+</div>
+<br />
+
+<% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
+<br />
+<br />
+<% if invites.any? %>
+<div class="boardActions">
+    <h1>Invitations</h1>
+</div>
+<div class="boards">
+  <% invites.each do |board|%>
+    <div class="card board">
+      <span class="name">
+          <%= board.name %>
+      </span>
+      <%= button_to 'REJECT', {:controller => "boards", :action => "reject", :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
+      <%= button_to 'ACCEPT', {:controller => "boards", :action => "join",   :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
+      <div class="info">
+          <br />
+          <%= board.description %>
+      </div>
+      <div class="info">
+          <%= 'Role: ' + Invitation.find_by(board_id: board.id, user_id: current_user.id).role.humanize %>
+      </div>
     </div>
-    <div class="boards">
-      <% invites.each do |board|%>
-        <div class="card board">
-          <span class="name">
-              <%= board.name %>
-          </span>
-          <%= button_to 'REJECT', {:controller => "boards", :action => "reject", :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
-          <%= button_to 'ACCEPT', {:controller => "boards", :action => "join",   :board_id => board.id, :user_id => current_user.id, :method => :post}  %>
-          <div class="info">
-              <br />
-              <%= board.description %>
-          </div>
-          <div class="info">
-              <%= 'Role: ' + Invitation.find_by(board_id: board.id, user_id: current_user.id).role.humanize %>
-          </div>
-        </div>
-      <br>
-      <% end %>
-    </div>
+  <br>
   <% end %>
+</div>
+<% end %>
 </div>
