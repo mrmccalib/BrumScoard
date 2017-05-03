@@ -1,7 +1,7 @@
 <%= yield :js %>
 
 <div class="boardActions">
-    <div class="pageTitle"><span style="color:rgb(57, 127, 214);"><h1><%= @board.name %></h1></span></div>
+    <div class="pageTitle"><span style="color:rgb(77, 150, 230);font-size:1.2em;"><h1><%= @board.name %></h1></span></div>
     <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
     <% if current_user_role == Membership.roles[:product_owner] %>
         <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>

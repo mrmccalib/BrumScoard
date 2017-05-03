@@ -45,29 +45,31 @@
     <div class='pending_invites_box'>
       <% invites = current_board.invitations %>
       <% if invites.any? %>
-          <h1 class='pageTitle'>Pending invitations</h1>
-          <table class="user-table">
-              <tr>
-                  <th>Username</th>
-                  <th>Role</th>
-              </tr>
-              <% invites.each do |invite|%>
-                  <tr>
-                      <td class="cell">
-                          <%= User.find(invite.user_id).username %>
-                      </td>
-                      <td class="cell">
-                          <%= invite.role.humanize %>
-                      </td>
-                  </tr>
-              <% end%>
-          </table>
-        </div>
-      <br />
+        <h1 class='pageTitle'>Pending invitations</h1>
+        <table class="user-table">
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+            </tr>
+            <% invites.each do |invite|%>
+                <tr>
+                    <td class="cell">
+                        <%= User.find(invite.user_id).username %>
+                    </td>
+                    <td class="cell">
+                        <%= invite.role.humanize %>
+                    </td>
+                </tr>
+            <% end%>
+        </table>
+      </div>
+    <br />
 
-      <% end %>
-      <div class='return_link_box'>
-      <%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>
+    <% end %>
+    <div class='return_link_box'>
+      <span style='font-size: 1.3em'>
+        <%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>
+      </span>
     </div>
   </div>
 </div>

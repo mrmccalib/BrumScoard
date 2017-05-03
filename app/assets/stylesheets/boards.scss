@@ -89,11 +89,13 @@
 }
 
 .boards a {
-      text-decoration: none;
+    text-decoration: none;
+    // color: lightgrey;
 }
 
 .boards a:hover .name {
     text-decoration: underline;
+    // color:red;
 }
 
 
@@ -129,22 +131,20 @@
     // margin:1.3%;
 }
 .pageTitle {
-    // float:left;
     display:inline-block;
-    // text-align: center;
-    // align-self:left;
 }
 
 .singularAction {
-    text-decoration:none;
-    // color:lightgrey;
-    // float:right;
+    // text-decoration:none;
+    // color:red;
     font-size:1.45em;
     margin:inherit;
     display:inline-block;
-    // align-self:right;
     line-height: 53px;
     margin-left: 1.3%;
+}
+.singularAction a {
+    color:white;
 }
 
 input.singularAction {
@@ -188,9 +188,12 @@ input.singularAction {
     padding-top: 50px;
 }
 
-// a {
-//     color:lightgrey;
-// }
+a {
+    color:lightgrey;
+}
+a:visited {
+    color:lightgrey;
+}
 
 th, td {
     // padding: 5px 30px 7px 30px;

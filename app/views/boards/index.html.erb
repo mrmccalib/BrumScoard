@@ -1,10 +1,6 @@
 <div class="content-wrapper">
 <div class="boardActions">
-    <div class="pageTitle">
-        <h1>My Boards</h1>
-    </div>
-    <div class="singularAction">
-    </div>
+    <h1 class='pageTitle' style='font-size: 2.3em'>My Boards</h1>
 </div>
 
 <div class="boards">
@@ -25,19 +21,18 @@
 </div>
 
 <div class="boardActions">
-  <div class="singularAction">
-    <div class="text-fa"><span class="fa fa-plus"></span>&nbsp;<%= link_to "New Board", newboard_path %></div>
-  </div>
+  <br />
+  <span class="fa fa-plus"></span>
+  <span style='font-size:1.5em;color:black'>&nbsp;<%= link_to "New Board", newboard_path %></span>
 </div>
+<br />
 <br />
 
 <% invites = Board.joins(:invitations).where(invitations: {user_id: current_user.id})%>
 <br />
 <br />
 <% if invites.any? %>
-<div class="boardActions">
-    <h1>Invitations</h1>
-</div>
+<h1 class='boardActions' style='font-size: 2.3em'>Invitations</h1> 
 <div class="boards">
   <% invites.each do |board|%>
     <div class="card board">
