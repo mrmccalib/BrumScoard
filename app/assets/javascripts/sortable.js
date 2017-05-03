@@ -34,13 +34,6 @@ $(document).on('turbolinks:load', function() {
             var oldCol = $cards.attr('data-oldcol');
             var newCol = ui.item.parent().parent().data('col');
 
-            if (oldCol == 0 && newCol == 1) {
-                ui.item.find('.acceptreject').css('visibility', 'visible');
-            }
-            else if (oldCol == 1 && newCol == 0) {
-                ui.item.find('.acceptreject').css('visibility', 'hidden');
-            }
-
             var id = ui.item.attr('id');
             id = id.substring(id.indexOf('.') + 1);
 
@@ -78,8 +71,16 @@ $(document).on('turbolinks:load', function() {
                         else {
                             showError('Unhandled response type!');
                         }
+                        console.log(data.message == true);
                     }
                     else {
+                        console.log('do the stuff');
+                        if (oldCol == 0 && newCol == 1) {
+                            ui.item.find('.acceptreject').css('visibility', 'visible');
+                        }
+                        else if (oldCol == 1 && newCol == 0) {
+                            ui.item.find('.acceptreject').css('visibility', 'hidden');
+                        }
                         clearError();
                     }
                 },

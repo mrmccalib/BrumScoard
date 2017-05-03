@@ -16,6 +16,10 @@ class SprintsController < ApplicationController
                 storyClone = story.dup
                 storyClone.acceptance = nil
                 storyClone.rejection_reason = nil
+                storyClone.position = 0
+                pbl.stories.each do |pbl_story|
+                    pbl_story.position += 1
+                end
                 pbl.stories << storyClone
                 # storyClone.save
             end
