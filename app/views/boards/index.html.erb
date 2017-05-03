@@ -1,22 +1,15 @@
 <div class="content-wrapper">
-  <div class="boardActions">
+<div class="boardActions">
     <div class="pageTitle">
-
-      <h1>My Boards</h1>
+        <h1>My Boards</h1>
     </div>
     <div class="singularAction">
     </div>
-  </div>
-
-
-  <% if (params.has_key?(:id) && params.has_key?(:random)) %>
-  <%= "id: #{params[:id]}" %> <br/>
-  <%= "random: #{params[:random]}" %> <br/>
-  <% end %>
+</div>
 
 <div class="boards">
     <% Board.joins(:memberships).where(memberships: {user_id: current_user.id}).each do |board|%>
-        <%= link_to board_path(board.id, active_state(board).sprints.last.id) do %>
+        <%= link_to board_path(board.id, active_state(board).id, active_state(board).sprints.last.id) do %>
             <div class="card board">
                 <span class="name">
                     <%= board.name %>

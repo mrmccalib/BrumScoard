@@ -28,6 +28,7 @@ class BoardsController < ApplicationController
 
     def show
         @board = Board.find(params[:id])
+        session[:state_id] = current_state.id
         session[:sprint_id] = current_sprint.id
     end
 

@@ -19,8 +19,6 @@ $(document).on('turbolinks:load', function() {
     $(".cards").sortable({
         group: 'cards',
         connectWith: ['.cards'],
-        // pullPlaceholder: false,
-        // revert: 300,
 
         start: function(e, ui) {
             // creates a temporary attribute on the element with the old index

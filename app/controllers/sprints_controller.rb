@@ -21,7 +21,7 @@ class SprintsController < ApplicationController
             end
         end
         active_state(current_board).sprints << sprint
-        redirect_to board_path(current_board.id, sprint.id)
+        redirect_to board_path(current_board.id, current_state.id, sprint.id)
     end
 
 end

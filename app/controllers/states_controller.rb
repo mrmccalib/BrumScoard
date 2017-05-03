@@ -5,7 +5,7 @@ class StatesController < ApplicationController
         state.active = false
         current_board.states << state
         flash[:success] = 'State copied!'
-        redirect_to board_path(current_board.id, current_sprint.id)
+        redirect_to board_path(current_board.id, current_state.id, current_sprint.id)
     end
 
 end

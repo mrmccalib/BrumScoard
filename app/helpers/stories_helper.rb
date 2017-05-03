@@ -4,16 +4,12 @@ module StoriesHelper
     end
 
     def completion(story)
-        puts story.description
         doneColumn = (current_sprint.task_columns.select {|task_column| task_column.position == 4}).first
         doneTasks = doneColumn.tasks.select {|task| task.story_id == story.id}
-        # numDone = doneTasks ? doneTasks.count : 0
-        # numTasks = story.tasks.any? ? story.tasks.count : 0
         doneWeight = 0
         totalWeight = 0
         doneTasks.each do |task|
             doneWeight += task.weight unless task.weight.nil?
-
         end
         story.tasks.each do |task|
             totalWeight += task.weight unless task.weight.nil?

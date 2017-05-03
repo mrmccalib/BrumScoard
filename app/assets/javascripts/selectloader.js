@@ -13,4 +13,5 @@ $(document).on('turbolinks:load', function() {
         selection = $(this).find('option:selected').val();
         window.open('/boards/' + boardID + '/sprints/' + selection, '_self');
     });
+
 })

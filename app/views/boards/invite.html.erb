@@ -59,4 +59,4 @@
 
 <% end %>
 
-<%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:sprint_id]) %>
+<%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>

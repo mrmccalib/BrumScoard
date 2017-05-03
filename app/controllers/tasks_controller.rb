@@ -41,7 +41,7 @@ class TasksController < ApplicationController
         oldWeight = @task.weight
         oldWeight = 0 if oldWeight.nil?
         newWeight = task_params[:weight].to_i
-        if newWeight or current_sprint.position > 2
+        if !task_params[:weight].blank? or @task.task_column.position > 2
             if newWeight > 100 or newWeight < 1
                 flash.now[:danger] = "Weight must be between 1 and 100!"
                 render 'edit'
