@@ -19,23 +19,25 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#state_state_id').change(function() {
+        selection = $(this).find('option:selected').val();
         sprintID = -1;
         $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: window.location.pathname + '/currentsprint',
+            url: '/boards/' + boardID + '/states/' + selection + '/latestsprint',
             data: {},
             success: function(data) {
                 if (data) {
                     if (data.sprint_id) {
-                        sprintID = data.sprint_id
+                        sprintID = data.sprint_id;
+                        window.open('/boards/' + boardID + '/states/' + selection + '/sprints/' + sprintID, '_self');
                     }
                     else {
                         showError('Unhandled response type!');
                     }
                 }
                 else {
-                    clearError();
+                    showError('No AJAX data!');
                 }
             },
             error: function(error) {
@@ -44,9 +46,5 @@ $(document).on('turbolinks:load', function() {
                 console.log(error.getResponseHeader());
             }
         });
-        selection = $(this).find('option:selected').val();
-        window.open('/boards/' + boardID + '/states/' + selection + '/sprints/' + sprintID, '_self');
     });
-
-
 })
