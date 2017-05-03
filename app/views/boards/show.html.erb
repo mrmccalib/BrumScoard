@@ -1,7 +1,5 @@
 <%= yield :js %>
 
-
-
 <div class="boardActions">
     <div class="pageTitle"><span style="color:rgb(57, 127, 214);"><h1><%= @board.name %></h1></span></div>
     <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
@@ -9,8 +7,10 @@
         <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
     <% end %>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
-    <%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %>
-    <%= button_to "Copy State", {controller: 'states',  action: 'create'}, {class: 'singularAction', data: {confirm: 'Are you sure?'}} %>
+</div>
+<div class="boardActions">
+    <div class="singularAction"><%= button_to "New Sprint", {controller: 'sprints', action: 'create'}, {class: 'singularAction'} %></div>
+    <div class="singularAction"><%= button_to "Copy State", {controller: 'states',  action: 'create'}, {class: 'singularAction', data: {confirm: 'Are you sure?'}} %></div>
     <div class="singularAction"><%= select "sprint", "sprint_id", options_for_select(current_state.sprints.reverse.collect {|sprint| ['Sprint ' + sprint.number.to_s + sprint.created_at.strftime(' (%d/%m/%y)'), sprint.id]})%></div>
     <div class="singularAction"><%= select "state",  "state_id", options_for_select(current_board.states.reverse.collect {|state| ['State from ' + state.created_at.strftime('%d/%m/%y, %l:%M %P'), state.id]})%></div>
 </div>
