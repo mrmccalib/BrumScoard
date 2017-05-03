@@ -19,8 +19,14 @@ cs330project = Board.create(name: 'CS330Project', description: 'board for CS330 
 testsprint  = Sprint.create(number: 1)
 cs330sprint = Sprint.create(number: 1)
 
-testproject.sprints << testsprint
-cs330project.sprints << cs330sprint
+teststate = State.create(active: true)
+cs330state = State.create(active: true)
+
+teststate.sprints << testsprint
+cs330state.sprints << cs330sprint
+
+testproject.states << teststate
+cs330project.states << cs330state
 
 testpbl  = StoryColumn.create(name: 'Product Backlog', position: 0)
 cs330pbl = StoryColumn.create(name: 'Product Backlog', position: 0)

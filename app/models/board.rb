@@ -2,7 +2,7 @@ class Board < ApplicationRecord
 
     # has_many :story_columns
     # has_many :task_columns
-    has_many :sprints
+    has_many :states
 
     validates :name, presence: true
     validates :name, uniqueness: { case_sensitive: false }

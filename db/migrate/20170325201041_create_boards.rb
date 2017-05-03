@@ -20,10 +20,16 @@ class CreateBoards < ActiveRecord::Migration[5.0]
             t.integer :position, index: true
         end
 
-        add_reference :sprints,       :board,  foreign_key: true
+        create_table :states do |t|
+            t.boolean  :active
+            t.datetime :created_at
+        end
+
+
+        add_reference :sprints,       :state,  foreign_key: true
         add_reference :story_columns, :sprint, foreign_key: true
         add_reference :task_columns,  :sprint, foreign_key: true
-
+        add_reference :states,        :board,  foreign_key: true
 
          add_index :sprints, :created_at
     end

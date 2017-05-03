@@ -7,7 +7,9 @@ class BoardsController < ApplicationController
     def create
         @board = Board.new(board_params)
         sprint = Sprint.create(number: 1)
-        @board.sprints << sprint
+        state = State.create(active: true)
+        @board.states << state
+        state.sprints << sprint
         sprint.story_columns << StoryColumn.create(name: 'Product Backlog', position:0)
         sprint.story_columns << StoryColumn.create(name: 'Sprint Backlog',  position:1)
         sprint.task_columns << TaskColumn.create(name: 'To Do', position: 2)
@@ -34,7 +36,7 @@ class BoardsController < ApplicationController
 
     def stories_update
         sprint = current_sprint
-        if sprint != current_board.sprints.last
+        if sprint != active_state(current_board).sprints.last
             render :json => {
                 :message => "Only the current sprint is editable!"
             }
@@ -98,7 +100,7 @@ class BoardsController < ApplicationController
 
     def tasks_update
         sprint = current_sprint
-        if sprint != current_board.sprints.last
+        if sprint != active_state(current_board).sprints.last
             render :json => {
                 :message => "Only the current sprint is editable!"
             }

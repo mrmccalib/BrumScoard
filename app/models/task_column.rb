@@ -5,6 +5,15 @@ class TaskColumn < ApplicationRecord
 
     validate :required_fields
 
+    def deep_dup
+        self_dup = TaskColumn.create(self.dup.attributes)
+        tasks.each do |task|
+            self_dup.tasks << task.deep_dup
+        end
+        return self_dup
+    end
+
+
     private
 
     def required_fields

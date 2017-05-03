@@ -5,6 +5,14 @@ class StoryColumn < ApplicationRecord
 
     validate :required_fields
 
+    def deep_dup
+        self_dup = StoryColumn.create(self.dup.attributes)
+        stories.each do |story|
+            self_dup.stories << story.deep_dup
+        end
+        return self_dup
+    end
+
     private
 
     def required_fields

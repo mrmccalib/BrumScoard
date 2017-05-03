@@ -42,4 +42,6 @@ Rails.application.routes.draw do
     delete '/boards/:id/stories/sprints/:sprint_id/:story_id/tasks/:task_id/delete', to: 'tasks#destroy', as: 'deletetask'
 
     post '/boards/:id/sprints/:sprint_id/newsprint', to: 'sprints#create'
+
+    post '/boards/:id/sprints/:sprint_id/newstate',  to: 'states#create'
 end

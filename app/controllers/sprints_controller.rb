@@ -20,7 +20,7 @@ class SprintsController < ApplicationController
                 # storyClone.save
             end
         end
-        current_board.sprints << sprint
+        active_state(current_board).sprints << sprint
         redirect_to board_path(current_board.id, sprint.id)
     end
 

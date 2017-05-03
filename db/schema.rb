@@ -34,9 +34,16 @@ ActiveRecord::Schema.define(version: 20170425003808) do
   create_table "sprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "number"
     t.datetime "created_at"
-    t.integer  "board_id"
-    t.index ["board_id"], name: "index_sprints_on_board_id", using: :btree
+    t.integer  "state_id"
     t.index ["created_at"], name: "index_sprints_on_created_at", using: :btree
+    t.index ["state_id"], name: "index_sprints_on_state_id", using: :btree
+  end
+
+  create_table "states", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.integer  "board_id"
+    t.index ["board_id"], name: "index_states_on_board_id", using: :btree
   end
 
   create_table "stories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -90,7 +97,8 @@ ActiveRecord::Schema.define(version: 20170425003808) do
     t.string "password_digest"
   end
 
-  add_foreign_key "sprints", "boards"
+  add_foreign_key "sprints", "states"
+  add_foreign_key "states", "boards"
   add_foreign_key "stories", "story_columns"
   add_foreign_key "story_columns", "sprints"
   add_foreign_key "task_columns", "sprints"
