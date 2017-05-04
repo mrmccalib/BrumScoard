@@ -3,9 +3,6 @@
 <div class="boardActions">
     <span style="color:rgb(167,206,242); font-size: 1.1em"><h1 class='pageTitle'><%= @board.name %></h1></span>
     <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
-    <% if current_user_role == Membership.roles[:product_owner] %>
-        <div class="singularAction"><%= link_to 'Add story to product backlog', newstory_path %></div>
-    <% end %>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
 </div>
 <div class="boardActions">
@@ -20,7 +17,7 @@
 <% current_sprint.story_columns.each do |story_column| %>
     <div class="column", id="story_column.<%= story_column.id %>" data-col="<%= story_column.position %>">
         <h2><%= story_column.name %></h2>
-        <% if story_column.position == 0 %>
+        <% if story_column.position == 0 and current_user_role == Membership.roles[:product_owner] %>
             <%= link_to newstory_path do %><div class="text-fa"><span class="fa fa-plus"></span>&nbsp;Add story</div><% end %>
         <% end %>
         <div class="cards">
