@@ -1,0 +1,43 @@
+<h1><%= @user.username %> - Work Summary</h1>
+<table>
+    <% current_state.sprints.reverse.each do |sprint| %>
+        <tr>
+            <th colspan="3">Sprint <%= sprint.number %></th>
+        <tr>
+        <% if worked_on(@user, sprint) %>
+            <tr>
+                <th>Story</th>
+                <th>Completed</th>
+                <th>Assigned</th>
+            <tr>
+            <% sprint.story_columns.each do |story_column| %>
+                <% story_column.stories.each do |story| %>
+                    <% show = false %>
+                    <% weightIncomplete = 0 %>
+                    <% weightComplete = 0 %>
+                    <% story.tasks.each do |task| %>
+                        <% if task.user == @user %>
+                            <% show = true %>
+                            <% if task.task_column.position == 4 %>
+                                <% weightComplete += task.weight %>
+                            <% else %>
+                                <% weightIncomplete += task.weight %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% if show %>
+                        <tr>
+                            <td><%= story.description %></td>
+                            <td><%=  weightComplete.to_s + '%' %></td>
+                            <td><%=  (weightIncomplete + weightComplete).to_s + '%' %><td>
+                        </tr>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% else %>
+            <td colspan="3">No tasks assigned</td>
+        <% end %>
+    <% end %>
+</table>
+
+<%= link_to 'Return to members', invite_path %>

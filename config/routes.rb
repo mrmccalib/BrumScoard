@@ -47,4 +47,6 @@ Rails.application.routes.draw do
 
     get  '/boards/:id/states/:state_id/latestsprint',  to: 'states#latest_sprint'
 
+    get  '/boards/:id/states/:state_id/memberships/:membership_id', to: 'memberships#show', as: 'member'
+
 end
