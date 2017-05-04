@@ -7,7 +7,6 @@
 }
 
 .card {
-
     border: 2px solid #ccc;
     background-color: white;
     color: rgb(51, 51, 51);
@@ -114,17 +113,31 @@
     margin: 15px .3% .3% .3%;
     background: lightgrey;
     color:(50,50,50);
+
+    h2 {
+        margin: 5px;
+        display: inline-block;
+    }
+
+
+    .card {
+        margin-top: 10px;
+    }
+
+    .card .info {
+        margin: 2px 0px;
+    }
 }
 
-.column h2 {
+.column > a {
+    display: inline-block;
+    float: right;
+    font-size: 1.25em;
     margin: 5px;
 }
 
-.column .card {
-    margin-top: 10px;
-}
-.column .card .info {
-    margin: 2px 0px;
+div.text-fa {
+    margin: 2px;
 }
 
 .boardActions {
