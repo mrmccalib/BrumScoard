@@ -58,7 +58,7 @@ class TasksController < ApplicationController
             flash[:success] = "Task edited!"
             redirect_to current_board
         else
-            render 'new'
+            render 'edit'
         end
     end
 

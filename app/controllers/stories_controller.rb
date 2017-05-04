@@ -35,7 +35,7 @@ class StoriesController < ApplicationController
             flash[:success] = "Story edited!"
             redirect_to current_board
         else
-            render 'new'
+            render 'edit'
         end
     end
 

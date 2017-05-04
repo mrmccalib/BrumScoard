@@ -1,25 +1,30 @@
-<h1>Create new board</h1>
+<div class="content_wrapper">
+    <div class="story_wrapper">
 
-<% if @board.errors.full_messages.any? %>
-    <% @board.errors.full_messages.each do |message| %>
-    <div class="alert alert-danger"><%= message %></div> </br>
-    <% end %>
-<% end %>
+        <h1>Create new board</h1>
 
-<%= form_for :board, url: newboard_path do |f| %>
-    <div class="container">
-        <%= f.label "Name*" %><br>
+        <% if @board.errors.full_messages.any? %>
+        <% @board.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger"><%= message %></div> <br />
+        <% end %>
+        <% end %>
+        <%= render partial: "flashes" %>
+        <br /><br />
+        <%= form_for :board, url: newboard_path do |f| %>
+        <%= f.label "Name*" %>
         <%= f.text_field :name %>
-    </div>
+        <br /><br />
 
-    <div class="container">
-        <%= f.label "Description" %><br>
+        <%= f.label "Description" %>
         <%= f.text_field :description %>
-    </div>
+        <br /><br />
 
-    <div class="container">
         <%= f.submit "Create board!" %>
-    </div>
-<% end %>
+        <br /><br />
+        <% end %>
+        <br /><br />
 
-<%= link_to 'Return to boards', boards_path %>
+        <%= link_to 'Return to boards', boards_path %>
+
+    </div>
+</div>

@@ -4,9 +4,10 @@
 
     <% if @task.errors.full_messages.any? %>
         <% @task.errors.full_messages.each do |message| %>
-        <div class="alert alert-danger"><%= message %></div> </br>
+        <div class="alert alert-danger"><%= message %></div> <br />
         <% end %>
     <% end %>
+    <%= render partial: "flashes" %>
 
     <br /><br />
 

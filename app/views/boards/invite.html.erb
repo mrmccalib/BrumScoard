@@ -2,6 +2,7 @@
     <div class='invite_wrapper'>
         <div class='invite_new_box'>
             <h1 class="pageTitle">Invite User</h1>
+            <%= render partial: "flashes" %>
             <br />
             <br />
             <%= form_for :invitation, url: invite_path do |f| %>
@@ -37,9 +38,9 @@
                         <%= membership.role.humanize %>
                     </td>
                     <% if membership.role == 'developer'%>
-                        <td class="cell">
-                            <%= link_to 'Work summary', member_path(current_board.id, session[:state_id], membership.id) %>
-                        </td>
+                    <td class="cell">
+                        <%= link_to 'Work summary', member_path(current_board.id, session[:state_id], membership.id) %>
+                    </td>
                     <% end %>
                 </tr>
                 <% end%>

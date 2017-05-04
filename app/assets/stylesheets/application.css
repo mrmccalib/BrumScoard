@@ -179,6 +179,7 @@ textarea {
   /*background: rgb(94, 95, 114);*/
   background-image: url("blue_geometric.png");
 }
-.logo {
-  object-fit: ;
+
+.field_with_errors input {
+    margin-top:0px;
 }
