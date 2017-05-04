@@ -55,6 +55,21 @@ class BoardsController < ApplicationController
                 :message => "Only a product owner can move stories!"
             }
             return
+        elsif storyAtOldIndex.size.blank? and oldCol.position == 0 and newCol.position == 1
+            render :json => {
+                :message => "Story must have size estimate before moving!"
+            }
+            return
+        elsif storyAtOldIndex.criteria.blank? and oldCol.position == 0 and newCol.position == 1
+            render :json => {
+                :message => "Story must have acceptance criteria before moving!"
+            }
+            return
+        elsif storyAtOldIndex.as.blank? or storyAtOldIndex.want.blank? or storyAtOldIndex.so_that.blank? and oldCol.position == 0 and newCol.position == 1
+            render :json => {
+                :message => "Template must be filled before moving!"
+            }
+            return
         elsif oldCol.position == 0 and newCol.position == 1 and oldIndex != 0
             render :json => {
                 :message => "Can only move top item in Product Backlog!"

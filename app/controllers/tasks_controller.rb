@@ -41,16 +41,28 @@ class TasksController < ApplicationController
         oldWeight = @task.weight
         oldWeight = 0 if oldWeight.nil?
         newWeight = task_params[:weight].to_i
-        if !task_params[:weight].blank? or @task.task_column.position > 2
+        if !task_params[:weight].blank? and @task.task_column.position != 2
             if newWeight > 100 or newWeight < 1
                 flash.now[:danger] = "Weight must be between 1 and 100!"
                 render 'edit'
                 return
-            elsif current_story.tasks.sum(:weight) - oldWeight + newWeight > 100
-                flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
+            end
+        end
+        if @task.task_column.position > 2
+            if task_params[:user_id].blank?
+                flash.now[:danger] = "Task must be assigned a user!"
+                render 'edit'
+                return
+            elsif task_params[:weight].blank?
+                flash.now[:danger] = "Task must be assigned a weight!"
                 render 'edit'
                 return
             end
+        end
+        if !task_params[:weight].blank? and current_story.tasks.sum(:weight) - oldWeight + newWeight > 100
+            flash.now[:danger] = "Total weight for this story must not exceed 100. Reduce the weight for other tasks first!"
+            render 'edit'
+            return
         end
 
         @task.update_attributes(task_params)
