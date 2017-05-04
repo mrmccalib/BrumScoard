@@ -1,20 +1,25 @@
 <%= form_for :session, url: login_path do |f| %>
-  <div class="credentials_box">
-    <!-- <img src="brumscoard_logo.png" alt="SOMETHING IS SUPPOSED TO BE HERE"> -->
 
-    <h1 class="login_title"><%= image_tag("brumscoard_logo.png", size: "150x114", align: "center")%>Login</h1>
+  <div class="credentials_box">
+    <h1 class="login_title">Login</h1>
     <div class="username_box">
         <!-- <%= f.label "Username" %> -->
-        <div class="fa fa-user"></span>&nbsp;<%= f.text_field :username, placeholder: " username" %>
+        <div class="fa fa-user"></span>&nbsp;<%= f.text_field :username, placeholder: " username" %></div>
     </div>
 
     <div class="password_box">
         <!-- <%= f.label "Password" %> -->
-        <div class="fa fa-lock"></span>&nbsp;<%= f.password_field :password, placeholder: " password"%>
+        <div class="fa fa-lock">&nbsp;<%= f.password_field :password, placeholder: " password"%></div>
     </div>
 
     <div class="login_button">
         <%= f.submit "Log in" %>
+    </div>
+  </div>
+
+  <div class="party_parrot_box">
+    <div class='party_parrot'>
+      <%= image_tag("brumscoard_logo.png", size: "150x114", align: "center")%>
     </div>
   </div>
 <% end %>

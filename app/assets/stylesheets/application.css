@@ -38,7 +38,7 @@ header {
 
     width:calc(100%-33px);
     margin: -33px -33px 0px -33px;
-    padding: 21px;
+    padding: 18px;
     /*color: rgb(186, 63, 63);*/
     color: white;
     /*background-color: rgb(16, 34, 91);*/
@@ -47,10 +47,10 @@ header {
     background-image: url("blue_geometric.png");
 }
 header img {
-    max-height: 30px;
+    max-height: 26px;
     object-fit: contain;
-    margin: 0px;
-    padding: 0px;
+    margin-top: 0px;
+    /*padding-top: 3px;*/
 }
 header span {
   float:right;
