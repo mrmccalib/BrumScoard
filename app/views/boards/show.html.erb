@@ -2,8 +2,9 @@
 
 <div class="boardActions">
     <span style="color:rgb(167,206,242); font-size: 1.1em"><h1 class='pageTitle'><%= @board.name %></h1></span>
-    <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
     <div class="singularAction"><%= link_to 'Manage members', invite_path %></div>
+    <div class="singularAction"><a href="http://gmail.com">Messaging</a></div>
+    <div class="singularAction"><%= link_to 'Return to boards', boards_path %></div>
 </div>
 <div class="boardActions">
     <% if current_state.active %>
