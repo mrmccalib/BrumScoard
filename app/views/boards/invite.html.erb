@@ -1,57 +1,62 @@
 <div class='content_wrapper'>
-  <div class='invite_wrapper'>
-    <div class='invite_new_box'>
-      <h1 class="pageTitle">Invite User</h1>
-        <br />
-        <br />
-        <%= form_for :invitation, url: invite_path do |f| %>
+    <div class='invite_wrapper'>
+        <div class='invite_new_box'>
+            <h1 class="pageTitle">Invite User</h1>
+            <br />
+            <br />
+            <%= form_for :invitation, url: invite_path do |f| %>
 
-        <%= f.label "Username*" %>
-        <%= f.text_field :username %>
+            <%= f.label "Username*" %>
+            <%= f.text_field :username %>
 
-        <br />
-        <br />
+            <br />
+            <br />
 
-        <%= f.label "Role" %>
-        <%= f.select :role, Membership.roles.keys.map {|key| [key.humanize, key]} %>
+            <%= f.label "Role" %>
+            <%= f.select :role, Membership.roles.keys.map {|key| [key.humanize, key]} %>
 
-        <br />
-        <br />
-        <br />
-        <%= f.submit "Invite" %>
-        <% end %>
-      </div>
-    <div class='current_users_box'>
-      <h1 class='pageTitle'>Members of <%=current_board.name%></h1>
-      <table class="user-table">
-          <tr>
-              <th>Username</th>
-              <th>Role</th>
-          </tr>
-          <% current_board.memberships.each do |membership|%>
-              <tr>
-                  <td class="cell">
-                      <%= User.find(membership.user_id).username %>
-                  </td>
-                  <td class="cell">
-                      <%= membership.role.humanize %>
-                  </td>
-              </tr>
-          <% end%>
-      </table>
-      <br />
-    </div>
+            <br />
+            <br />
+            <br />
+            <%= f.submit "Invite" %>
+            <% end %>
+        </div>
+        <div class='current_users_box'>
+            <h1 class='pageTitle'>Members of <%=current_board.name%></h1>
+            <table class="user-table">
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+                <% current_board.memberships.each do |membership|%>
+                <tr>
+                    <td class="cell">
+                        <%= User.find(membership.user_id).username %>
+                    </td>
+                    <td class="cell">
+                        <%= membership.role.humanize %>
+                    </td>
+                    <% if membership.role == 'developer'%>
+                        <td class="cell">
+                            <%= link_to 'Work summary', member_path(current_board.id, session[:state_id], membership.id) %>
+                        </td>
+                    <% end %>
+                </tr>
+                <% end%>
+            </table>
+            <br />
+        </div>
 
-    <div class='pending_invites_box'>
-      <% invites = current_board.invitations %>
-      <% if invites.any? %>
-        <h1 class='pageTitle'>Pending invitations</h1>
-        <table class="user-table">
-            <tr>
-                <th>Username</th>
-                <th>Role</th>
-            </tr>
-            <% invites.each do |invite|%>
+        <div class='pending_invites_box'>
+            <% invites = current_board.invitations %>
+            <% if invites.any? %>
+            <h1 class='pageTitle'>Pending invitations</h1>
+            <table class="user-table">
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+                <% invites.each do |invite|%>
                 <tr>
                     <td class="cell">
                         <%= User.find(invite.user_id).username %>
@@ -60,16 +65,16 @@
                         <%= invite.role.humanize %>
                     </td>
                 </tr>
-            <% end%>
-        </table>
-      </div>
-    <br />
+                <% end%>
+            </table>
+        </div>
+        <br />
 
-    <% end %>
-    <div class='return_link_box'>
-      <span style='font-size: 1.3em'>
-        <%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>
-      </span>
+        <% end %>
+        <div class='return_link_box'>
+            <span style='font-size: 1.3em'>
+                <%= link_to 'Return to ' + current_board.name, board_path(current_board.id, session[:state_id], session[:sprint_id]) %>
+            </span>
+        </div>
     </div>
-  </div>
 </div>
