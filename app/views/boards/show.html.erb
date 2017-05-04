@@ -36,14 +36,16 @@
                         </span>
                     <% end %>
 
-                    <% acceptance = '' %>
-                    <% if !story.acceptance.nil? %>
-                        <% acceptance = if story.acceptance then ' (accepted)' else ' (rejected)' end%>
-                    <% end %>
 
                     <% if !story.description.blank? %>
                         <div class="info">
-                            <strong><%= story.description + acceptance%></strong>
+                            <strong><%= story.description%>
+                              <% if !story.acceptance.nil? %>
+                                <% if story.acceptance %><span style="font-size:12px;color:rgb(0, 200, 10)">&nbsp;ACCEPTED</span>
+                                <% else %><span style="font-size:12px;color:orangered">&nbsp;REJECTED</span>
+                                <% end %>
+                              <% end %>
+                            </strong>
                         </div>
                     <% end %>
 
@@ -74,7 +76,7 @@
 
                     <% if !story.rejection_reason.blank? %>
                         <div class="info">
-                            <%= 'Reason for rejection: ' + story.rejection_reason %>
+                            <strong><%= 'Reason for rejection: '%></strong><%= + story.rejection_reason %>
                         </div>
                     <% end %>
 
