@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     include SessionsHelper
     include BoardsHelper
+    include MembershipsHelper
     include StatesHelper
     include StoriesHelper
     include TasksHelper
