@@ -584,7 +584,7 @@ textarea {
   color:white;
   background-color: red;
 }*/
-.content-wrapper {
+.content_wrapper {
     position:absolute;
     top:62px;
     right:13%;

@@ -101,6 +101,9 @@ input[type="password"] {
     border-radius: 4px;
     border: 1px solid #ccc;
 }
+input {
+    margin-top:5px;
+}
 textarea {
     width: 270px;
     height: 50px;
@@ -114,7 +117,7 @@ textarea {
   color:white;
   background-color: red;
 }*/
-.content-wrapper {
+.content_wrapper {
     position:absolute;
     top:62px;
     right:13%;
@@ -136,6 +139,11 @@ textarea {
     margin: 5px;
     margin-top: 10px;
     color: white;
+}
+
+.pageTitle {
+    display:inline-block;
+    font-size: 2.3em;
 }
 
  .alert-success {
