@@ -1,35 +1,43 @@
-<h1>Edit task</h1>
+<div class='content_wrapper'>
+  <div class='story_wrapper'>
+    <h1 class='pageTitle'>Edit task</h1>
 
-<% if @task.errors.full_messages.any? %>
-    <% @task.errors.full_messages.each do |message| %>
-    <div class="alert alert-danger"><%= message %></div> </br>
+    <% if @task.errors.full_messages.any? %>
+        <% @task.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger"><%= message %></div> </br>
+        <% end %>
     <% end %>
-<% end %>
 
-<%= form_for :task, url: edittask_path do |f| %>
-    <div class="container">
-        <%= f.label "Description*" %><br>
+    <br /><br />
+
+    <%= form_for :task, url: edittask_path do |f| %>
+        <%= f.label "Description*" %>
         <%= f.text_field :description %>
-    </div>
 
-    <div class="container">
+
+        <br /><br />
+
         <% star = @task.task_column.position == 4 ? '*' : ''%>
-        <%= f.label "Weight (Percent)" + star %><br>
+        <%= f.label "Weight (Percent)" + star %>
         <%= f.text_field :weight %>
-    </div>
 
-    <div class="container">
+        <br /><br />
+
+
         <%= f.label "Assigned user" %><br>
         <%= f.select :user_id, User.joins(:memberships).where(memberships: {board_id: current_board.id, role: Membership.roles[:developer]}).collect {|user| [user.username, user.id]}, {:include_blank => 'Unassigned'} %>
-    </div>
 
+        <br />
 
-    <%= f.hidden_field :task_column_id, :value => @task.task_column_id %>
-    <%= f.hidden_field :position, :value => @task.position %>
+        <%= f.hidden_field :task_column_id, :value => @task.task_column_id %>
+        <%= f.hidden_field :position, :value => @task.position %>
 
-    <div class="container">
+        <br />
+
         <%= f.submit "Save changes!" %>
-    </div>
-<% end %>
+    <% end %>
 
-<%= link_to 'Return to ' + current_board.name, current_board %>
+    <br /><br /><br /><br /><br /><br />
+    <%= link_to 'Return to ' + current_board.name, current_board %>
+  </div>
+</div>

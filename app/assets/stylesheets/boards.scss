@@ -92,6 +92,10 @@
     text-decoration: none;
     // color: lightgrey;
 }
+.boards a:visited {
+    text-decoration: none;
+    color:white;
+}
 
 .boards a:hover .name {
     text-decoration: underline;
@@ -139,6 +143,9 @@
 .singularAction a {
     color:white;
 }
+.singularAction a:visited {
+    color:white;
+}
 
 input.singularAction {
     line-height: 18px;
@@ -182,7 +189,7 @@ input.singularAction {
 }
 
 .story_wrapper {
-    text-align: center;
+    margin-left:5%;
 }
 
 // .story_input {

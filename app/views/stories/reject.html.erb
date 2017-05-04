@@ -1,64 +1,69 @@
 <div class='content_wrapper'>
   <div class='story_wrapper'>
-    <h1>Reject Story</h1>
+    <h1 class='pageTitle'>Reject Story</h1>
 
     <% if @story.errors.full_messages.any? %>
         <% @story.errors.full_messages.each do |message| %>
-        <div class="alert alert-danger"><%= message %></div> </br>
+        <div class="alert alert-danger"><%= message %></div>
+        <br />
         <% end %>
     <% end %>
 
-    <div class="container">
-        <% if !@story.description.blank? %>
-            <div class="info">
-                <strong><%= @story.description %></strong>
-            </div>
-        <% end %>
-    </div>
-    <div class="container">
-        <% if !@story.want.blank? %>
-            <div class="info">
-                <%= "As " + @story.as + ", I want " + @story.want + " so that " + @story.so_that %>
-            </div>
-        <% end %>
-    </div>
-        <div class="container">
+    <br /><br />
 
-        <% if !@story.criteria.blank? %>
-            <div class="info">
-                <%= 'Acceptance criteria: ' + @story.criteria %>
-            </div>
-        <% end %>
-    </div>
+    <% if !@story.description.blank? %>
+        <div class="info">
+            <span style="font-size:18px;text-decoration:underline;"><strong><%= @story.description %></strong></span>
+        </div>
+    <% end %>
 
-        <div class="container">
+    <br />
 
-        <% if !@story.size.blank? %>
-            <div class="info">
-                <%= 'Size estimate: ' + @story.size %>
-            </div>
-        <% end %>
-    </div>
+    <% if !@story.want.blank? %>
+        <div class="info">
+          <strong>Template: </strong>
+            <%= "As " + @story.as + ", I want " + @story.want + " so that " + @story.so_that %>
+        </div>
+    <% end %>
 
-    <div class="container">
-        <% completion = completion(@story) %>
-        <% if completion != -1 %>
-            <div class="info completion">
-                <%= 'Completion: ' + completion %>
-            </div>
-        <% end %>
-    </div>
+    <br />
+
+    <% if !@story.criteria.blank? %>
+        <div class="info">
+            <strong><%= 'Acceptance criteria: '%></strong><%= + @story.criteria %>
+        </div>
+    <% end %>
+
+    <br />
+
+    <% if !@story.size.blank? %>
+        <div class="info">
+          <strong><%= 'Size estimate: '%></strong><%= + @story.size %>
+        </div>
+    <% end %>
+
+    <br />
+
+
+    <% completion = completion(@story) %>
+    <% if completion != -1 %>
+        <div class="info completion">
+            <strong><%= 'Completion: ' %></strong><%=+ completion %>
+        </div>
+    <% end %>
+
+    <br /><br />
 
     <%= form_for :story, url: rejectstory_path(current_board.id, current_state.id, current_sprint.id, @story.id) do |f| %>
-        <div class="container">
-            <%= f.label "Reason for rejection:*" %><br>
-            <%= f.text_field :rejection_reason %>
-        </div>
-        <div class="container">
-            <%= f.submit "Reject those nerds!" %>
-        </div>
+        <%= f.label "Reason for rejection:*" %>
+        <%= f.text_field :rejection_reason %>
+
+        <br /><br />
+
+        <%= f.submit "Reject those nerds!" %>
     <% end %>
 
+    <br /><br /><br /><br />
     <%= link_to 'Return to ' + current_board.name, current_board %>
   </div>
 </div>
