@@ -1,6 +1,8 @@
 <%= form_for :session, url: login_path do |f| %>
   <div class="credentials_box">
-    <h1 class="login_title">Login</h1>
+    <!-- <img src="brumscoard_logo.png" alt="SOMETHING IS SUPPOSED TO BE HERE"> -->
+
+    <h1 class="login_title"><%= image_tag("brumscoard_logo.png", size: "150x114", align: "center")%>Login</h1>
     <div class="username_box">
         <!-- <%= f.label "Username" %> -->
         <div class="fa fa-user"></span>&nbsp;<%= f.text_field :username, placeholder: " username" %>
