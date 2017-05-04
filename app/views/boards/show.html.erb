@@ -20,6 +20,9 @@
 <% current_sprint.story_columns.each do |story_column| %>
     <div class="column", id="story_column.<%= story_column.id %>" data-col="<%= story_column.position %>">
         <h2><%= story_column.name %></h2>
+        <% if story_column.position == 0 %>
+            <%= link_to newstory_path do %><div class="text-fa"><span class="fa fa-plus"></span>&nbsp;Add story</div><% end %>
+        <% end %>
         <div class="cards">
             <% story_column.stories.each do |story| %>
                 <div class="card" id="story.<%= story.id %>">
