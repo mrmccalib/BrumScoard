@@ -1,36 +1,44 @@
-<h1>New task for <%= current_story.description%></h1>
+<div class='content_wrapper'>
+  <div class='story_wrapper'>
 
-<% if @task.errors.full_messages.any? %>
-    <% @task.errors.full_messages.each do |message| %>
-    <div class="alert alert-danger"><%= message %></div> </br>
+    <h1 class='pageTitle'>New task for <%= current_story.description%></h1>
+
+    <% if @task.errors.full_messages.any? %>
+        <% @task.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger"><%= message %></div> </br>
+        <% end %>
     <% end %>
-<% end %>
 
-<%= form_for :task, url: newtask_path do |f| %>
-    <div class="container">
-        <%= f.label "Description*" %><br>
+    <br /><br />
+
+    <%= form_for :task, url: newtask_path do |f| %>
+        <%= f.label "Description*" %>
         <%= f.text_field :description %>
-    </div>
 
-    <div class="container">
-        <%= f.label "Weight (Percent)" %><br>
+        <br /><br />
+
+        <%= f.label "Weight (Percent)" %>
         <%= f.text_field :weight %>
-    </div>
 
-    <div class="container">
-        <%= f.label "Assigned user" %><br>
+        <br /><br />
+
+        <%= f.label "Assigned developer" %>
         <%= f.select :user_id, User.joins(:memberships).where(memberships: {board_id: current_board.id, role: Membership.roles[:developer]}).collect {|user| [user.username, user.id]}, {:include_blank => 'Unassigned'} %>
-    </div>
+
+        <br /><br />
 
 
-    <%= f.hidden_field :story_id, :value => current_story.id  %>
-    <%= f.hidden_field :task_column_id, :value => current_sprint.task_columns.first.id %>
-    <%= f.hidden_field :position, :value => 0 %>
+        <%= f.hidden_field :story_id, :value => current_story.id  %>
+        <%= f.hidden_field :task_column_id, :value => current_sprint.task_columns.first.id %>
+        <%= f.hidden_field :position, :value => 0 %>
 
 
-    <div class="container">
+
         <%= f.submit "Add task!" %>
-    </div>
-<% end %>
+    <% end %>
 
-<%= link_to 'Return to ' + current_board.name, current_board %>
+    <br /><br /><br /><br /><br />
+
+    <%= link_to 'Return to ' + current_board.name, current_board %>
+  </div>
+</div>
