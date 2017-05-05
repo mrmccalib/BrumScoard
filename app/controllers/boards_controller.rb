@@ -50,11 +50,23 @@ class BoardsController < ApplicationController
         oldCol = (sprint.story_columns.select {|story_column| story_column.position == params[:oldCol].to_i}).first
         newCol = (sprint.story_columns.select {|story_column| story_column.position == params[:newCol].to_i}).first
 
-        if current_user_role != Membership.roles[:product_owner]
+        # if current_user_role != Membership.roles[:product_owner]
+        #     render :json => {
+        #         :message => "Only a product owner can move stories!"
+        #     }
+        #     return
+        if current_user_role == Membership.roles[:product_owner] and oldCol.position != newCol.position
             render :json => {
-                :message => "Only a product owner can move stories!"
+                :message => "Only a developer can move stories!"
             }
             return
+
+        elsif current_user_role == Membership.roles[:developer] and oldCol.position == newCol.position
+            render :json => {
+                :message => "Only a product owner can reorder stories!"
+            }
+            return
+
         elsif storyAtOldIndex.size.blank? and oldCol.position == 0 and newCol.position == 1
             render :json => {
                 :message => "Story must have size estimate before moving!"
